@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            Login
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <h3 text-center>Kabuliwala</h3>
+
+    <ion-segment [(ngModel)]="loginType" color="primary">
+        <ion-segment-button value="management">
+                Management
+        </ion-segment-button>
+        <ion-segment-button value="guest">
+                Guest
+        </ion-segment-button>
+    </ion-segment>
+
+    <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+
+        <ion-list no-margin>
+            <ion-item no-padding no-line-top>
+                <ion-label floating>Username</ion-label>
+                <ion-input type="text" formControlName="username"></ion-input>
+            </ion-item>
+            <ion-item no-padding>
+                <ion-label floating>Password</ion-label>
+                <ion-input type="password" formControlName="password"></ion-input>
+            </ion-item>
+        </ion-list>
+
+        <button type="submit" color="light_green" ion-button full>Log In</button>
+    </form>
+
+</ion-content>
