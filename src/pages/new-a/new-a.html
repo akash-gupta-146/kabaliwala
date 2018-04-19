@@ -1,18 +1,55 @@
-<!--
-  Generated template for the NewAPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>new-a</ion-title>
+    <ion-title>Create Appreciation</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
+
+  <ion-card>
+    <ion-item>
+      <ion-label stacked>Title</ion-label>
+      <ion-textarea [(ngModel)]="title" required name="title" maxlength="50" placeholder="Enter Title (Max 50 characters)"></ion-textarea>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-item>
+      <ion-label stacked>Description</ion-label>
+      <ion-textarea [(ngModel)]="description" required name="description" rows="5" maxlength="2500" placeholder="Enter Description (Max 2500 characters)"></ion-textarea>
+    </ion-item>
+
+  </ion-card>
+
+  <!-- GUEST OPTIONAL INFO FORM -->
+  <div>
+    <h4>Guest Information (Optional)</h4>
+    <ion-card>
+      <ion-item>
+        <ion-label floating>Name</ion-label>
+        <ion-input type="text" [(ngModel)]="guestInfo.name" name="name"></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input type="email" [(ngModel)]="guestInfo.email" name="email"></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-label floating>Contact No. (10 digits)</ion-label>
+        <ion-input type="text" [(ngModel)]="guestInfo.contact" minlength="10" maxlength="10" name="contact"></ion-input>
+      </ion-item>
+    </ion-card>
+  </div>
+
+  <div padding>
+    <button [disabled]="title.trim()=='' || description.trim()==''" ion-button full type="button" (click)="submitAppreciation()">Submit</button>
+  </div>
+
 
 </ion-content>

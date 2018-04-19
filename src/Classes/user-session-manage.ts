@@ -6,6 +6,7 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { CustomService } from '../providers/custom.service';
 
+declare var ROLE;
 export class UserSessionManage {
 
     selectedPage: string;
@@ -80,6 +81,7 @@ export class UserSessionManage {
     public logout() {
 
         localStorage.clear();
+        ROLE=undefined;
         this.appCtrl.getRootNavs()[0].setRoot(LoginPage);
     }
 

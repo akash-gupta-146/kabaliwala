@@ -16,17 +16,20 @@ import { CustomService } from '../providers/custom.service';
 import { AuthService } from '../providers/auth.service';
 import { Network } from '@ionic-native/network';
 import { ComplaintService } from '../providers/complaint.service';
+import { AppreciationService } from '../providers/appreciation.service';
 
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    LoginPage 
+    LoginPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      preloadModules: true
+    }),
     HttpClientModule,
 
   ],
@@ -39,13 +42,14 @@ import { ComplaintService } from '../providers/complaint.service';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     Network,
     NetworkService,
     CustomHttpService,
     CustomService,
     AuthService,
-    ComplaintService
+    ComplaintService,
+    AppreciationService
   ]
 })
-export class AppModule {}
+export class AppModule { }

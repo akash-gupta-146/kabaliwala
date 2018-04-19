@@ -49,7 +49,7 @@ export class CustomHttpService {
         let headers = this.addHeaders(options);
         const _url = BASEURL + (ROLE ? '/' + ROLE : '') + url;
 
-        return this.httpClient.get(_url, { headers: headers, observe: 'response' })
+        return this.httpClient.post(_url, body,{ headers: headers, observe: 'response' })
             .map(this.extractData)
             .catch(this.handleError);
     }
@@ -72,7 +72,7 @@ export class CustomHttpService {
 
         // console.log('inside extract data', res);
         return res.body || res.status;
-    }
+    }      
 
     private handleError(err: HttpErrorResponse) {
         // console.log('inside handle error', err);
