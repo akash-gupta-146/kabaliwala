@@ -26,6 +26,10 @@ export class SubmitSuccessPage {
   }
 
   ionViewDidLoad() {
+    /**
+     * REMOVE THE PAGE BELOW THE CURRENT PAGE IN THE PAGE STACK
+     * THIS IS DONE IN ORDER TO VIEW THE MAIN PAGE DIRECTLY AND NOT THE NEW-FORM PAGE
+     */
     const prevView: ViewController = this.navCtrl.getPrevious();
     this.navCtrl.removeView(prevView);
 

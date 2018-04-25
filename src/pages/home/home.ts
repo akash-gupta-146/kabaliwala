@@ -29,7 +29,9 @@ export class HomePage {
 
 
   }
-  onSurvey() { }
+  onSurvey() {
+    this.navCtrl.push('NewSurPage');
+  }
 
   onLogout() {
     this.events.publish('user:logout')

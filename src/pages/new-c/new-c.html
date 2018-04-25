@@ -17,7 +17,7 @@
       <ion-card>
         <ion-item>
           <ion-icon ios="ios-sad-outline" md="md-sad" item-start color="primary"></ion-icon>
-          <ion-label>Against</ion-label>
+          <ion-label>{{complaintService.compOrSugg=='complaint'?'Against':'For'}}</ion-label>
           <ion-select [(ngModel)]="selectedCategory" (ionChange)="resetSubCategories()" required name="category">
             <ion-option *ngFor="let category of complaintCategories" [value]="category">{{category.name}}</ion-option>
           </ion-select>

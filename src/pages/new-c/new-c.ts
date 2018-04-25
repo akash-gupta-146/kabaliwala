@@ -32,7 +32,7 @@ export class NewComplaintPage { // ALSO USED FOR NEW SUGGESTION
     public navCtrl: NavController,
     public navParams: NavParams,
     private customService: CustomService,
-    private complaintService: ComplaintService) {
+    public complaintService: ComplaintService) {
   }
 
 
@@ -91,15 +91,15 @@ export class NewComplaintPage { // ALSO USED FOR NEW SUGGESTION
 
   isValidContactNo() {
 
-    
-    const pattern = /[^0-9]/;
-    
+
+    const pattern = /[^0-9]/; // regx for checking if there is a non-digit character in contact no.
+
     if (this.guestInfo.contact && pattern.test(this.guestInfo.contact)) {
-      this.customService.showToast('Only digits are allowed in Contact No.',"top");
+      this.customService.showToast('Only digits are allowed in Contact No.', "top");
       return false;
     }
 
-    if(this.guestInfo.contact && this.guestInfo.contact.trim().length !== 10){
+    if (this.guestInfo.contact && this.guestInfo.contact.trim().length !== 10) {
       this.customService.showToast('Contact No. must contain exactly 10 digits', "top", true);
       return false;
     }

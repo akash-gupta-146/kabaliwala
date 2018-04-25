@@ -20,21 +20,20 @@ export class AuthService {
     }
 
     fetchUserDetails() {
-        return this.http.get('/user-info').map((res)=>{
+        return this.http.get('/user-info').map((res) => {
             this.saveUserDetails(res);
             return res;
         });
     }
 
     saveUserDetails(userInfo: any) {
-       this.setRole(userInfo);
-         
+        this.setRole(userInfo);
+
         localStorage.setItem('userInfo', JSON.stringify(userInfo));
     }
 
-
-    setRole(info:any){
-        // eg. if info.roles is ["guest@3,guest@4"], then ROLE has to be 'g'
-      ROLE = info.roles[0].slice(0,1);
+    setRole(info: any) {
+        // urlPrefix will be 'g' for guest, 'a' for admin, 'sa' for superadmin
+        ROLE = info.urlPrefix;
     }
 }

@@ -7,14 +7,17 @@
 </ion-header>
 
 <ion-content padding>
-    <h3 text-center>Kabuliwala</h3>
+    <h3 text-center>Kabliwaalas</h3>
 
     <ion-segment [(ngModel)]="loginType" color="primary">
+        <ion-segment-button value="superadmin">
+            Super Admin
+        </ion-segment-button>
         <ion-segment-button value="management">
-                Management
+            Management
         </ion-segment-button>
         <ion-segment-button value="guest">
-                Guest
+            Guest
         </ion-segment-button>
     </ion-segment>
 

@@ -5,12 +5,7 @@ import { CustomService } from '../../providers/custom.service';
 import { AuthService } from '../../providers/auth.service';
 import { HomePage } from '../home/home';
 
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+declare var ROLE;
 
 @Component({
   selector: 'page-login',
@@ -40,11 +35,14 @@ export class LoginPage {
 
   login() {
 
-    // temporary block managment from login
-    if (this.loginType === 'management') { return; }
+    // temporary block superadmin from login
+    // if (this.loginType === 'superadmin') { return; }
 
 
     if (this.loginForm.valid) {
+
+      // clear the ROLE before each fresh login in order to avoid any bug
+      ROLE = undefined;
 
       this.customService.showLoader("Authenticating...");
       this.authService.login(this.loginForm.value)
@@ -78,7 +76,12 @@ export class LoginPage {
   }
 
   navigate() {
-      this.navCtrl.setRoot(HomePage);
+    switch (this.loginType) {
+      case 'guest': this.navCtrl.setRoot(HomePage); break;
+      // case 'management':this.navCtrl.setRoot(); break;
+      // case 'superadmin':this.navCtrl.setRoot(); break;
+    }
+
   }
 
 
