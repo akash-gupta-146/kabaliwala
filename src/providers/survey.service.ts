@@ -5,7 +5,9 @@ import { of } from 'rxjs/Observable/of';
 export interface Question {
     id: number;
     question: string;
-    type: String
+    type: string;
+    starValue?: number; // answer of the question in case of type==='STAR'
+    textValue: string; // answer of the question in case of type==='TEXT'
 }
 
 @Injectable()
@@ -22,11 +24,11 @@ export class SurveyService {
             return this.http.get('/survey/question').map(res => {
                 this.questions = res;
                 return res;
-            });   
+            });
         }
     }
 
-    // submitAppreciation(data: any) {
-    //     return this.http.post('/appreciation', data);
-    // }
+   submitSurvey(payLoad:any){
+       return this.http.post('/survey',payLoad);
+   }
 }

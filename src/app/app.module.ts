@@ -18,6 +18,7 @@ import { Network } from '@ionic-native/network';
 import { ComplaintService } from '../providers/complaint.service';
 import { AppreciationService } from '../providers/appreciation.service';
 import { SurveyService } from '../providers/survey.service';
+import { SharedService } from '../providers/shared.service';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { SurveyService } from '../providers/survey.service';
     AuthService,
     ComplaintService,
     AppreciationService,
-    SurveyService
+    SurveyService,
+    SharedService
   ]
 })
 export class AppModule { }

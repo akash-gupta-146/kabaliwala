@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CustomService } from '../../providers/custom.service';
 import { ComplaintService } from '../../providers/complaint.service';
+import { SharedService } from '../../providers/shared.service';
 
 /**
  * Generated class for the NewCPage page.
@@ -32,8 +33,9 @@ export class NewComplaintPage { // ALSO USED FOR NEW SUGGESTION
     public navCtrl: NavController,
     public navParams: NavParams,
     private customService: CustomService,
-    public complaintService: ComplaintService) {
-  }
+    public complaintService: ComplaintService,
+    private sharedService: SharedService
+  ) { }
 
 
   ionViewDidLoad() {
@@ -60,7 +62,16 @@ export class NewComplaintPage { // ALSO USED FOR NEW SUGGESTION
 
   onSubmit() {
 
-    if (!this.isValidContactNo()) {
+    if (this.isGuestNameEntered() && !this.isGuestContactEntered()) {
+      this.customService.showToast('Please also enter your contact no.', 'top');
+      return;
+    }
+    if (!this.isGuestNameEntered() && this.isGuestContactEntered()) {
+      this.customService.showToast('Please also enter your name', 'top');
+      return;
+    }
+
+    if (!this.sharedService.isValidContactNo(this.guestInfo.contact)) {
       return;
     }
     const data: any = {};
@@ -69,10 +80,12 @@ export class NewComplaintPage { // ALSO USED FOR NEW SUGGESTION
     data.title = this.complaintTitle;
     data.description = this.complaintDescription;
 
-    if (this.guestInfo.contact && this.guestInfo.contact.trim() != '') {
+    if (this.isGuestContactEntered() && this.isGuestNameEntered()) {
 
-      data.visitorInfo = { contactNo: this.guestInfo.contact };
-      this.guestInfo.name && this.guestInfo.name.trim() != '' && (data.visitorInfo.name = this.guestInfo.name);
+      data.visitorInfo = {
+        contactNo: this.guestInfo.contact,
+        name: this.guestInfo.name
+      };
       this.guestInfo.email && this.guestInfo.email.trim() != '' && (data.visitorInfo.email = this.guestInfo.email);
     };
 
@@ -89,23 +102,13 @@ export class NewComplaintPage { // ALSO USED FOR NEW SUGGESTION
       });
   }
 
-  isValidContactNo() {
 
 
-    const pattern = /[^0-9]/; // regx for checking if there is a non-digit character in contact no.
-
-    if (this.guestInfo.contact && pattern.test(this.guestInfo.contact)) {
-      this.customService.showToast('Only digits are allowed in Contact No.', "top");
-      return false;
-    }
-
-    if (this.guestInfo.contact && this.guestInfo.contact.trim().length !== 10) {
-      this.customService.showToast('Contact No. must contain exactly 10 digits', "top", true);
-      return false;
-    }
-
-    return true;
+  isGuestNameEntered() {
+    return this.guestInfo.name && this.guestInfo.name.trim() != '';
   }
 
-
+  isGuestContactEntered() {
+    return this.guestInfo.contact && this.guestInfo.contact.trim() != '';
+  }
 }

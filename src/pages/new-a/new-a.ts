@@ -2,13 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { CustomService } from '../../providers/custom.service';
 import { AppreciationService } from '../../providers/appreciation.service';
+import { SharedService } from '../../providers/shared.service';
 
-/**
- * Generated class for the NewAPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -24,14 +20,24 @@ export class NewAppreciationPage {
   constructor(
     public navCtrl: NavController,
     private customService: CustomService,
-    private appreciationService: AppreciationService
+    private appreciationService: AppreciationService,
+    private sharedService:SharedService
   ) {
   }
 
 
   submitAppreciation() {
 
-    if (!this.isValidContactNo()) {
+    if (this.isGuestNameEntered() && !this.isGuestContactEntered()) {
+      this.customService.showToast('Please also enter your contact no.', 'top');
+      return;
+    }
+    if (!this.isGuestNameEntered() && this.isGuestContactEntered()) {
+      this.customService.showToast('Please also enter your name', 'top');
+      return;
+    }
+
+    if (!this.sharedService.isValidContactNo(this.guestInfo.contact)) {
       return;
     }
 
@@ -40,10 +46,12 @@ export class NewAppreciationPage {
     data.title = this.title;
     data.description = this.description;
 
-    if (this.guestInfo.contact && this.guestInfo.contact.trim() != '') {
+    if (this.isGuestContactEntered() && this.isGuestNameEntered()) {
 
-      data.visitorInfo = { contactNo: this.guestInfo.contact };
-      this.guestInfo.name && this.guestInfo.name.trim() != '' && (data.visitorInfo.name = this.guestInfo.name);
+      data.visitorInfo = {
+        contactNo: this.guestInfo.contact,
+        name: this.guestInfo.name
+      };
       this.guestInfo.email && this.guestInfo.email.trim() != '' && (data.visitorInfo.email = this.guestInfo.email);
     };
 
@@ -59,22 +67,14 @@ export class NewAppreciationPage {
       });
   }
 
-  isValidContactNo() {
-
-    
-    const pattern = /[^0-9]/;
-    
-    if (this.guestInfo.contact && pattern.test(this.guestInfo.contact)) {
-      this.customService.showToast('Only digits are allowed in Contact No.','top');
-      return false;
-    }
-
-    if(this.guestInfo.contact && this.guestInfo.contact.trim().length !== 10){
-      this.customService.showToast('Contact No. must contain exactly 10 digits', "top", true);
-      return false;
-    }
-
-    return true;
+  isGuestNameEntered() {
+    return this.guestInfo.name && this.guestInfo.name.trim() != '';
   }
+
+  isGuestContactEntered() {
+    return this.guestInfo.contact && this.guestInfo.contact.trim() != '';
+  }
+
+
 
 }
