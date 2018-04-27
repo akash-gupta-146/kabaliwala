@@ -18,7 +18,7 @@ import { SharedService } from '../../providers/shared.service';
 })
 export class NewComplaintPage { // ALSO USED FOR NEW SUGGESTION
 
-  title: string = `Create ${this.complaintService.compOrSugg}`;
+  title: string = `${this.complaintService.compOrSugg}`;
   complaintCategories: Array<any>;
   guestInfo: { name: string, email: string, contact: string } = <any>{};;
 

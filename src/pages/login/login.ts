@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, Events } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CustomService } from '../../providers/custom.service';
 import { AuthService } from '../../providers/auth.service';
@@ -20,7 +20,8 @@ export class LoginPage {
     public navCtrl: NavController,
     public formBuilder: FormBuilder,
     private customService: CustomService,
-    private authService: AuthService
+    private authService: AuthService,
+    private events:Events
   ) {
   }
 
@@ -28,15 +29,12 @@ export class LoginPage {
   ngOnInit() {
 
     this.loginForm = this.formBuilder.group({
-      username: ['guest@3', Validators.required],
+      username: ['kabliwala', Validators.required],
       password: ['abc123', Validators.required]
     });
   }
 
   login() {
-
-    // temporary block superadmin from login
-    // if (this.loginType === 'superadmin') { return; }
 
 
     if (this.loginForm.valid) {
@@ -76,11 +74,14 @@ export class LoginPage {
   }
 
   navigate() {
-    switch (this.loginType) {
-      case 'guest': this.navCtrl.setRoot(HomePage); break;
-      // case 'management':this.navCtrl.setRoot(); break;
-      // case 'superadmin':this.navCtrl.setRoot(); break;
-    }
+    // switch (this.loginType) {
+    //   case 'guest': this.navCtrl.setRoot(HomePage); break;
+    //   // case 'management':this.navCtrl.setRoot(); break;
+    //   // case 'superadmin':this.navCtrl.setRoot(); break;
+    // }
+
+    this.events.publish('user:login');
+
 
   }
 

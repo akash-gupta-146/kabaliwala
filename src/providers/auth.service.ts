@@ -33,7 +33,7 @@ export class AuthService {
     }
 
     setRole(info: any) {
-        // urlPrefix will be 'g' for guest, 'a' for admin, 'sa' for superadmin
+        // urlPrefix will be 'g' for guest, 'a' for admin/management, 'sa' for superadmin
         ROLE = info.urlPrefix;
     }
 }
