@@ -1,18 +1,114 @@
-<!--
-  Generated template for the NewEmplPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>new-empl</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-navbar color="primary">
+            <ion-toolbar>
+                <ion-buttons start>
+                    <button ion-button color="light" class="navBtnRight" (click)="dismiss()">
+                        <span color="light">Cancel</span>
+                    </button>
+                </ion-buttons>
+                <ion-title>
+                    Create Employee
+                </ion-title>
+
+            </ion-toolbar>
+        </ion-navbar>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+
+    <form #newEmplForm="ngForm" (ngSubmit)="onSubmit()">
+
+
+
+        <ion-card>
+            <ion-item>
+                <ion-label stacked>Name</ion-label>
+                <ion-input [(ngModel)]="name" placeholder="Enter name" required maxlength="50" name="name"></ion-input>
+            </ion-item>
+        </ion-card>
+
+        <ion-card>
+            <ion-item>
+                <ion-label stacked>NickName</ion-label>
+                <ion-input [(ngModel)]="nickName" placeholder="Enter nickName (optional)" maxlength="50" name="title"></ion-input>
+            </ion-item>
+        </ion-card>
+
+        <ion-card>
+            <ion-item>
+                <ion-label stacked>Contact No.</ion-label>
+                <ion-input [(ngModel)]="contactNo" placeholder="Enter contact No. (optional)" maxlength="15" name="contactNo"></ion-input>
+            </ion-item>
+        </ion-card>
+
+        <ion-card>
+            <ion-item>
+                <ion-label stacked>Email</ion-label>
+                <ion-input [(ngModel)]="email" placeholder="Enter email (optional)" name="email"></ion-input>
+            </ion-item>
+        </ion-card>
+
+
+        <ion-card>
+            <ion-item>
+                <ion-label stacked>Username</ion-label>
+                <ion-input [(ngModel)]="username" placeholder="Enter username" required name="username"></ion-input>
+            </ion-item>
+        </ion-card>
+
+
+        <ion-card>
+            <ion-item>
+                <ion-label stacked>Password</ion-label>
+                <ion-input type="password" [(ngModel)]="password" placeholder="Enter password" required name="password"></ion-input>
+            </ion-item>
+        </ion-card>
+
+        <ion-card *ngIf="roles">
+            <h5 margin padding>Select Store and role</h5>
+            <ion-row *ngFor="let rs of roleStoreList;let i=index">
+
+                <ion-col col-5>
+                    <ion-item>
+                        <ion-label>Store</ion-label>
+                        <ion-select [(ngModel)]="rs.storeId" required name="store{{i}}">
+                            <ion-option *ngFor="let s of stores" value="{{s.id}}">{{s.name}}</ion-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-5>
+                    <ion-item>
+                        <ion-label>Role</ion-label>
+                        <ion-select [(ngModel)]="rs.roleId" required name="role{{i}}">
+                            <ion-option *ngFor="let r of roles" value="{{r.id}}">{{r.name}}</ion-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-1>
+                    <button type="button" *ngIf="roleStoreList.length > 1 " ion-button icon-only (click)="onRemove(i)">
+                        <ion-icon name="close"></ion-icon>
+                    </button>
+                </ion-col>
+            </ion-row>
+
+            <button type="button" ion-button icon-only (click)="onAdd()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+
+        </ion-card>
+
+
+
+
+        <div padding>
+            <button [disabled]="!newEmplForm.valid" ion-button full type="submit">Submit</button>
+        </div>
+    </form>
 
 </ion-content>

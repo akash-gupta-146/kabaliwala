@@ -101,7 +101,7 @@ export class UserSessionManage {
 
             { title: 'Home', component: "DashboardPage", show: isSuperAdmin, icon: 'assets/icon/home.png' },
             { title: 'Stores', component: "StoresPage", show: isSuperAdmin, icon: 'assets/icon/complaint.jpg' },
-            // { title: 'Employees', component: "SuggestionTabsPageStudent", icon: 'assets/icon/suggestion.jpg' },
+            { title: 'Employees', component: "EmployeesPage", icon: 'assets/icon/suggestion.jpg' },
             // { title: 'Appreciations', component: "AppreciationTabsPageStudent", icon: 'assets/icon/appreciation.jpg' },
             // { title: 'Polls', component: "PollStudent", icon: 'assets/icon/poll.jpg' },
             // { title: 'Surveys', component: "SurveyPageStudent", icon: 'assets/icon/survey.jpg' },

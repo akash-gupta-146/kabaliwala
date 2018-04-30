@@ -19,6 +19,8 @@ import { ComplaintService } from '../providers/complaint.service';
 import { AppreciationService } from '../providers/appreciation.service';
 import { SurveyService } from '../providers/survey.service';
 import { SharedService } from '../providers/shared.service';
+import { StoreService } from '../providers/store.service';
+import { EmployeeService } from '../providers/employee.service';
 
 
 @NgModule({
@@ -53,7 +55,8 @@ import { SharedService } from '../providers/shared.service';
     ComplaintService,
     AppreciationService,
     SurveyService,
-    SharedService
+    StoreService,
+    EmployeeService
   ]
 })
 export class AppModule { }

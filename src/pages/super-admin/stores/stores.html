@@ -16,4 +16,20 @@
 
 <ion-content padding>
 
+  <ion-list>
+
+
+    <ion-item *ngFor="let s of stores">
+      <h5>{{s.name}}</h5>
+      <ion-icon start name="pin"></ion-icon>
+      {{s.location}}
+    </ion-item>
+  </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab color="primary" (click)="openNewStoreAlert()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+
 </ion-content>
