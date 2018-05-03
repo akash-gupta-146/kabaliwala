@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CustomHttpService } from './custom-http.service';
 declare var URLPREFIX;
+declare var ROLE;
 
 @Injectable()
 export class AuthService {
@@ -35,5 +36,9 @@ export class AuthService {
     setRole(info: any) {
         // urlPrefix will be 'g' for guest, 'a' for admin/management, 'sa' for superadmin
         URLPREFIX = info.urlPrefix;
+        // set ROLE in case of admin/mngmnt only, set default ROLE as first role in array
+        if(URLPREFIX==='a'){
+            ROLE=info.roles[0];
+        }
     }
 }

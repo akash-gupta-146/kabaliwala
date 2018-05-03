@@ -6,6 +6,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { BASEURL } from './app.constants';
 declare var URLPREFIX;
+declare var ROLE;
 
 @Injectable()
 export class CustomHttpService {
@@ -34,10 +35,17 @@ export class CustomHttpService {
 
 
 
-    get(url: string, options?: HttpHeaders, urlWithRole = false) {
+    get(url: string, options?: HttpHeaders) {
 
         const headers = this.addHeaders(options);
-        const _url = urlWithRole ? BASEURL + url : BASEURL + (URLPREFIX ? '/' + URLPREFIX : '') + url;
+        let _url: string;
+        if (ROLE) {
+            // in case of admin.mngmnt, each request contains ROLE if ROLE exists
+            _url = BASEURL + (URLPREFIX ? '/' + URLPREFIX : '') + '/' + ROLE + url;
+        } else {
+            _url = BASEURL + (URLPREFIX ? '/' + URLPREFIX : '') + url;
+
+        }
 
         return this.httpClient.get(_url, { headers: headers, observe: 'response' })
             .map(this.extractData)
@@ -47,8 +55,14 @@ export class CustomHttpService {
     post(url: string, body: any, options?: HttpHeaders, urlWithRole = false) {
 
         let headers = this.addHeaders(options);
-        const _url = urlWithRole ? BASEURL + url : BASEURL + (URLPREFIX ? '/' + URLPREFIX : '') + url;
+        let _url: string;
+        if (ROLE) {
+            // in case of admin.mngmnt, each request contains ROLE if ROLE exists
+            _url = BASEURL + (URLPREFIX ? '/' + URLPREFIX : '') + '/' + ROLE + url;
+        } else {
+            _url = BASEURL + (URLPREFIX ? '/' + URLPREFIX : '') + url;
 
+        }
         return this.httpClient.post(_url, body, { headers: headers, observe: 'response' })
             .map(this.extractData)
             .catch(this.handleError);

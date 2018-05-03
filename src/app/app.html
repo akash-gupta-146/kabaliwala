@@ -12,7 +12,7 @@
     </ion-header>
     <ion-content>
         <ion-list>
-            <button ion-item  *ngFor="let option of sideMenuOptions" (click)="openPage(option)" [ngClass]="{'activePage': activePage == option.component}">
+            <button ion-item  *ngFor="let option of sideMenuOptions"  (click)="openPage(option)" [ngClass]="{'activePage': activePage == option.component}">
                 <img [src]="option.icon" item-start class="csWidth30"> {{option.title}}
             </button>
         </ion-list>

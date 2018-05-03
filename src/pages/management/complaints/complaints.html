@@ -1,13 +1,21 @@
-
 <ion-header>
-
   <ion-navbar>
-    <ion-title>complaints</ion-title>
+    <ion-toolbar>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title> {{title | titlecase}} </ion-title>
+    </ion-toolbar>
   </ion-navbar>
-
+  <!-- <ion-searchbar [ngClass]="{'hide-header':showHelpers,'show-header':hideHelpers}" [(ngModel)]="searchInput" (ionInput)="onSearchInput($event)"
+    [debounce]="debounceDuration" (ionClear)="onSearchClear($event)"></ion-searchbar> -->
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <complaint-main [complaintList]="complaintList" [searchInput]="searchInput"></complaint-main>
 </ion-content>
+<!-- <sort-filter [ngClass]="{'hide-footer':showHelpers,'show-footer':hideHelpers}" [sortSelected]="complaintMainPage.isSortApplied" [filterSelected]="complaintMainPage.isFilterApplied" (onSelect)="onSortFilterSelect($event)"></sort-filter> -->

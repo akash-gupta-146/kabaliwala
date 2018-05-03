@@ -6,6 +6,7 @@ import { AuthService } from '../../providers/auth.service';
 import { HomePage } from '../home/home';
 
 declare var URLPREFIX;
+declare var ROLE;
 
 @Component({
   selector: 'page-login',
@@ -41,6 +42,7 @@ export class LoginPage {
 
       // clear the URLPREFIX before each fresh login in order to avoid any bug
       URLPREFIX = undefined;
+      ROLE= undefined;
 
       this.customService.showLoader("Authenticating...");
       this.authService.login(this.loginForm.value)
@@ -96,6 +98,5 @@ export class LoginPage {
       this.customService.showToast(err.msg);
     }
   }
-
 
 }
