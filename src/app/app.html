@@ -1,5 +1,5 @@
 <ion-menu [content]="mycontent" *ngIf="!isGuest">
-    <ion-header class="csProfileHeader" tappable (tap)="openPage()" menuClose>
+    <ion-header class="csProfileHeader" tappable (tap)="openPage()" >
         <div class="csAccBgImg csHeight160">
             <div class="csCenter csProfileHeader">
                 <div class="csAccBgImg">
@@ -12,7 +12,7 @@
     </ion-header>
     <ion-content>
         <ion-list>
-            <button ion-item *ngFor="let option of sideMenuOptions" (click)="openPage(option)">
+            <button ion-item  *ngFor="let option of sideMenuOptions" (click)="openPage(option)" [ngClass]="{'activePage': activePage == option.component}">
                 <img [src]="option.icon" item-start class="csWidth30"> {{option.title}}
             </button>
         </ion-list>

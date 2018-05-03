@@ -29,4 +29,8 @@ export class ComplaintService {
     submitComplaint(data:any){
         return this.http.post(`/${this.compOrSugg}`,data);
     }
+
+    // below methods are related to managment/admin
+
+    
 }

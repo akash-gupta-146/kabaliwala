@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CustomHttpService } from './custom-http.service';
-declare var ROLE;
+declare var URLPREFIX;
 
 @Injectable()
 export class AuthService {
@@ -34,6 +34,6 @@ export class AuthService {
 
     setRole(info: any) {
         // urlPrefix will be 'g' for guest, 'a' for admin/management, 'sa' for superadmin
-        ROLE = info.urlPrefix;
+        URLPREFIX = info.urlPrefix;
     }
 }

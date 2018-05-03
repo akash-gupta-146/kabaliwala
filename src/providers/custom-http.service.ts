@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { BASEURL } from './app.constants';
-declare var ROLE;
+declare var URLPREFIX;
 
 @Injectable()
 export class CustomHttpService {
@@ -34,22 +34,22 @@ export class CustomHttpService {
 
 
 
-    get(url: string, options?: HttpHeaders) {
+    get(url: string, options?: HttpHeaders, urlWithRole = false) {
 
         const headers = this.addHeaders(options);
-        const _url = BASEURL + (ROLE ? '/' + ROLE : '') + url;
+        const _url = urlWithRole ? BASEURL + url : BASEURL + (URLPREFIX ? '/' + URLPREFIX : '') + url;
 
         return this.httpClient.get(_url, { headers: headers, observe: 'response' })
             .map(this.extractData)
             .catch(this.handleError);
     }
 
-    post(url: string, body: any, options?: HttpHeaders) {
+    post(url: string, body: any, options?: HttpHeaders, urlWithRole = false) {
 
         let headers = this.addHeaders(options);
-        const _url = BASEURL + (ROLE ? '/' + ROLE : '') + url;
+        const _url = urlWithRole ? BASEURL + url : BASEURL + (URLPREFIX ? '/' + URLPREFIX : '') + url;
 
-        return this.httpClient.post(_url, body,{ headers: headers, observe: 'response' })
+        return this.httpClient.post(_url, body, { headers: headers, observe: 'response' })
             .map(this.extractData)
             .catch(this.handleError);
     }
@@ -72,7 +72,7 @@ export class CustomHttpService {
 
         // console.log('inside extract data', res);
         return res.body || res.status;
-    }      
+    }
 
     private handleError(err: HttpErrorResponse) {
         // console.log('inside handle error', err);

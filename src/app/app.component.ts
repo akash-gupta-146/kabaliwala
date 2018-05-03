@@ -17,7 +17,7 @@ import { CustomService } from '../providers/custom.service';
 export class MyApp extends UserSessionManage {
 
   @ViewChild(Nav) nav: Nav;
-  selectedPage: any;
+  activePage: any;
   defaultUserImage: string = "assets/imgs/user.png";
 
   constructor(
@@ -46,13 +46,13 @@ export class MyApp extends UserSessionManage {
 
     /**Handle the case when user pic is clicked */
     if (!page) {
-      // this.selectedPage = "Account";
+      this.activePage = "";
       this.menu.close();
       // this.nav.setRoot("AccountPage");
       return;
     }
 
-    // this.selectedPage = page.title;
+    this.activePage = page.component;
     this.menu.close();
     this.nav.setRoot(page.component);
 

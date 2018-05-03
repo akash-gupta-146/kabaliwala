@@ -56,7 +56,8 @@ import { EmployeeService } from '../providers/employee.service';
     AppreciationService,
     SurveyService,
     StoreService,
-    EmployeeService
+    EmployeeService,
+    SharedService
   ]
 })
 export class AppModule { }

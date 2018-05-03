@@ -6,10 +6,9 @@ import { LoginPage } from '../pages/login/login';
 import { CustomService } from '../providers/custom.service';
 import { HomePage } from '../pages/home/home';
 
-declare var ROLE;
+declare var URLPREFIX;
 export class UserSessionManage {
 
-    selectedPage: string;
     rootPage: any;
     sideMenuOptions: Array<any>;
     isGuest: boolean;
@@ -92,7 +91,7 @@ export class UserSessionManage {
     }
 
     /**maintain different side menu options for super-admin and managment for better understanding and also there might be some features
-     * present in one and not in other
+     * present in one but not in other
      */
     decideSideMenuContent() {
 
@@ -125,7 +124,7 @@ export class UserSessionManage {
     public logout() {
 
         localStorage.clear();
-        ROLE = undefined;
+        URLPREFIX = undefined;
         this.appCtrl.getRootNavs()[0].setRoot(LoginPage);
     }
 
