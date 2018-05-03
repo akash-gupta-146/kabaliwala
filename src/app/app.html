@@ -1,19 +1,15 @@
 <ion-menu [content]="mycontent" *ngIf="!isGuest">
-    <ion-header class="csProfileHeader" tappable (tap)="openPage()" menuClose>
-        <div class="csAccBgImg csHeight160">
-            <div class="csCenter csProfileHeader">
-                <div class="csAccBgImg">
-                    <br>
-                    <img [src]="userImage || defaultUserImage" class="csAccImg csCenter">
-                    <div class="csAccName" text-center>{{userName | titlecase}}</div>
+    <ion-header tappable (tap)="openPage()" menuClose>
+                <div>
+                    <img [src]="userImage || defaultUserImage" class="center-block" width="100px" height="100px" margin-top>
+                    <h2 text-center>{{userName | titlecase}}</h2>
                 </div>
-            </div>
-        </div>
+
     </ion-header>
     <ion-content>
         <ion-list>
             <button ion-item *ngFor="let option of sideMenuOptions" (click)="openPage(option)">
-                <img [src]="option.icon" item-start class="csWidth30"> {{option.title}}
+                <ion-icon [name]="option.icon" color="primary" item-left></ion-icon>{{option.title}}
             </button>
         </ion-list>
     </ion-content>

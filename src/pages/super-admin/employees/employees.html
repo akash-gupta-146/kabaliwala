@@ -5,43 +5,93 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar>
-    <ion-toolbar>
-
-      <button ion-button icon-only menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-
-      <ion-title>
-        Employees
-      </ion-title>
-
-    </ion-toolbar>
-  </ion-navbar>
-
-</ion-header>
+    <ion-navbar color="primary">
+        <button ion-button icon-only menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title no-lines>
+          Employes
+        </ion-title>
+    </ion-navbar>
+  </ion-header>
 
 
-<ion-content padding>
+<ion-content class="gray-back">
 
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+  <ion-grid>
+      <ion-row>
+        <ion-col col-sm-12 col-md-6 col-lg-4 col-xl-3 *ngFor="let e of employees">
+            <ion-card class="profile-card2">
+              <div class="top"></div>
+              <div image>
+                 <!-- <img src="e.picUrl"> -->
+                  <img src="http://glia.ca/scm/2013/ge1127_b/wp-content/uploads/2013/10/594partner-profile-pic-An.jpg">
+                </div>
+                <div text-center class="user-details">
+                  Miley
+                    <h2 class="" text-center><b>{{ e.name }}</b></h2>
+                    <p>{{e.email}}</p>
+                    <b>+91 {{e.contactNo}}</b>
+                </div>
+  
+                <div class="bottom" text-center>
+                  <ion-slides>
+                    <ion-slide *ngFor="let role of e.roles" text-center>
+                        <b>{{ role.role }}@</b>
+                        <b>{{role.storeName}}</b>
+                        <p>{{ role.storeLocation }}</p>
+                    </ion-slide>
+                  </ion-slides>
+      
+                </div>
+              
+              </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
-  <ion-list>
+<ion-grid>
+  <ion-row>
+    <ion-col col-sm-12 col-md-6 col-lg-4 col-xl-3 *ngFor="let e of employees">
+        <ion-card class="profile-card" >
+          <div image>
+            <div class="top d-flex justify-content-between">
+              <b></b>
+              <b>
+                <ion-icon name="email"></ion-icon> {{e.email}}
+              </b>
+            </div>
+            <!-- <img src="e.picUrl"> -->
+              <img src="http://img2.thejournal.ie/inline/2470754/original/?width=428&version=2470754">
+              <div class="bottom d-flex justify-content-between">
+                John
+                  <b>{{ e.name }}</b>
+                  <b><ion-icon name="call"></ion-icon> {{e.contactNo}}</b>
+                </div>
+            </div>
+            <ion-item text-center *ngFor="let role of e.roles">
+                <ion-badge>{{ role.role }}</ion-badge><br>
+                <b>{{role.storeName}}</b>
+                <p>{{ role.storeLocation }}</p>
+            </ion-item>
+          
+          </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
 
-    <ion-item *ngFor="let e of employees">
-      <h5>{{e.name}} ({{e.username}})</h5>
-      <p>{{e.rolesList}}</p>
-    </ion-item>
-  </ion-list>
+
+
 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 
   <ion-fab right bottom>
-    <button ion-fab color="primary" (click)="openNewEmployeeModal()">
+    <button ion-fab color="secondary" (click)="openNewEmployeeModal()">
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>

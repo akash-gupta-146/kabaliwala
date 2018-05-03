@@ -1,33 +1,34 @@
 <ion-header>
-  <ion-navbar>
-    <ion-toolbar>
-
+  <ion-navbar color="primary">
       <button ion-button icon-only menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
-
-      <ion-title>
+      <ion-title no-lines>
         Stores
       </ion-title>
-
-    </ion-toolbar>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="gray-back">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-sm-12 col-md-4 col-lg-3 col-xl-2 *ngFor="let s of stores">
+        <ion-card padding-top>
+          <img src="assets/imgs/store.png">
+          <ion-card-header text-center no-padding margin-top>
+            {{s.name}}
+          </ion-card-header>
+          <div text-center>
+            <p no-margin padding-left padding-right>{{s.location}}</p>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-  <ion-list>
-
-
-    <ion-item *ngFor="let s of stores">
-      <h5>{{s.name}}</h5>
-      <ion-icon start name="pin"></ion-icon>
-      {{s.location}}
-    </ion-item>
-  </ion-list>
 
   <ion-fab right bottom>
-    <button ion-fab color="primary" (click)="openNewStoreAlert()">
+    <button ion-fab color="secondary" (click)="openNewStoreAlert()">
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>

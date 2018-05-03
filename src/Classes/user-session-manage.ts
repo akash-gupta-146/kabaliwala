@@ -99,9 +99,9 @@ export class UserSessionManage {
         const isSuperAdmin: boolean = JSON.parse(localStorage.getItem('userInfo')).urlPrefix === 'sa';
         this.sideMenuOptions = [
 
-            { title: 'Home', component: "DashboardPage", show: isSuperAdmin, icon: 'assets/icon/home.png' },
-            { title: 'Stores', component: "StoresPage", show: isSuperAdmin, icon: 'assets/icon/complaint.jpg' },
-            { title: 'Employees', component: "EmployeesPage", icon: 'assets/icon/suggestion.jpg' },
+            { title: 'Home', component: "DashboardPage", show: isSuperAdmin, icon: 'home' },
+            { title: 'Stores', component: "StoresPage", show: isSuperAdmin, icon: 'basket' },
+            { title: 'Employees', component: "EmployeesPage", icon: 'people' },
             // { title: 'Appreciations', component: "AppreciationTabsPageStudent", icon: 'assets/icon/appreciation.jpg' },
             // { title: 'Polls', component: "PollStudent", icon: 'assets/icon/poll.jpg' },
             // { title: 'Surveys', component: "SurveyPageStudent", icon: 'assets/icon/survey.jpg' },

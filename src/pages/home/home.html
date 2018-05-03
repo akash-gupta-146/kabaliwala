@@ -1,14 +1,18 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Guest
-    </ion-title>
-  </ion-navbar>
-</ion-header>
+    <ion-navbar color="primary">
+        <ion-title no-lines>
+          Guest
+        </ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="onLogout()">
+              <ion-icon name="log-out"></ion-icon>
+            </button>
+          </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+<ion-content class="gray-back">
 
-<ion-content padding>
-
-  <ion-grid>
+  <!-- <ion-grid>
     <ion-row>
       <ion-col col-6>
         <button ion-button full (click)="onComplaint()">
@@ -20,8 +24,6 @@
           Suggestion
         </button>
       </ion-col>
-    </ion-row>
-    <ion-row>
       <ion-col col-6>
         <button ion-button full (click)="onAppreciation()">
           Appreciation
@@ -33,9 +35,53 @@
         </button>
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
 
-  <button ion-button full color="danger" (click)="onLogout()">Log Out</button>
+
+  <ion-grid>
+      <ion-row>
+        <ion-col col-6>
+          <div class="custom-button back-1">
+            <div class="center">
+                <button clear icon-only (click)="onComplaint()">
+                    <ion-icon name="sad"></ion-icon>
+                  </button>
+            </div>
+            <div class="btn-title" text-center>Complaint</div>
+          </div>
+        </ion-col>
+        <ion-col col-6>
+            <div class="custom-button back-2">
+                <div class="center">
+                    <button clear icon-only (click)="onSuggestion()">
+                        <ion-icon name="bulb"></ion-icon>
+                      </button>
+                </div>
+                <div class="btn-title" text-center>Suggestion</div>
+              </div>
+        </ion-col>
+        <ion-col col-6>
+            <div class="custom-button back-3">
+                <div class="center">
+                    <button clear icon-only (click)="onAppreciation()">
+                        <ion-icon name="thumbs-up"></ion-icon>
+                      </button>
+                </div>
+                <div class="btn-title" text-center>Appreciate</div>
+              </div>
+        </ion-col>
+        <ion-col col-6>
+            <div class="custom-button back-4">
+                <div class="center">
+                    <button clear icon-only (click)="onSurvey()">
+                        <ion-icon name="list-box"></ion-icon>
+                      </button>
+                </div>
+                <div class="btn-title" text-center>Survey</div>
+              </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
 
 </ion-content>
