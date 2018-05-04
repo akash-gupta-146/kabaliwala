@@ -1,79 +1,81 @@
 
 
  <!-- THIS FILE IS ALSO USED FRO SUGGESTIONS -->
+ 
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>{{title | titlecase}}</ion-title>
+  <ion-navbar color="primary">
+    <ion-title no-lines>{{title | titlecase}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="gray-back">
   <div *ngIf="complaintCategories">
 
     <form #complaintForm="ngForm" (ngSubmit)="onSubmit()">
-      <ion-card>
-        <ion-item>
-          <ion-icon ios="ios-sad-outline" md="md-sad" item-start color="primary"></ion-icon>
-          <ion-label>{{complaintService.compOrSugg=='complaint'?'Against':'For'}}</ion-label>
-          <ion-select [(ngModel)]="selectedCategory" (ionChange)="resetSubCategories()" required name="category">
-            <ion-option *ngFor="let category of complaintCategories" [value]="category">{{category.name}}</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-card>
-      <div *ngIf="selectedCategory?.childCategory && selectedCategory.childCategory.length > 0">
-        <ion-card>
-          <ion-item>
-            <ion-icon name="options" item-start></ion-icon>
-            <ion-label>SubCategory</ion-label>
-            <ion-select [(ngModel)]="selectedSubCategory" required name="subCategory">
-              <ion-option *ngFor="let subCat of selectedCategory.childCategory" [value]="subCat">{{subCat.name}}</ion-option>
-            </ion-select>
-          </ion-item>
-        </ion-card>
+      <div class="input-box">
+          <ion-item no-lines>
+              <ion-icon name="sad" item-start color="primary" *ngIf="complaintService.compOrSugg=='complaint'"></ion-icon>
+              <ion-icon name="bulb" item-start color="primary" *ngIf="complaintService.compOrSugg!='complaint'"></ion-icon>
+              <ion-label>{{complaintService.compOrSugg=='omplaint'?'Complaint Against':'Suggestion For'}}</ion-label>
+              <ion-select [(ngModel)]="selectedCategory" (ionChange)="resetSubCategories()" required name="category">
+                <ion-option *ngFor="let category of complaintCategories" [value]="category">{{category.name}}</ion-option>
+              </ion-select>
+            </ion-item>
       </div>
 
-      <ion-card>
-        <ion-item>
-          <ion-label stacked>Title</ion-label>
-          <ion-textarea [(ngModel)]="complaintTitle" required name="title" maxlength="50" placeholder="Enter Title (Max 50 characters)"></ion-textarea>
-        </ion-item>
-      </ion-card>
+      <div class="input-box" *ngIf="selectedCategory?.childCategory && selectedCategory.childCategory.length > 0">
+          <ion-item no-lines>
+              <ion-icon name="options" item-start></ion-icon>
+              <ion-label>SubCategory</ion-label>
+              <ion-select [(ngModel)]="selectedSubCategory" required name="subCategory">
+                <ion-option *ngFor="let subCat of selectedCategory.childCategory" [value]="subCat">{{subCat.name}}</ion-option>
+              </ion-select>
+            </ion-item>
+      </div>
 
-      <ion-card>
+      <div class="input-box">
         <ion-item>
-          <ion-label stacked>Description</ion-label>
-          <ion-textarea [(ngModel)]="complaintDescription" required name="description" rows="5" maxlength="2500" placeholder="Enter Description (Max 2500 characters)"></ion-textarea>
+            <ion-icon name='ios-more' item-left></ion-icon>
+            <ion-label stacked>Title</ion-label>
+            <ion-textarea [(ngModel)]="complaintTitle" required name="title" maxlength="50" placeholder="Enter Title (Max 50 characters)"></ion-textarea>
+          </ion-item>
+          <ion-item no-lines>
+              <ion-icon name='list' item-left></ion-icon>
+            <ion-label stacked>Description</ion-label>
+            <ion-textarea [(ngModel)]="complaintDescription" required name="description" rows="5" maxlength="2500" placeholder="Enter Description (Max 2500 characters)"></ion-textarea>
         </ion-item>
-
-      </ion-card>
+      </div>
 
       <!-- GUEST OPTIONAL INFO FORM -->
-      <div>
-        <h4>Guest Information (Optional)</h4>
-        <ion-card>
-          <ion-item>
-            <ion-label floating>Name</ion-label>
-            <ion-input type="text" [(ngModel)]="guestInfo.name" [ngModelOptions]="{standalone: true}" name="name"></ion-input>
-          </ion-item>
-        </ion-card>
+      <ion-list-header>
+          <h5>Your Details (Optional)</h5>
+      </ion-list-header>
+          <div class="input-box">
+              <ion-item no-lines>
+                <ion-icon name='person' item-left></ion-icon>
+                  <ion-label>Name</ion-label>
+                  <ion-input placeholder="Your Name" type="text" [(ngModel)]="guestInfo.name" [ngModelOptions]="{standalone: true}" name="name"></ion-input>
+                </ion-item>
+          </div>
+       
+          <div class="input-box">
+              <ion-item no-lines>
+                  <ion-icon name='mail' item-left></ion-icon>
+                  <ion-label>Email</ion-label>
+                  <ion-input placeholder="Your Email Address" type="email" [(ngModel)]="guestInfo.email" [ngModelOptions]="{standalone: true}" name="email"></ion-input>
+                </ion-item>
+          </div>
 
-        <ion-card>
-          <ion-item>
-            <ion-label floating>Email</ion-label>
-            <ion-input type="email" [(ngModel)]="guestInfo.email" [ngModelOptions]="{standalone: true}" name="email"></ion-input>
-          </ion-item>
-        </ion-card>
-
-        <ion-card>
-          <ion-item>
-            <ion-label floating>Contact No. (10 digits)</ion-label>
-            <ion-input type="text" [(ngModel)]="guestInfo.contact" [ngModelOptions]="{standalone: true}" minlength="10" maxlength="10" name="contact"></ion-input>
-          </ion-item>
-        </ion-card>
-      </div>
+          <div class="input-box">
+              <ion-item no-lines>
+                  <ion-icon name='call' item-left></ion-icon>
+                  <ion-label>Contact No.</ion-label>
+                  <ion-input placeholder="Your 10 Digits Contact Number" type="text" [(ngModel)]="guestInfo.contact" [ngModelOptions]="{standalone: true}" minlength="10" maxlength="10" name="contact"></ion-input>
+                </ion-item>
+          </div>
 
       <div padding>
         <button [disabled]="!complaintForm.valid" ion-button full type="submit">Submit</button>

@@ -1,3 +1,21 @@
 page-new-c {
 
 }
+.input-box{
+    margin:15px;
+    padding:5px;
+    background:lighten(color($colors,primary),40%);
+    transition:0.5s;
+    ion-item{
+        background:transparent;
+        ion-icon,ion-label{
+            color:#7f6500 !important;
+        }
+        ion-label[stacked]{
+            font-size:1.8rem !important;
+        }
+    }
+    &:focus-within,&:focus,&:active{
+        box-shadow: 0 8px 30px lighten(color($colors,primary),20%);
+    }
+}

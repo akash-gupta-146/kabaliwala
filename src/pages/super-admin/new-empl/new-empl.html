@@ -1,97 +1,84 @@
-
 <ion-header>
-        <ion-navbar color="primary">
-                <button ion-button (click)="dismiss()">
-                        <span>Cancel</span>
-                    </button>
-            <ion-title no-lines>
-              Add new employee
-            </ion-title>
-        </ion-navbar>
-      </ion-header>
+  <ion-navbar color="primary">
+    <button ion-button (click)="dismiss()">
+      <span>Cancel</span>
+    </button>
+    <ion-title no-lines>
+      Add new employee
+    </ion-title>
+  </ion-navbar>
+</ion-header>
 
 <ion-content class="gray-back">
 
+  <form #newEmplForm="ngForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-icon item-left name="person" color="primary"></ion-icon>
+      <ion-label>Name</ion-label>
+      <ion-input [(ngModel)]="name" placeholder="Enter Name" required maxlength="50" name="name"></ion-input>
+    </ion-item>
 
-    <form #newEmplForm="ngForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-icon item-left name="person" color="primary"></ion-icon>
+      <ion-label>NickName</ion-label>
+      <ion-input [(ngModel)]="nickName" placeholder="Enter Nickname" maxlength="50" name="title"></ion-input>
+    </ion-item>
 
+    <ion-item>
+      <ion-icon item-left name="call" color="primary"></ion-icon>
+      <ion-label>Contact No.</ion-label>
+      <ion-input [(ngModel)]="contactNo" placeholder="Enter Contact Number" maxlength="15" name="contactNo"></ion-input>
+    </ion-item>
 
+    <ion-item>
+      <ion-icon item-left name="mail" color="primary"></ion-icon>
+      <ion-label>Email</ion-label>
+      <ion-input [(ngModel)]="email" placeholder="Enter Email" name="email"></ion-input>
+    </ion-item>
 
+    <ion-item>
+      <ion-icon item-left name="person" color="primary"></ion-icon>
+      <ion-label>Username</ion-label>
+      <ion-input [(ngModel)]="username" placeholder="Enter Username" required name="username"></ion-input>
+    </ion-item>
 
-            <ion-item>
-                <ion-icon item-left name="person" color="primary"></ion-icon>
-                <ion-label>Name</ion-label>
-                <ion-input [(ngModel)]="name" placeholder="Enter Name" required maxlength="50" name="name"></ion-input>
-            </ion-item>
+    <ion-item no-lines>
+      <ion-icon item-left name="lock" color="primary"></ion-icon>
+      <ion-label>Password</ion-label>
+      <ion-input type="password" [(ngModel)]="password" placeholder="Enter Password" required name="password"></ion-input>
+    </ion-item>
+    <div *ngIf="roles">
+      <ion-list-header>
+        Select Store and role
+      </ion-list-header>
+      <div *ngFor="let rs of roleStoreList;let i=index" class="box">
+        <button class="box-btn" type="button" *ngIf="roleStoreList.length > 1 " ion-button icon-only (click)="onRemove(i)">
+          <ion-icon name="close"></ion-icon>
+        </button>
+        <ion-card>
+          <ion-item>
+            <ion-icon item-left name="basket" color="primary"></ion-icon>
+            <ion-label>Store</ion-label>
+            <ion-select [(ngModel)]="rs.storeId" required name="store{{i}}">
+              <ion-option *ngFor="let s of stores" value="{{s.id}}">{{s.name}}</ion-option>
+            </ion-select>
+          </ion-item>
 
-            <ion-item>
-                    <ion-icon item-left name="person"  color="primary"></ion-icon>
-                <ion-label>NickName</ion-label>
-                <ion-input [(ngModel)]="nickName" placeholder="Enter Nickname" maxlength="50" name="title"></ion-input>
-            </ion-item>
+          <ion-item>
+            <ion-icon item-left name="body" color="primary"></ion-icon>
+            <ion-label>Role</ion-label>
+            <ion-select [(ngModel)]="rs.roleId" required name="role{{i}}">
+              <ion-option *ngFor="let r of roles" value="{{r.id}}">{{r.name}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-card>
+      </div>
 
-            <ion-item>
-                    <ion-icon item-left name="call" color="primary"></ion-icon>
-                <ion-label>Contact No.</ion-label>
-                <ion-input [(ngModel)]="contactNo" placeholder="Enter Contact Number" maxlength="15" name="contactNo"></ion-input>
-            </ion-item>
-
-            <ion-item>
-                    <ion-icon item-left name="mail" color="primary"></ion-icon>
-                <ion-label>Email</ion-label>
-                <ion-input [(ngModel)]="email" placeholder="Enter Email" name="email"></ion-input>
-            </ion-item>
-
-            <ion-item>
-                    <ion-icon item-left name="person" color="primary"></ion-icon>
-                <ion-label>Username</ion-label>
-                <ion-input [(ngModel)]="username" placeholder="Enter Username" required name="username"></ion-input>
-            </ion-item>
-
-            <ion-item no-lines>
-                    <ion-icon item-left name="lock" color="primary"></ion-icon>
-                <ion-label>Password</ion-label>
-                <ion-input type="password" [(ngModel)]="password"placeholder="Enter Password"  required name="password"></ion-input>
-            </ion-item>
-
-        <div *ngIf="roles">
-            <ion-list-header>
-                    Select Store and role
-            </ion-list-header>
-            <div *ngFor="let rs of roleStoreList;let i=index" class="box">
-                    <button class="box-btn" type="button" *ngIf="roleStoreList.length > 1 " ion-button icon-only (click)="onRemove(i)">
-                            <ion-icon name="close"></ion-icon>
-                        </button>
-                <ion-card>
-                    <ion-item>
-                            <ion-icon item-left name="basket" color="primary"></ion-icon>
-                        <ion-label>Store</ion-label>
-                        <ion-select [(ngModel)]="rs.storeId" required name="store{{i}}">
-                            <ion-option *ngFor="let s of stores" value="{{s.id}}">{{s.name}}</ion-option>
-                        </ion-select>
-                    </ion-item>
-
-                    <ion-item>
-                            <ion-icon item-left name="body" color="primary"></ion-icon>
-                        <ion-label>Role</ion-label>
-                        <ion-select [(ngModel)]="rs.roleId" required name="role{{i}}">
-                            <ion-option *ngFor="let r of roles" value="{{r.id}}">{{r.name}}</ion-option>
-                        </ion-select>
-                    </ion-item>
-                </ion-card>
-            </div>
-
-            <button type="button" margin-right style="float:right" small round ion-button  (click)="onAdd()">
-                 Add Role
-            </button>
-
-        </div>
-
-
-
-
-            <button [disabled]="!newEmplForm.valid" ion-button full type="submit">Save</button>
-  
-    </form>
+      <button type="button" margin-right style="float:right" small round ion-button (click)="onAdd()">
+        Add Role
+      </button>
+    </div>
+    <button [disabled]="!newEmplForm.valid" ion-button full type="submit">Save</button>
+  </form>
 
 </ion-content>
