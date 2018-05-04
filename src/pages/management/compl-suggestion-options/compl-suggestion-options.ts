@@ -19,7 +19,6 @@ export class ComplaintSuggestionOptionsPage extends ComplaintSuggestionOptionsBa
     @Input() complaintIndex: any;
 
     compalintStatusChanged: boolean;
-    isStudent: boolean;
     constructor(
         public mdlCtrl: ModalController,
         public alertCtrl: AlertController,

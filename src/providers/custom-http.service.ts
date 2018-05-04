@@ -52,7 +52,7 @@ export class CustomHttpService {
             .catch(this.handleError);
     }
 
-    post(url: string, body: any, options?: HttpHeaders, urlWithRole = false) {
+    post(url: string, body: any, options?: HttpHeaders) {
 
         let headers = this.addHeaders(options);
         let _url: string;
@@ -64,6 +64,22 @@ export class CustomHttpService {
 
         }
         return this.httpClient.post(_url, body, { headers: headers, observe: 'response' })
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    put(url: string, body: any, options?: HttpHeaders) {
+
+        let headers = this.addHeaders(options);
+        let _url: string;
+        if (ROLE) {
+            // in case of admin.mngmnt, each request contains ROLE if ROLE exists
+            _url = BASEURL + (URLPREFIX ? '/' + URLPREFIX : '') + '/' + ROLE + url;
+        } else {
+            _url = BASEURL + (URLPREFIX ? '/' + URLPREFIX : '') + url;
+
+        }
+        return this.httpClient.put(_url, body, { headers: headers, observe: 'response' })
             .map(this.extractData)
             .catch(this.handleError);
     }
