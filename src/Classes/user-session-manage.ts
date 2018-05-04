@@ -75,7 +75,6 @@ export class UserSessionManage {
     }
 
     setRootPage() {
-        console.log('setting root page');
 
         //check role and set root page
         const role = JSON.parse(localStorage.getItem('userInfo')).urlPrefix;

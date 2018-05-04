@@ -24,7 +24,6 @@ export class FacultySearchPage {
         private navParam: NavParams
     ) {
         this.searchList = this.navParam.get('searchList');
-        console.log(this.navParam.get('searchList'));
         
         this.title = 'Select ' + this.navParam.get('title');
         this.searchTempList = this.searchList;

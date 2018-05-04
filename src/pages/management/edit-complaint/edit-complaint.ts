@@ -97,7 +97,7 @@ export class ComplaintEditPage {
             assignedTo: this.assignTo && this.assignTo.id,
             priority: this.priority
         };
-        console.log(this.inProgress);
+        (this.inProgress);
         
         if (this.inProgress) { status.statusId = 3; }
 
@@ -108,7 +108,7 @@ export class ComplaintEditPage {
                 this.complaintService.updateComplaint(this.complaint,res);
                 this.customService.hideLoader();
                 this.customService.showToast('Complaint Edited successfully');
-                this.dismiss();
+                this.dismiss(res);
             }, (err: any) => {
 
                 this.customService.hideLoader();

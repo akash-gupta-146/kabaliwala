@@ -3,6 +3,7 @@ import { CustomHttpService } from './custom-http.service';
 declare var URLPREFIX;
 declare var ROLE;
 
+
 @Injectable()
 export class AuthService {
 
@@ -41,4 +42,6 @@ export class AuthService {
             ROLE=info.roles[0];
         }
     }
+
+
 }

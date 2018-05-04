@@ -77,7 +77,7 @@ export class ComplaintCloseManagementPage {
                 this.customService.hideLoader();
                 this.complaintService.updateComplaint(this.complaint,res);
                 this.customService.showToast('Complaint closed successfully');
-                this.dismiss();
+                this.dismiss(res);
             }, (err: any) => {
 
                 this.customService.hideLoader();
@@ -87,8 +87,8 @@ export class ComplaintCloseManagementPage {
     }
 
 
-    dismiss() {
-        this.viewCtrl.dismiss();
+    dismiss(updatedComplaint?:any) {
+        this.viewCtrl.dismiss(updatedComplaint);
     }
 }
 

@@ -20,6 +20,7 @@
                 <nl-img [src]="search.picUrl" item-left style="height: 50px;width: 50px"></nl-img>
                 {{search.name }}
                 <span *ngIf="search.role"> ({{search.role}})</span>
+                <p *ngIf="search.store"><span bold>Store: </span>{{search.store}}</p>
             </button>
         </ion-list>
     </ion-card>

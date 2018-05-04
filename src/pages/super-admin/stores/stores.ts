@@ -60,7 +60,6 @@ export class StoresPage {
         }, {
           text: 'Create',
           handler: data => {
-            console.log(data);
             if (data.name.trim() === '') {
               this.customService.showToast('Store name cannot be empty', 'top');
               return false;

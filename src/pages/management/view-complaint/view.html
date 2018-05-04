@@ -33,17 +33,17 @@
       </ion-title>
     </div>
     <div flex buttons>
-      <button (click)="openCommentPage()" ion-button round icon-left outline color="secondary" [style.border-color]="complaint.statusColor || 'green' "
+      <button (click)="comment()" ion-button round icon-left outline color="secondary" [style.border-color]="complaint.statusColor || 'green' "
         [style.color]="complaint.statusColor || 'green' ">
         <ion-icon name="chatbubbles"></ion-icon>
         Comment
       </button>
-      <button (click)="editComplaint()" *ngIf="complaint.statusId != 6 && complaint.statusId != 4" ion-button round icon-left outline
+      <button (click)="edit()" *ngIf="complaint.statusId != 6 && complaint.statusId != 4" ion-button round icon-left outline
         color="secondary" [style.border-color]="complaint.statusColor || 'green' " [style.color]="complaint.statusColor || 'green' ">
         <ion-icon name="md-create"></ion-icon>
         Edit
       </button>
-      <button (click)="openClosePage()" *ngIf="complaint.statusId != 6 && complaint.statusId != 4" ion-button round icon-left outline
+      <button (click)="close()" *ngIf="complaint.statusId != 6 && complaint.statusId != 4" ion-button round icon-left outline
         color="secondary" [style.border-color]="complaint.statusColor || 'green' " [style.color]="complaint.statusColor || 'green' ">
         <ion-icon name="md-remove-circle"></ion-icon>
         Close

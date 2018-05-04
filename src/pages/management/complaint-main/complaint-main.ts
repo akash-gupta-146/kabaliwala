@@ -166,7 +166,6 @@ export class ComplaintMainPage {
         mod.present();
 
         mod.onDidDismiss((recentlyAddedComplaint?: any) => {
-            console.log(recentlyAddedComplaint);
 
             if (recentlyAddedComplaint && recentlyAddedComplaint.data) {
 
@@ -176,8 +175,10 @@ export class ComplaintMainPage {
     }
 
     openViewModal(complaint: any, index: number) {
-        console.log(complaint, index);
-        this.navCtrl.push("ViewComplaintPage", { viewCompl: complaint, index: index });
+        // complaint list and index are to be sent so that 
+        // if complaint is edited from within the view
+        // the same can be reflected in the list also
+        this.navCtrl.push("ViewComplaintPage", { viewCompl: complaint, index: index,list:this.complaintList });
     }
 
     doRefresh(refresher: any) {
@@ -309,11 +310,9 @@ export class ComplaintMainPage {
         if (this.searchInput.trim().length >= 1) {
 
             if (this.isFilterApplied) {
-                console.log('FILTERED SEARCH FIRED.......');
 
                 this.sendSearchAfterFilterRequest();
             } else {
-                console.log('NORMAL SEARCH FIRED.......');
                 this.sendSearchRequest();
             }
         }

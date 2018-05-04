@@ -7,6 +7,8 @@ import 'rxjs/add/observable/throw';
 import { BASEURL } from './app.constants';
 declare var URLPREFIX;
 declare var ROLE;
+declare const SockJS;
+declare const Stomp;
 
 @Injectable()
 export class CustomHttpService {
@@ -122,6 +124,14 @@ export class CustomHttpService {
         }
         return Observable.throw(errorInfo);
 
+    }
+
+    getSockJs() {
+
+        let access_token = localStorage.getItem('access_token');
+        let url = BASEURL + `/${URLPREFIX}/nxtlife/websocket?access_token=${access_token}`;
+        var socket = new SockJS(url);
+        return Stomp.over(socket);
     }
 
 }

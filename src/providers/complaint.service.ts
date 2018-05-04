@@ -52,7 +52,7 @@ export class ComplaintService {
 
     }
 
-    
+
     editComplaint(id: number, status: any) {
         return this.http.put(`/${this.compOrSugg}/${id}`, status);
 
@@ -73,6 +73,14 @@ export class ComplaintService {
                     return [this.complaintPriorities, this.employees];
                 });
         }
+    }
+
+    fetchComments(complaintId: number) {
+        return this.http.get(`/${this.compOrSugg}/${complaintId}/comment`);
+    }
+
+    postComments(complaintId: number, comment: string) {
+        return this.http.post(`/${this.compOrSugg}/${complaintId}/comment`, { comment: comment });
     }
 
     updateComplaint(oldC: any, newC: any) {

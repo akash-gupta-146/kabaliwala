@@ -18,6 +18,7 @@ export class ViewComplaintPage extends ComplaintSuggestionOptionsBaseClass {
     title = `View ${this.complaintService.compOrSugg}`;
     complaint: any;
     complaintIndex: number;
+    complaintList: Array<any>;
     stompClient: any;
 
     statusChangedByLive: boolean = false;
@@ -35,11 +36,13 @@ export class ViewComplaintPage extends ComplaintSuggestionOptionsBaseClass {
     ) {
         super(mdlCtrl, alertCtrl, actionSheetCtrl, customService, complaintService, events);
 
-
+        // complaint sent form list view is only used for getting the id
+        // as complete detail of complaint is required to be fetched from the server using its id
         let complaintTemp = this.params.get('viewCompl');
         this.complaintIndex = this.params.get('index');
-    
-        this.fetchCompleteComplaint(complaintTemp.id); 
+        this.complaintList = this.params.get('list');
+
+        this.fetchCompleteComplaint(complaintTemp.id);
     }
 
     fetchCompleteComplaint(id: number) {
@@ -112,8 +115,52 @@ export class ViewComplaintPage extends ComplaintSuggestionOptionsBaseClass {
     //         this.complaint = newData;
     //         this.events.publish('complaintStatusChanged', this.complaint, this.complaintIndex);
     //     });
-        
+
     // }
+
+    comment() {
+        this.openCommentPage()
+            .onDidDismiss((updatedComplaint: any) => {
+                if (updatedComplaint) {
+                    // update the current complaint
+                    this.complaint = updatedComplaint;
+
+                    // replace the currenlty opened complaint from the list with 
+                    // the updated complaint by using index
+                    this.complaintList.splice(this.complaintIndex, 1, updatedComplaint);
+                }
+            });
+    }
+
+    edit() {
+        
+        this.editComplaint()
+            .onDidDismiss((updatedComplaint: any) => {
+                if (updatedComplaint) {
+                    // update the current complaint
+                    this.complaint = updatedComplaint;
+
+                    // replace the currenlty opened complaint from the list with 
+                    // the updated complaint by using index
+                    
+                    this.complaintList.splice(this.complaintIndex, 1, updatedComplaint);
+                }
+            });
+    }
+
+    close() {
+        this.openClosePage()
+            .onDidDismiss((updatedComplaint: any) => {
+                if (updatedComplaint) {
+                    // update the current complaint
+                    this.complaint = updatedComplaint;
+
+                    // replace the currenlty opened complaint from the list with 
+                    // the updated complaint by using index
+                    this.complaintList.splice(this.complaintIndex, 1, updatedComplaint);
+                }
+            });
+    }
 
 
     dismiss() {
