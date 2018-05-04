@@ -15,6 +15,7 @@ export class LoginPage {
 
   loginForm: FormGroup;
   loginType = 'guest';
+  audio:any;
 
   constructor(
     public navCtrl: NavController,
@@ -97,5 +98,11 @@ export class LoginPage {
     }
   }
 
+  playSound(type:string){
+    if(type=='click'){
+      this.audio = document.getElementById("click");
+      this.audio.play();
+    }
+  }
 
 }

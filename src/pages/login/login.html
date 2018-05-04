@@ -1,46 +1,6 @@
-<!-- <ion-header>
-    <ion-navbar>
-        <ion-title>
-            Login
-        </ion-title>
-    </ion-navbar>
-</ion-header>
-
-<ion-content padding>
-    <h3 text-center>Kabliwaalas</h3>
-
-    <ion-segment [(ngModel)]="loginType" color="primary">
-        <ion-segment-button value="superadmin">
-            Super Admin
-        </ion-segment-button>
-        <ion-segment-button value="management">
-            Management
-        </ion-segment-button>
-        <ion-segment-button value="guest">
-            Guest
-        </ion-segment-button>
-    </ion-segment>
-
-    <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
-
-        <ion-list no-margin>
-            <ion-item no-padding no-line-top>
-                <ion-label floating>Username</ion-label>
-                <ion-input type="text" formControlName="username"></ion-input>
-            </ion-item>
-            <ion-item no-padding>
-                <ion-label floating>Password</ion-label>
-                <ion-input type="password" formControlName="password"></ion-input>
-            </ion-item>
-        </ion-list>
-
-        <button type="submit" color="light_green" ion-button full>Log In</button>
-    </form>
-
-</ion-content> -->
-
-
-
+<audio id="click">
+        <source src="assets/music/beep.mp3">
+</audio>
 
 <ion-content>
 
@@ -52,23 +12,19 @@
                         <div class="layer"></div>
             </div>
         </div>
-           
-                
-        
-        
         <div segment>
                 <img src="assets/imgs/logo.png" class="logo">
 
             <ion-segment [(ngModel)]="loginType" class="custom-ion-segment-button">
-                <ion-segment-button value="superadmin" class=" d-flex flex-column align-items-center">
+                <ion-segment-button value="superadmin" class=" d-flex flex-column align-items-center" (click)="playSound('click')">
                     <img src="assets/imgs/super-admin.png" class="button-image">
                     <h3>Super Admin</h3>
                 </ion-segment-button>
-                <ion-segment-button value="management" class=" d-flex flex-column align-items-center">
+                <ion-segment-button value="management" class=" d-flex flex-column align-items-center" (click)="playSound('click')">
                         <img src="assets/imgs/management.png" class="button-image">
                         <h3>Management</h3>
                 </ion-segment-button>
-                <ion-segment-button value="guest" class=" d-flex flex-column align-items-center">
+                <ion-segment-button value="guest" class=" d-flex flex-column align-items-center" (click)="playSound('click')">
                         <img src="assets/imgs/guest.png" class="button-image">
                         <h3>Guest</h3>
                 </ion-segment-button>
@@ -90,7 +46,7 @@
                                     </div>
     
         
-                <button type="submit" ion-button round class="center-block" outline>
+                <button type="submit" ion-button round class="center-block" outline (click)="playSound('click')">
                     Log In
                 </button>
             </form>

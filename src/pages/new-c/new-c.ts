@@ -36,11 +36,12 @@ export class NewComplaintPage { // ALSO USED FOR NEW SUGGESTION
     public complaintService: ComplaintService,
     private sharedService: SharedService
   ) { }
-
-
   ionViewDidLoad() {
     this.getComplaintCategories();
   }
+
+
+
 
   getComplaintCategories() {
     this.customService.showLoader();
@@ -111,4 +112,5 @@ export class NewComplaintPage { // ALSO USED FOR NEW SUGGESTION
   isGuestContactEntered() {
     return this.guestInfo.contact && this.guestInfo.contact.trim() != '';
   }
+
 }
