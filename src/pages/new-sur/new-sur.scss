@@ -13,3 +13,50 @@
 //     }
 //   }
   
+page-new-sur{
+    ion-slides{
+        height: initial;
+        ion-slide{
+            height: auto !important;
+            ion-label{
+                font-size: 20px;
+                margin:13px auto !important;
+                color: #f9622c;
+                font-weight:bold;
+                white-space: pre-line;
+            }
+            .image{
+                width:25vw;
+                height:25vw;
+                background-size: contain;
+                background-position: center;
+                background-repeat:no-repeat;
+                display:block;
+                margin:auto;
+            }
+        }
+        .survey-card{
+            margin: 30px 15vw;
+            padding: 30px;
+            background:white;
+            box-shadow: 0px 7px 24px rgba(0, 0, 0, 0.4392156862745098);
+        }
+        .image-slide:nth-child(1) .image{
+            background-image:url(../assets/imgs/quality.png);
+        }
+        .image-slide:nth-child(2) .image{
+            background-image:url(../assets/imgs/staff.png);
+        }
+        .image-slide:nth-child(3) .image{
+            background-image:url(../assets/imgs/nuts2.png);
+        } 
+        ion-textarea{
+            border:1px solid lightgray;
+        }
+    }
+    rating ul{
+        font-size:5vw;
+        color:#f9622c;
+        padding-left:0px;
+    }
+}

@@ -5,13 +5,18 @@
   Ionic pages and navigation.
 -->
 
-<ion-content padding>
+<ion-content class="gray-back">
 
-  <button ion-button clear (click)="onBack()">
-    <ion-icon name="arrow-dropleft"></ion-icon>
-    Back
-  </button>
 
-  <h1 margin text-center>SUBMITTED SUCCESSFULLY</h1>
+<div cen>
+    <h1 margin text-center>Sent Successfully</h1>
+    <img class="sent" src="assets/imgs/sent.gif" margin>
+    <button ion-button round margin full class="center-block" icon-left (click)="onBack()">
+        <ion-icon name="arrow-dropleft"></ion-icon>
+        Back
+      </button>
+</div>
+
+
 
 </ion-content>

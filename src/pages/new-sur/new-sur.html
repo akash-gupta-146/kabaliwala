@@ -1,9 +1,7 @@
 <ion-header>
-
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>Survey</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 <!--
@@ -17,51 +15,76 @@
     (ngModelChange)="onModelChange($event)"></rating> 
       -->
 
-<ion-content padding>
+<ion-content class="gray-back">
 
-  <ion-list>
     <ion-list-header>
       Help us improve by answering the following questions
     </ion-list-header>
-    <div *ngFor="let q of questions;let i=index">
-      <ion-item *ngIf="q.type==='STAR'">
+
+    <!-- <div class="input-box" *ngFor="let q of questions;let i=index">
+      <ion-item *ngIf="q.type==='STAR'" no-lines>
         <h5>{{q.question}}</h5>
         <rating [(ngModel)]="q.starValue"></rating>
       </ion-item>
-      <ion-item *ngIf="q.type==='TEXT'">
+      <ion-item *ngIf="q.type==='TEXT'" no-lines>
         <ion-label color="primary" stacked>{{q.question}}</ion-label>
         <ion-input type="text" [(ngModel)]="q.textValue" placeholder="Enter Text (optional)"></ion-input>
       </ion-item>
-    </div>
-  </ion-list>
+    </div> -->
+
+      <ion-slides pager paginationType="progress" *ngIf="questions && questions.length" autoplay="5000" speed="1000">
+        <ng-container *ngFor="let q of questions;let i=index" >
+        <ion-slide *ngIf="q.type==='STAR'" class="image-slide">
+          <div  class="survey-card">
+          <ion-label text-center>{{q.question}}</ion-label>
+          <div class="image"></div>
+          <rating [(ngModel)]="q.starValue" text-center></rating>
+        </div>
+        </ion-slide>
+        <ion-slide *ngIf="q.type==='TEXT'" class="text-slide">
+            <div  class="survey-card">
+            <ion-label color="primary" text-center>{{q.question}}</ion-label>
+            <ion-textarea type="text" rows="5" [(ngModel)]="q.textValue" placeholder="Type Here (optional)"></ion-textarea>
+              </div>
+        </ion-slide>
+      </ng-container>
+      </ion-slides>
 
   <!-- GUEST OPTIONAL INFO FORM -->
-  <div>
-    <h4>Guest Information (Optional)</h4>
-    <ion-card>
-      <ion-item>
-        <ion-label floating>Name</ion-label>
-        <ion-input type="text" [(ngModel)]="guestInfo.name" [ngModelOptions]="{standalone: true}"></ion-input>
-      </ion-item>
-    </ion-card>
+  <ion-list-header>
+      <h5>Your Details (Optional)</h5>
+    </ion-list-header>
 
-    <ion-card>
-      <ion-item>
-        <ion-label floating>Email</ion-label>
-        <ion-input type="email" [(ngModel)]="guestInfo.email" [ngModelOptions]="{standalone: true}"></ion-input>
+    <div class="input-box">
+      <ion-item no-lines>
+          <ion-icon name='person' item-left></ion-icon>
+        <ion-label>Name</ion-label>
+        <ion-input placeholder="Your Name" type="text" [(ngModel)]="guestInfo.name" [ngModelOptions]="{standalone: true}"></ion-input>
       </ion-item>
-    </ion-card>
+    </div>
 
-    <ion-card>
-      <ion-item>
-        <ion-label floating>Contact No. (10 digits)</ion-label>
-        <ion-input type="text" [(ngModel)]="guestInfo.contact" [ngModelOptions]="{standalone: true}"></ion-input>
+    <div class="input-box">
+      <ion-item no-lines>
+          <ion-icon name='mail' item-left></ion-icon>
+        <ion-label>Email</ion-label>
+        <ion-input placeholder="Your Email Address" type="email" [(ngModel)]="guestInfo.email" [ngModelOptions]="{standalone: true}"></ion-input>
       </ion-item>
-    </ion-card>
-  </div>
+    </div>
+
+    <div class="input-box">
+      <ion-item no-lines>
+          <ion-icon name='call' item-left></ion-icon>
+        <ion-label>Contact No.</ion-label>
+        <ion-input  placeholder="Your 10 Digits Contact Number" type="text" [(ngModel)]="guestInfo.contact" [ngModelOptions]="{standalone: true}"></ion-input>
+      </ion-item>
+    </div>
 
   <div padding>
-    <button ion-button full type="button" (click)="submitSurvey()">Submit</button>
+    <button ion-button full round icon-right type="button" (click)="submitSurvey()">
+        Send
+        <ion-icon name="send"></ion-icon>
+    </button>
+
   </div>
 
 </ion-content>

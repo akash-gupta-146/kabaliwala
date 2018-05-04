@@ -1,3 +1,15 @@
 page-submit-success {
-
+    h1{
+        color:color($colors,primary);
+    }
+    div[cen]{
+        position: absolute;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%)
+    }
+    .sent{
+        width:70vw;
+        box-shadow:0 0 32px lighten(color($colors,primary),30%);
+    }
 }
