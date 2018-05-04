@@ -20,18 +20,6 @@
     <ion-list-header>
       Help us improve by answering the following questions
     </ion-list-header>
-
-    <!-- <div class="input-box" *ngFor="let q of questions;let i=index">
-      <ion-item *ngIf="q.type==='STAR'" no-lines>
-        <h5>{{q.question}}</h5>
-        <rating [(ngModel)]="q.starValue"></rating>
-      </ion-item>
-      <ion-item *ngIf="q.type==='TEXT'" no-lines>
-        <ion-label color="primary" stacked>{{q.question}}</ion-label>
-        <ion-input type="text" [(ngModel)]="q.textValue" placeholder="Enter Text (optional)"></ion-input>
-      </ion-item>
-    </div> -->
-
       <ion-slides pager paginationType="progress" *ngIf="questions && questions.length" autoplay="5000" speed="1000">
         <ng-container *ngFor="let q of questions;let i=index" >
         <ion-slide *ngIf="q.type==='STAR'" class="image-slide">
