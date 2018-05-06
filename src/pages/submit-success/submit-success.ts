@@ -16,14 +16,22 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 export class SubmitSuccessPage {
 
   timeOutId: number;
+  music: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    
   }
 
   onBack() {
     clearTimeout(this.timeOutId);
     this.navCtrl.pop();
   }
+  
+  ngOnInit(){
+    this.playSound();
+  }
+
+
 
   ionViewDidLoad() {
     /**
@@ -36,6 +44,14 @@ export class SubmitSuccessPage {
     this.timeOutId = setTimeout(() => {
       this.navCtrl.pop();
     }, 5000);
+  }
+
+  playSound(){
+    this.music = document.getElementById("music");
+    if(this.music){
+      this.music.play();
+    }
+
   }
 
 }
