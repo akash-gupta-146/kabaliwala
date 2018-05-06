@@ -64,7 +64,7 @@ export class EmployeesPage {
     eList.forEach(e => {
       roleString = '';
       e.roles.forEach((role: any, index: number, roles: Array<any>) => {
-        roleString += `${role.role}` + (index < roles.length ? ',' : '');
+        roleString += `${role.role}` + (index < roles.length-1 ? ',' : '');
 
       });
 

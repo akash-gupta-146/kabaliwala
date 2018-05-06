@@ -1,0 +1,31 @@
+<ion-header>
+        <ion-navbar color="primary">
+            <ion-toolbar>
+                <ion-buttons start>
+                    <button ion-button color="light" class="navBtnRight" (click)="dismiss()">
+                        <span color="light">Cancel</span>
+                    </button>
+                </ion-buttons>
+                <ion-title> {{title | titlecase}}} </ion-title>
+            </ion-toolbar>
+        </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-searchbar #searchbar [(ngModel)]="searchInput" (ionInput)="onSearchInput($event)" (ionClear)="onSearchClear($event)"></ion-searchbar>
+
+    <ion-card>
+        <ion-list>
+            <button ion-item *ngFor="let search of searchTempList" (click)="dismiss(search)">
+                <nl-img [src]="search.picUrl" item-left style="height: 50px;width: 50px"></nl-img>
+                {{search.name }}
+                <span *ngIf="search.role"> ({{search.role}})</span>
+                <p *ngIf="search.store"><span bold>Store: </span>{{search.store}}</p>
+            </button>
+        </ion-list>
+    </ion-card>
+
+    <p *ngIf="noMatch">No Match Found</p>
+    <p *ngIf="searchList.length == 0">No Data Available</p>
+
+</ion-content>

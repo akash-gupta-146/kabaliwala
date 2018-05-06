@@ -5,7 +5,10 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { BASEURL } from './app.constants';
+declare var URLPREFIX;
 declare var ROLE;
+declare const SockJS;
+declare const Stomp;
 
 @Injectable()
 export class CustomHttpService {
@@ -37,7 +40,14 @@ export class CustomHttpService {
     get(url: string, options?: HttpHeaders) {
 
         const headers = this.addHeaders(options);
-        const _url = BASEURL + (ROLE ? '/' + ROLE : '') + url;
+        let _url: string;
+        if (ROLE) {
+            // in case of admin.mngmnt, each request contains ROLE if ROLE exists
+            _url = BASEURL + (URLPREFIX ? '/' + URLPREFIX : '') + '/' + ROLE + url;
+        } else {
+            _url = BASEURL + (URLPREFIX ? '/' + URLPREFIX : '') + url;
+
+        }
 
         return this.httpClient.get(_url, { headers: headers, observe: 'response' })
             .map(this.extractData)
@@ -47,9 +57,31 @@ export class CustomHttpService {
     post(url: string, body: any, options?: HttpHeaders) {
 
         let headers = this.addHeaders(options);
-        const _url = BASEURL + (ROLE ? '/' + ROLE : '') + url;
+        let _url: string;
+        if (ROLE) {
+            // in case of admin.mngmnt, each request contains ROLE if ROLE exists
+            _url = BASEURL + (URLPREFIX ? '/' + URLPREFIX : '') + '/' + ROLE + url;
+        } else {
+            _url = BASEURL + (URLPREFIX ? '/' + URLPREFIX : '') + url;
 
-        return this.httpClient.post(_url, body,{ headers: headers, observe: 'response' })
+        }
+        return this.httpClient.post(_url, body, { headers: headers, observe: 'response' })
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    put(url: string, body: any, options?: HttpHeaders) {
+
+        let headers = this.addHeaders(options);
+        let _url: string;
+        if (ROLE) {
+            // in case of admin.mngmnt, each request contains ROLE if ROLE exists
+            _url = BASEURL + (URLPREFIX ? '/' + URLPREFIX : '') + '/' + ROLE + url;
+        } else {
+            _url = BASEURL + (URLPREFIX ? '/' + URLPREFIX : '') + url;
+
+        }
+        return this.httpClient.put(_url, body, { headers: headers, observe: 'response' })
             .map(this.extractData)
             .catch(this.handleError);
     }
@@ -72,7 +104,7 @@ export class CustomHttpService {
 
         // console.log('inside extract data', res);
         return res.body || res.status;
-    }      
+    }
 
     private handleError(err: HttpErrorResponse) {
         // console.log('inside handle error', err);
@@ -92,6 +124,14 @@ export class CustomHttpService {
         }
         return Observable.throw(errorInfo);
 
+    }
+
+    getSockJs() {
+
+        let access_token = localStorage.getItem('access_token');
+        let url = BASEURL + `/${URLPREFIX}/nxtlife/websocket?access_token=${access_token}`;
+        var socket = new SockJS(url);
+        return Stomp.over(socket);
     }
 
 }

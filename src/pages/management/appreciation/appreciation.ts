@@ -13,7 +13,7 @@ export class AppreciationPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AppreciationPage');
+    ('ionViewDidLoad AppreciationPage');
   }
 
 }

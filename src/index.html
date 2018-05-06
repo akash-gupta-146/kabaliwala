@@ -19,7 +19,8 @@
   <!-- cordova.js required for cordova apps (remove if not needed) -->
   <script src="cordova.js"></script>
   <script>
-    var ROLE; 
+    var URLPREFIX; // possible values are: 'sa'/'g'/'a' for superadmin/guest/admin
+    var ROLE; // tells the selected role of admin/mangmnt( used only in case of admin/mngmt)
   </script>
 
   <!-- un-comment this code to enable service worker
@@ -49,6 +50,9 @@
 
   <!-- The main bundle js is generated during the build process -->
   <script src="build/main.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 
 </body>
 

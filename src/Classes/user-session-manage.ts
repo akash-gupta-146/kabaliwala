@@ -6,10 +6,10 @@ import { LoginPage } from '../pages/login/login';
 import { CustomService } from '../providers/custom.service';
 import { HomePage } from '../pages/home/home';
 
+declare var URLPREFIX;
 declare var ROLE;
 export class UserSessionManage {
 
-    selectedPage: string;
     rootPage: any;
     sideMenuOptions: Array<any>;
     isGuest: boolean;
@@ -75,10 +75,9 @@ export class UserSessionManage {
     }
 
     setRootPage() {
-        console.log('setting root page');
-        
+
         //check role and set root page
-        this.isGuest = JSON.parse(localStorage.getItem('userInfo')).urlPrefix === 'g';
+        const role = JSON.parse(localStorage.getItem('userInfo')).urlPrefix;
         if (!this.isGuest) {
             this.rootPage = 'DashboardPage';
             this.decideSideMenuContent();
@@ -88,31 +87,73 @@ export class UserSessionManage {
             this.menu.enable(false);
             this.rootPage = HomePage;
         }
+        switch (role) {
+            case 'g':
+                this.menu.enable(false);
+                this.rootPage = HomePage;
+                this.isGuest = true;
+                break;
+
+            case 'sa':
+                this.rootPage = 'DashboardPage';
+                this.decideSideMenuContent();
+                this.menu.enable(true);
+                this.isGuest = false;
+                break;
+
+            case 'a':
+                this.rootPage = 'DashboardPage';
+                this.decideSideMenuContent();
+                this.menu.enable(true);
+                this.isGuest = false;
+                break;
+        }
         this.imageUpdate();
     }
 
     /**maintain different side menu options for super-admin and managment for better understanding and also there might be some features
-     * present in one and not in other
+     * present in one but not in other
      */
     decideSideMenuContent() {
 
         const isSuperAdmin: boolean = JSON.parse(localStorage.getItem('userInfo')).urlPrefix === 'sa';
-        this.sideMenuOptions = [
 
-            { title: 'Home', component: "DashboardPage", show: isSuperAdmin, icon: 'home' },
-            { title: 'Stores', component: "StoresPage", show: isSuperAdmin, icon: 'basket' },
-            { title: 'Employees', component: "EmployeesPage", icon: 'people' },
-            // { title: 'Appreciations', component: "AppreciationTabsPageStudent", icon: 'assets/icon/appreciation.jpg' },
-            // { title: 'Polls', component: "PollStudent", icon: 'assets/icon/poll.jpg' },
-            // { title: 'Surveys', component: "SurveyPageStudent", icon: 'assets/icon/survey.jpg' },
-            // { title: 'Circular', component: "CircularStudentListPage", icon: 'assets/icon/circular.jpg' },
-            // { title: 'Events', component: "MainPlannerPageManagement", icon: 'assets/icon/event.jpg' },
-            // { title: 'Assignment', component: "AssignmentTabsPageStudent", icon: 'assets/icon/rating.jpg' },
-            // { title: 'Assessment', component: "AssessmentTabsPageStudent", icon: 'assets/icon/rating.jpg' },
-            // { title: 'Time Table', component: "TimeTablePageStudent", icon: 'assets/icon/rating.jpg' },
-            // { title: 'Account', component: "AccountPage", icon: 'assets/icon/profile.jpg' },
-   
-        ];
+        if (isSuperAdmin) {
+
+            this.sideMenuOptions = [
+                { title: 'Home', component: "DashboardPage", icon: 'home' },
+                { title: 'Complaints', component: "ComplaintsPage", icon: 'sad' },
+                { title: 'Stores', component: "StoresPage", show: isSuperAdmin, icon: 'basket' },
+                { title: 'Employees', component: "EmployeesPage", show: isSuperAdmin, icon: 'people' }
+                // { title: 'Appreciations', component: "AppreciationTabsPageStudent", icon: 'assets/icon/appreciation.jpg' },
+                // { title: 'Polls', component: "PollStudent", icon: 'assets/icon/poll.jpg' },
+                // { title: 'Surveys', component: "SurveyPageStudent", icon: 'assets/icon/survey.jpg' },
+                // { title: 'Circular', component: "CircularStudentListPage", icon: 'assets/icon/circular.jpg' },
+                // { title: 'Events', component: "MainPlannerPageManagement", icon: 'assets/icon/event.jpg' },
+                // { title: 'Assignment', component: "AssignmentTabsPageStudent", icon: 'assets/icon/rating.jpg' },
+                // { title: 'Assessment', component: "AssessmentTabsPageStudent", icon: 'assets/icon/rating.jpg' },
+                // { title: 'Time Table', component: "TimeTablePageStudent", icon: 'assets/icon/rating.jpg' },
+                // { title: 'Account', component: "AccountPage", icon: 'assets/icon/profile.jpg' },
+
+            ];
+        } else {
+
+            this.sideMenuOptions = [
+
+                { title: 'Home', component: "DashboardPage", icon: 'home' },
+                { title: 'Complaints', component: "ComplaintsPage", icon: 'sad' },
+                // { title: 'Appreciations', component: "AppreciationTabsPageStudent", icon: 'assets/icon/appreciation.jpg' },
+                // { title: 'Polls', component: "PollStudent", icon: 'assets/icon/poll.jpg' },
+                // { title: 'Surveys', component: "SurveyPageStudent", icon: 'assets/icon/survey.jpg' },
+                // { title: 'Circular', component: "CircularStudentListPage", icon: 'assets/icon/circular.jpg' },
+                // { title: 'Events', component: "MainPlannerPageManagement", icon: 'assets/icon/event.jpg' },
+                // { title: 'Assignment', component: "AssignmentTabsPageStudent", icon: 'assets/icon/rating.jpg' },
+                // { title: 'Assessment', component: "AssessmentTabsPageStudent", icon: 'assets/icon/rating.jpg' },
+                // { title: 'Time Table', component: "TimeTablePageStudent", icon: 'assets/icon/rating.jpg' },
+                // { title: 'Account', component: "AccountPage", icon: 'assets/icon/profile.jpg' },
+
+            ];
+        }
 
     }
 
@@ -125,6 +166,7 @@ export class UserSessionManage {
     public logout() {
 
         localStorage.clear();
+        URLPREFIX = undefined;
         ROLE = undefined;
         this.appCtrl.getRootNavs()[0].setRoot(LoginPage);
     }

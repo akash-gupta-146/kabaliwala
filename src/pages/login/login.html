@@ -1,55 +1,52 @@
 <audio id="click">
-        <source src="assets/music/water-drop.wav">
+  <source src="assets/music/water-drop.wav">
 </audio>
 
 <ion-content>
+  <div class="background">
+    <div class="nuts">
+      <div class="top"></div>
+      <div class="right"></div>
+      <div class="bottom"></div>
+      <div class="layer"></div>
+    </div>
+  </div>
+  <div segment>
+    <img src="assets/imgs/logo.png" class="logo">
 
-        <div class="background">
-            <div class="nuts">
-                <div class="top"></div>
-                <div class="right"></div>
-                <div class="bottom"></div>
-                        <div class="layer"></div>
-            </div>
-        </div>
-        <div segment>
-                <img src="assets/imgs/logo.png" class="logo">
+    <ion-segment [(ngModel)]="loginType" class="custom-ion-segment-button">
+      <ion-segment-button value="superadmin" class=" d-flex flex-column align-items-center" (click)="playSound('click')">
+        <img src="assets/imgs/super-admin.png" class="button-image">
+        <h3>Super Admin</h3>
+      </ion-segment-button>
+      <ion-segment-button value="management" class=" d-flex flex-column align-items-center" (click)="playSound('click')">
+        <img src="assets/imgs/management.png" class="button-image">
+        <h3>Management</h3>
+      </ion-segment-button>
+      <ion-segment-button value="guest" class=" d-flex flex-column align-items-center" (click)="playSound('click')">
+        <img src="assets/imgs/guest.png" class="button-image">
+        <h3>Guest</h3>
+      </ion-segment-button>
+    </ion-segment>
 
-            <ion-segment [(ngModel)]="loginType" class="custom-ion-segment-button">
-                <ion-segment-button value="superadmin" class=" d-flex flex-column align-items-center" (click)="playSound('click')">
-                    <img src="assets/imgs/super-admin.png" class="button-image">
-                    <h3>Super Admin</h3>
-                </ion-segment-button>
-                <ion-segment-button value="management" class=" d-flex flex-column align-items-center" (click)="playSound('click')">
-                        <img src="assets/imgs/management.png" class="button-image">
-                        <h3>Management</h3>
-                </ion-segment-button>
-                <ion-segment-button value="guest" class=" d-flex flex-column align-items-center" (click)="playSound('click')">
-                        <img src="assets/imgs/guest.png" class="button-image">
-                        <h3>Guest</h3>
-                </ion-segment-button>
-            </ion-segment>
-        
-    
-            <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
-                    <div class="login-card paper" padding>
-                                        <ion-item no-lines> 
-                                                <ion-icon name="person" item-left></ion-icon>
-                                            <ion-label fixed>Username</ion-label>
-                                            <ion-input type="text" formControlName="username"></ion-input>
-                                        </ion-item>
-                                        <ion-item no-lines>
-                                                <ion-icon name="unlock" item-left></ion-icon>
-                                            <ion-label fixed>Password</ion-label>
-                                            <ion-input type="password" formControlName="password"></ion-input>
-                                        </ion-item>
-                                    </div>
-    
-        
-                <button type="submit" ion-button round class="center-block" outline (click)="playSound('click')">
-                    Log In
-                </button>
-            </form>
-        </div>
-    
-    </ion-content>
+    <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+      <div class="login-card paper" padding>
+        <ion-item no-lines>
+          <ion-icon name="person" item-left></ion-icon>
+          <ion-label fixed>Username</ion-label>
+          <ion-input type="text" formControlName="username"></ion-input>
+        </ion-item>
+        <ion-item no-lines>
+          <ion-icon name="unlock" item-left></ion-icon>
+          <ion-label fixed>Password</ion-label>
+          <ion-input type="password" formControlName="password"></ion-input>
+        </ion-item>
+      </div>
+
+      <button type="submit" ion-button round class="center-block" outline (click)="playSound('click')">
+        Log In
+      </button>
+    </form>
+  </div>
+
+</ion-content>

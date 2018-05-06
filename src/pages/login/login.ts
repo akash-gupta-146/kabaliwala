@@ -5,6 +5,7 @@ import { CustomService } from '../../providers/custom.service';
 import { AuthService } from '../../providers/auth.service';
 import { HomePage } from '../home/home';
 
+declare var URLPREFIX;
 declare var ROLE;
 
 @Component({
@@ -40,8 +41,9 @@ export class LoginPage {
 
     if (this.loginForm.valid) {
 
-      // clear the ROLE before each fresh login in order to avoid any bug
-      ROLE = undefined;
+      // clear the URLPREFIX before each fresh login in order to avoid any bug
+      URLPREFIX = undefined;
+      ROLE= undefined;
 
       this.customService.showLoader("Authenticating...");
       this.authService.login(this.loginForm.value)

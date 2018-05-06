@@ -1,0 +1,15 @@
+<button ion-button *ngIf="complaint.statusId != 6 && complaint.statusId != 4" color="color2" (click)="editComplaint()">
+  <ion-icon name="md-close" class="csBigIcon"></ion-icon>
+  Edit
+</button>
+
+<button ion-button color="color4" (click)="openCommentPage()">
+  <ion-icon name="ios-chatbubbles" class="csBigIcon"></ion-icon>
+  Comments
+</button>
+
+
+<button ion-button *ngIf="complaint.statusId != 6 && complaint.statusId != 4" color="color3" (click)="openClosePage()">
+  <ion-icon name="md-close" class="csBigIcon"></ion-icon>
+  Close
+</button>

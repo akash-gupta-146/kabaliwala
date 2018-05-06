@@ -40,7 +40,6 @@ export class NewEmplPage {
     this.customService.showLoader();
     this.empService.getRolesAndStores()
       .subscribe((res: Array<any>) => {
-        console.log(res);
         [this.roles, this.stores] = res;
         this.customService.hideLoader();
 

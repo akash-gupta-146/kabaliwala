@@ -29,7 +29,6 @@ export class CustomService {
 
     public showToast(msg, pos?: string, showCloseBtn?: boolean) {
 
-        console.log(pos);
         
         this.toast = this.toastCtrl.create({
             message: msg,
