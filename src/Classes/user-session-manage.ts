@@ -123,11 +123,11 @@ console.log('setroot page calld/');
 
             this.sideMenuOptions = [
 
-                { title: 'Home', component: "DashboardPage", icon: 'home' },
-                { title: 'Complaints', component: "ComplaintsPage", icon: 'sad' },
-                { title: 'Stores', component: "StoresPage", show: isSuperAdmin, icon: 'basket' },
-                { title: 'Employees', component: "EmployeesPage", show: isSuperAdmin, icon: 'people' },
-                { title: 'Logout', component: "null"}
+                { title: 'Home', component: "DashboardPage", icon: 'home', color:"#0079ff" },
+                { title: 'Complaints', component: "ComplaintsPage", icon: 'sad', color:"#ffcd01"  },
+                { title: 'Stores', component: "StoresPage", show: isSuperAdmin, icon: 'basket', color:"#4cda63"  },
+                { title: 'Employees', component: "EmployeesPage", show: isSuperAdmin, icon: 'people', color:"#ff9403"  },
+                { title: 'Logout', component: "null", icon: 'md-log-out', color:"#ff3b30" }
                 // { title: 'Appreciations', component: "AppreciationTabsPageStudent", icon: 'assets/icon/appreciation.jpg' },
                 // { title: 'Polls', component: "PollStudent", icon: 'assets/icon/poll.jpg' },
                 // { title: 'Surveys', component: "SurveyPageStudent", icon: 'assets/icon/survey.jpg' },
@@ -143,10 +143,10 @@ console.log('setroot page calld/');
 
             this.sideMenuOptions = [
 
-                { title: 'Home', component: "DashboardPage", icon: 'home' },
-                { title: 'Complaints', component: "ComplaintsPage", icon: 'sad' },
+                { title: 'Home', component: "DashboardPage", icon: 'home', color:"#0079ff"  },
+                { title: 'Complaints', component: "ComplaintsPage", icon: 'sad', color:"#ffcd01"   },
                 { title: 'Suggestions', component: "SuggestionsPage", icon: 'assets/icon/suggestion.jpg' },
-                { title: 'Logout', component: "null"}
+                { title: 'Logout', component: "null", icon: 'md-log-out', color:"#ff3b30" }
 
                 // { title: 'Appreciations', component: "AppreciationTabsPageStudent", icon: 'assets/icon/appreciation.jpg' },
                 // { title: 'Polls', component: "PollStudent", icon: 'assets/icon/poll.jpg' },

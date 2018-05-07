@@ -5,6 +5,17 @@ comments{
     background-repeat: no-repeat;
     background-size: 30%;
   }
+  .no-comment{
+    position: relative;
+    top: 75%;
+    transform: translateY(-50%);
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    color: #a49e9c;
+    // background: rgba(0,0,0,0.4);
+    padding-bottom: 25px;
+  }
 
 }
 .csChatBox{
@@ -14,8 +25,6 @@ comments{
     display: block !important;
     margin-top: 40vh;
     margin-right: auto !important;
-  }
-  .no-comment{
   }
 }
 .loader{
