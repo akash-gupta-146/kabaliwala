@@ -12,31 +12,33 @@
 <ion-content class="gray-back">
         <div class="input-box">
         <ion-item>
-            <ion-label>
+            <ion-label stacked class="d-flex justify-content-between">
                 Root Cause
+                <ion-badge class="limit">
+                        <span>{{50 - rootCause.length}}</span>
+                </ion-badge>
             </ion-label>
             <ion-textarea [(ngModel)]="rootCause" required name="rca" maxlength="50" placeholder="Enter Root Cause "></ion-textarea>
-            <ion-badge class="limit">
-                    <span>{{50 - rootCause.length}}</span>
-            </ion-badge>
+
         </ion-item>
 
         </div>
 
         <div class="input-box">
         <ion-item>
-            <ion-label>
+            <ion-label stacked class="d-flex justify-content-between">
                 Comment
+                <ion-badge>
+                        <span>{{200 - comment.length}}</span>
+                </ion-badge>
             </ion-label>
             <ion-textarea [(ngModel)]="comment" required name="comment" maxlength="50" placeholder="Enter Comment"></ion-textarea>
-            <ion-badge>
-                    <span>{{200 - comment.length}}</span>
-            </ion-badge>
+
         </ion-item>
     </div>
 
     <div padding>
-        <button (click)="onSubmit()" [disabled]="rootCause.trim().length==0 || comment.trim().length==0" ion-button full>Submit</button>
+        <button (click)="onSubmit()" round [disabled]="rootCause.trim().length==0 || comment.trim().length==0" ion-button full>Submit</button>
     </div>
 
 </ion-content>
