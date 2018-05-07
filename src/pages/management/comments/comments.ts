@@ -20,9 +20,10 @@ export class CommentsPage {
     complaintIndex: number;
     comments: Array<any>;
     isCommentsEmpty: boolean;
-    complaintClosed: boolean = false; // used only for handling comment count in case complaint is closed with a comment
-    selfId: number = parseInt(localStorage.getItem('id'));
-    postInProcess: boolean = false; //to show spinner while sending the message
+    complaintClosed = false; // used only for handling comment count in case complaint is closed with a comment
+    userInfo:any = JSON.parse(localStorage.getItem('userInfo'));
+    selfId: number;
+    postInProcess = false; //to show spinner while sending the message
     stompClient: any;
     @ViewChild(Content) content: Content;
 
@@ -33,8 +34,9 @@ export class CommentsPage {
         private events: Events,
         private complaintService: ComplaintService,
         private customService: CustomService,
-        private customHttp:CustomHttpService
+        private customHttp: CustomHttpService
     ) {
+        this.selfId = this.userInfo.id;
         this.complaint = this.navParam.get('complaint');
         this.complaintIndex = this.navParam.get('complaintIndex');
         this.getComments();
@@ -51,8 +53,8 @@ export class CommentsPage {
                 this.isCommentsEmpty = this.comments.length == 0;
                 this.customService.hideLoader();
                 setTimeout(() => {
-                    
-                   this.content.scrollToBottom(200);
+
+                    this.content.scrollToBottom();
                 }, 100);
 
                 this.checkComplaintStatus();
@@ -66,7 +68,7 @@ export class CommentsPage {
     checkComplaintStatus() {
 
         if (this.complaint.statusId == 4 || this.complaint.statusId == 6) {
-            this.customService.showToast("You can't comment any more, your complaint is either closed or satisfied");
+            this.customService.showToast("This complaint is has been closed, No more comments can be added to it.");
         }
     }
 
@@ -124,17 +126,27 @@ export class CommentsPage {
 
     postChat() {
 
+        const msg = this.inputChat;
+        this.inputChat = '';
         this.postInProcess = true;
-        this.content.scrollToBottom();
-        this.complaintService.postComments(this.complaint.id, this.inputChat)
+        // this.content.scrollToBottom();
+
+        this.complaintService.postComments(this.complaint.id, msg)
             .subscribe((res: any) => {
 
                 this.postInProcess = false;
-                this.inputChat = '';
                 this.complaint.commentCount++;
                 this.isCommentsEmpty = false;
-                this.showRecentPost(res);
-                this.content.scrollToBottom();
+                this.showRecentPost({
+                    comment: msg,
+                    employeeId: this.selfId || null,
+                    employeeName: this.userInfo.name || null,
+                    employeePicUrl: this.userInfo.picUrl || null,
+                });
+                setTimeout(() => {
+
+                    this.content.scrollToBottom();
+                }, 100);
             }, (err: any) => {
 
                 this.customService.showToast(err.msg);
@@ -145,21 +157,21 @@ export class CommentsPage {
     }
 
     showRecentPost(commentData: any) {
+        console.log(commentData);
+        
         this.comments.push({
             comment: commentData.comment,
             employeeId: commentData.employeeId || null,
             employeeName: commentData.employeeName || null,
             employeeNickName: commentData.employeeNickName || null,
-            studentId: commentData.studentId || null,
-            studentName: commentData.studentName || null,
-            studentPic: commentData.studentPic || null,
+            employeePicUrl: commentData.employeePicUrl || null,
             createdAt: new Date(Date.now())
         });
 
     }
 
 
-    dismiss(updatedComplaint?:any) {
+    dismiss(updatedComplaint?: any) {
 
         this.disconnectSockJs();
         this.viewCtrl.dismiss(updatedComplaint);

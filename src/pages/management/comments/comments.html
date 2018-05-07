@@ -18,7 +18,7 @@
         <br>NO COMMENT
     </div>
 
-    <div class="message-box csTransparent" *ngFor="let comm of comments" [ngClass]="{'mine': ((isStudent && comm.studentId == selfId )|| (!isStudent && comm.employeeId == selfId) )}"
+    <div class="message-box csTransparent" *ngFor="let comm of comments" [ngClass]="{'mine':comm.employeeId==selfId}"
         no-margin>
 
         <div class="csMyComment">
@@ -26,14 +26,12 @@
         </div>
 
         <div class="csCommentTime">
-
-            <span *ngIf="isStudent && comm.employeeId>=0">{{comm.employeeNickName || comm.employeeName}} </span>
-            <span *ngIf="!isStudent && comm.studentId>=0">{{comm.studentName}} </span>
+            <span *ngIf="comm.employeeId!==selfId">{{comm.employeeName}} • </span>
             <span>{{ comm.createdAt | amCalendar }}</span>
         </div>
 
     </div>
-    <ion-spinner class="loader" name="dots" *ngIf="postInProcess"></ion-spinner>
+    <ion-spinner  name="dots" *ngIf="postInProcess"></ion-spinner>
 
 </ion-content>
 

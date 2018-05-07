@@ -36,12 +36,11 @@ export class NewComplaintPage { // ALSO USED FOR NEW SUGGESTION
     public complaintService: ComplaintService,
     private sharedService: SharedService
   ) { }
+
+
   ionViewDidLoad() {
     this.getComplaintCategories();
   }
-
-
-
 
   getComplaintCategories() {
     this.customService.showLoader();
@@ -63,11 +62,11 @@ export class NewComplaintPage { // ALSO USED FOR NEW SUGGESTION
 
   onSubmit() {
 
-    if (this.isGuestNameEntered() && !this.isGuestContactEntered()) {
-      this.customService.showToast('Please also enter your contact no.', 'top');
+    if (this.isGuestNameEntered() && !this.isGuestContactEntered() && !this.isGuestEmailEntered()) {
+      this.customService.showToast('Please also enter your Contact No. or Email', 'top');
       return;
     }
-    if (!this.isGuestNameEntered() && this.isGuestContactEntered()) {
+    if (!this.isGuestNameEntered() && (this.isGuestContactEntered()) || this.isGuestEmailEntered()) {
       this.customService.showToast('Please also enter your name', 'top');
       return;
     }
@@ -81,13 +80,13 @@ export class NewComplaintPage { // ALSO USED FOR NEW SUGGESTION
     data.title = this.complaintTitle;
     data.description = this.complaintDescription;
 
-    if (this.isGuestContactEntered() && this.isGuestNameEntered()) {
+    if ((this.isGuestContactEntered() || this.isGuestEmailEntered()) && this.isGuestNameEntered()) {
 
       data.visitorInfo = {
-        contactNo: this.guestInfo.contact,
         name: this.guestInfo.name
       };
-      this.guestInfo.email && this.guestInfo.email.trim() != '' && (data.visitorInfo.email = this.guestInfo.email);
+      this.isGuestContactEntered() && (data.visitorInfo.contact = this.guestInfo.contact);
+      this.isGuestEmailEntered() && (data.visitorInfo.email = this.guestInfo.email);
     };
 
 
@@ -113,4 +112,7 @@ export class NewComplaintPage { // ALSO USED FOR NEW SUGGESTION
     return this.guestInfo.contact && this.guestInfo.contact.trim() != '';
   }
 
+  isGuestEmailEntered() {
+    return this.guestInfo.email && this.guestInfo.email.trim() != '';
+  }
 }

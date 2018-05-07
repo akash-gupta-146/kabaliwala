@@ -75,6 +75,7 @@ export class UserSessionManage {
     }
 
     setRootPage() {
+console.log('setroot page calld/');
 
         //check role and set root page
         const role = JSON.parse(localStorage.getItem('userInfo')).urlPrefix;
@@ -121,10 +122,12 @@ export class UserSessionManage {
         if (isSuperAdmin) {
 
             this.sideMenuOptions = [
+
                 { title: 'Home', component: "DashboardPage", icon: 'home' },
                 { title: 'Complaints', component: "ComplaintsPage", icon: 'sad' },
                 { title: 'Stores', component: "StoresPage", show: isSuperAdmin, icon: 'basket' },
-                { title: 'Employees', component: "EmployeesPage", show: isSuperAdmin, icon: 'people' }
+                { title: 'Employees', component: "EmployeesPage", show: isSuperAdmin, icon: 'people' },
+                { title: 'Logout', component: "null"}
                 // { title: 'Appreciations', component: "AppreciationTabsPageStudent", icon: 'assets/icon/appreciation.jpg' },
                 // { title: 'Polls', component: "PollStudent", icon: 'assets/icon/poll.jpg' },
                 // { title: 'Surveys', component: "SurveyPageStudent", icon: 'assets/icon/survey.jpg' },
@@ -142,6 +145,9 @@ export class UserSessionManage {
 
                 { title: 'Home', component: "DashboardPage", icon: 'home' },
                 { title: 'Complaints', component: "ComplaintsPage", icon: 'sad' },
+                { title: 'Suggestions', component: "SuggestionsPage", icon: 'assets/icon/suggestion.jpg' },
+                { title: 'Logout', component: "null"}
+
                 // { title: 'Appreciations', component: "AppreciationTabsPageStudent", icon: 'assets/icon/appreciation.jpg' },
                 // { title: 'Polls', component: "PollStudent", icon: 'assets/icon/poll.jpg' },
                 // { title: 'Surveys', component: "SurveyPageStudent", icon: 'assets/icon/survey.jpg' },
