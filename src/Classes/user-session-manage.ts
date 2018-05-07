@@ -5,6 +5,7 @@ import { NetworkService } from '../providers/network.service';
 import { LoginPage } from '../pages/login/login';
 import { CustomService } from '../providers/custom.service';
 import { HomePage } from '../pages/home/home';
+import { DashboardPage } from '../pages/dashboard/dashboard';
 
 declare var URLPREFIX;
 declare var ROLE;
@@ -75,35 +76,29 @@ export class UserSessionManage {
     }
 
     setRootPage() {
-console.log('setroot page calld/');
-
+        
         //check role and set root page
         const role = JSON.parse(localStorage.getItem('userInfo')).urlPrefix;
-        if (!this.isGuest) {
-            this.rootPage = 'DashboardPage';
-            this.decideSideMenuContent();
-            this.menu.enable(true);
-
-        } else {
-            this.menu.enable(false);
-            this.rootPage = HomePage;
-        }
+    
         switch (role) {
             case 'g':
                 this.menu.enable(false);
-                this.rootPage = HomePage;
+                // this.rootPage = HomePage;
+                this.appCtrl.getRootNavs()[0].setRoot(HomePage);
                 this.isGuest = true;
                 break;
 
             case 'sa':
-                this.rootPage = 'DashboardPage';
+                // this.rootPage = DashboardPage;
+                this.appCtrl.getRootNavs()[0].setRoot(DashboardPage);
                 this.decideSideMenuContent();
                 this.menu.enable(true);
                 this.isGuest = false;
                 break;
 
             case 'a':
-                this.rootPage = 'DashboardPage';
+                // this.rootPage = DashboardPage;
+                this.appCtrl.getRootNavs()[0].setRoot(DashboardPage);
                 this.decideSideMenuContent();
                 this.menu.enable(true);
                 this.isGuest = false;
@@ -123,11 +118,11 @@ console.log('setroot page calld/');
 
             this.sideMenuOptions = [
 
-                { title: 'Home', component: "DashboardPage", icon: 'home' },
+                { title: 'Home', component: DashboardPage, icon: 'home' },
                 { title: 'Complaints', component: "ComplaintsPage", icon: 'sad' },
+                { title: 'Suggestions', component: "SuggestionsPage", icon: 'bulb' },
                 { title: 'Stores', component: "StoresPage", show: isSuperAdmin, icon: 'basket' },
                 { title: 'Employees', component: "EmployeesPage", show: isSuperAdmin, icon: 'people' },
-                { title: 'Logout', component: "null"}
                 // { title: 'Appreciations', component: "AppreciationTabsPageStudent", icon: 'assets/icon/appreciation.jpg' },
                 // { title: 'Polls', component: "PollStudent", icon: 'assets/icon/poll.jpg' },
                 // { title: 'Surveys', component: "SurveyPageStudent", icon: 'assets/icon/survey.jpg' },
@@ -143,11 +138,9 @@ console.log('setroot page calld/');
 
             this.sideMenuOptions = [
 
-                { title: 'Home', component: "DashboardPage", icon: 'home' },
+                { title: 'Home', component: DashboardPage, icon: 'home' },
                 { title: 'Complaints', component: "ComplaintsPage", icon: 'sad' },
-                { title: 'Suggestions', component: "SuggestionsPage", icon: 'assets/icon/suggestion.jpg' },
-                { title: 'Logout', component: "null"}
-
+                { title: 'Suggestions', component: "SuggestionsPage", icon: 'bulb' },
                 // { title: 'Appreciations', component: "AppreciationTabsPageStudent", icon: 'assets/icon/appreciation.jpg' },
                 // { title: 'Polls', component: "PollStudent", icon: 'assets/icon/poll.jpg' },
                 // { title: 'Surveys', component: "SurveyPageStudent", icon: 'assets/icon/survey.jpg' },

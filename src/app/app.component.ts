@@ -52,11 +52,6 @@ export class MyApp extends UserSessionManage {
       return;
     }
 
-    // handle logout click
-    if(page.title==='Logout'){
-      this.onLogoutBtn();
-      return;
-    }
 
     this.activePage = page.component;
     this.menu.close();
@@ -64,11 +59,6 @@ export class MyApp extends UserSessionManage {
 
   }
 
-  onLogoutBtn(){
-    this.activePage = "";
-    this.menu.close();
-    this.events.publish('user:logout')
-
-  }
+ 
 }
 

@@ -10,7 +10,7 @@
     <div class="d-flex">
       <div padding>
         <div class="image">
-          <img src="assets/imgs/user.png" *ngIf="complaint.assignedEmployeePicUrl">
+          <img src="complaint.assignedEmployeePicUrl" *ngIf="complaint.assignedEmployeePicUrl">
           <img src="assets/imgs/user.png" *ngIf="!complaint.assignedEmployeePicUrl">
         </div>
       </div>
@@ -40,13 +40,14 @@
               </button>
             </ion-col>
             <ion-col col col-4>
-              <button (click)="edit()" full small ion-button round icon-left padding-left padding-right>
+              <button (click)="edit()" full small ion-button round icon-left padding-left padding-right [disabled]="!(complaint.statusId != 6 && complaint.statusId != 4)">
                 <ion-icon name="md-create"></ion-icon>
                 Edit
               </button>
             </ion-col>
             <ion-col col col-4>
-              <button (click)="close()" full small ion-button round icon-left padding-left padding-right>
+              <button (click)="close()" full small ion-button round icon-left padding-left padding-right [disabled]="!(complaint.statusId != 6 && complaint.statusId != 4)">
+
                 <ion-icon name="md-remove-circle"></ion-icon>
                 Close
               </button>
@@ -71,12 +72,12 @@
     <ion-item *ngIf="complaint.createdAt">
       <ion-icon item-left name="calendar" [style.color]="complaint.statusColor"></ion-icon>
       <b [style.color]="complaint.statusColor">Created at</b>
-      <div item-right>{{complaint.createdAt  | amTimeAgo}}</div>
+      <div item-right>{{complaint.createdAt | amTimeAgo}}</div>
     </ion-item>
     <ion-item *ngIf="complaint.closedOn">
       <ion-icon item-left name="calendar" [style.color]="complaint.statusColor"></ion-icon>
       <b [style.color]="complaint.statusColor">Closed On</b>
-      <div item-right>{{complaint.closedOn  | amTimeAgo}}</div>
+      <div item-right>{{complaint.closedOn | amTimeAgo}}</div>
     </ion-item>
     <ion-item *ngIf="complaint.priorityName">
       <ion-icon item-left name="md-arrow-round-up" [style.color]="complaint.statusColor"></ion-icon>
