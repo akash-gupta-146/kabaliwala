@@ -10,27 +10,30 @@
     </ion-header>
 
 <ion-content class="gray-back">
-
-    <ion-card>
+        <div class="input-box">
         <ion-item>
-            <ion-label stacked>Root Cause</ion-label>
+            <ion-label>
+                Root Cause
+            </ion-label>
             <ion-textarea [(ngModel)]="rootCause" required name="rca" maxlength="50" placeholder="Enter Root Cause "></ion-textarea>
+            <ion-badge class="limit">
+                    <span>{{50 - rootCause.length}}</span>
+            </ion-badge>
         </ion-item>
-        <ion-badge class="csFiftyLimit">
-            <span>{{50 - rootCause.length}}</span>
-        </ion-badge>
-    </ion-card>
 
+        </div>
 
-    <ion-card>
+        <div class="input-box">
         <ion-item>
-            <ion-label stacked>Comment</ion-label>
+            <ion-label>
+                Comment
+            </ion-label>
             <ion-textarea [(ngModel)]="comment" required name="comment" maxlength="50" placeholder="Enter Comment"></ion-textarea>
+            <ion-badge>
+                    <span>{{200 - comment.length}}</span>
+            </ion-badge>
         </ion-item>
-        <ion-badge class="csFiftyLimit">
-            <span>{{200 - comment.length}}</span>
-        </ion-badge>
-    </ion-card>
+    </div>
 
     <div padding>
         <button (click)="onSubmit()" [disabled]="rootCause.trim().length==0 || comment.trim().length==0" ion-button full>Submit</button>
