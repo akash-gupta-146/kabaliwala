@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { AppreciationPage } from './appreciation';
+import { AppreciationsPage } from './appreciation';
+import { MomentModule } from 'angular2-moment';
 
 @NgModule({
-  declarations: [
-    AppreciationPage,
-  ],
+
+  declarations: [AppreciationsPage],
+
   imports: [
-    IonicPageModule.forChild(AppreciationPage),
+    MomentModule,
+    IonicPageModule.forChild(AppreciationsPage)
   ],
+
 })
-export class AppreciationPageModule {}
+export class AppreciationsModule { }  

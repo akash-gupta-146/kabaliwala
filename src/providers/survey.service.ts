@@ -28,7 +28,12 @@ export class SurveyService {
         }
     }
 
-   submitSurvey(payLoad:any){
-       return this.http.post('/survey',payLoad);
-   }
+    submitSurvey(payLoad: any) {
+        return this.http.post('/survey', payLoad);
+    }
+
+    getSurveys(pageNo: number) {
+        return this.http.get(`/survey/page/${pageNo}`);
+
+    }
 }
