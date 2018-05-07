@@ -85,7 +85,7 @@ export class ComplaintService {
 
     updateComplaint(oldC: any, newC: any) {
         // these are all the updatable properties depending on which operationj is performed
-        // if a property has been changed, it will be copied otherwise old value will be assigned
+        // if a property has been changed, it will be updated, otherwise old value will be assigned
         oldC.statusId = newC.statusId || oldC.statusId;
         oldC.statusName = newC.statusName || oldC.statusName;
         oldC.statusColor = newC.statusColor || oldC.statusColor;

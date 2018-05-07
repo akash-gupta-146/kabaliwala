@@ -34,7 +34,7 @@ export class ComplaintsPage {
     private complaintService: ComplaintService
   ) {
     this.complaintService.compOrSugg = "complaint";
-    this.title = this.complaintService.compOrSugg;
+    this.title = this.complaintService.compOrSugg+'s';
 
     this.showHelpers = false;
     this.hideHelpers = true;
@@ -67,10 +67,10 @@ export class ComplaintsPage {
     this.searchInput = '';
   }
 
-  openNewComplaintModal() {
+  // openNewComplaintModal() {
 
-    this.complaintMainPage.openNewComplaintModal();
-  }
+  //   this.complaintMainPage.openNewComplaintModal();
+  // }
 
 
   doRefresh(refresher: any) {

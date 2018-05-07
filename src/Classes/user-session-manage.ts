@@ -75,6 +75,7 @@ export class UserSessionManage {
     }
 
     setRootPage() {
+console.log('setroot page calld/');
 
         //check role and set root page
         const role = JSON.parse(localStorage.getItem('userInfo')).urlPrefix;
@@ -124,8 +125,10 @@ export class UserSessionManage {
 
                 { title: 'Home', component: "DashboardPage", icon: 'assets/icon/home.png' },
                 { title: 'Complaints', component: "ComplaintsPage", icon: 'assets/icon/complaint.jpg' },
-                { title: 'Stores', component: "StoresPage", show: isSuperAdmin, icon: 'assets/icon/complaint.jpg' },
-                { title: 'Employees', component: "EmployeesPage", show: isSuperAdmin, icon: 'assets/icon/suggestion.jpg' }
+                { title: 'Suggestions', component: "SuggestionsPage", icon: 'assets/icon/suggestion.jpg' },
+                { title: 'Stores', component: "StoresPage", icon: 'assets/icon/complaint.jpg' },
+                { title: 'Employees', component: "EmployeesPage", icon: 'assets/icon/suggestion.jpg' },
+                { title: 'Logout', component: "null"}
                 // { title: 'Appreciations', component: "AppreciationTabsPageStudent", icon: 'assets/icon/appreciation.jpg' },
                 // { title: 'Polls', component: "PollStudent", icon: 'assets/icon/poll.jpg' },
                 // { title: 'Surveys', component: "SurveyPageStudent", icon: 'assets/icon/survey.jpg' },
@@ -143,6 +146,9 @@ export class UserSessionManage {
 
                 { title: 'Home', component: "DashboardPage", icon: 'assets/icon/home.png' },
                 { title: 'Complaints', component: "ComplaintsPage", icon: 'assets/icon/complaint.jpg' },
+                { title: 'Suggestions', component: "SuggestionsPage", icon: 'assets/icon/suggestion.jpg' },
+                { title: 'Logout', component: "null"}
+
                 // { title: 'Appreciations', component: "AppreciationTabsPageStudent", icon: 'assets/icon/appreciation.jpg' },
                 // { title: 'Polls', component: "PollStudent", icon: 'assets/icon/poll.jpg' },
                 // { title: 'Surveys', component: "SurveyPageStudent", icon: 'assets/icon/survey.jpg' },
