@@ -1,6 +1,5 @@
 <ion-header>
-    <ion-navbar>
-        <ion-navbar color="primary">
+        <ion-navbar color="primary"  no-lines>
             <ion-toolbar>
                 <ion-buttons start>
                     <button ion-button color="light" class="navBtnRight" (click)="dismiss()">
@@ -10,10 +9,9 @@
                 <ion-title>Comments</ion-title>
             </ion-toolbar>
         </ion-navbar>
-    </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="gray-back">
 
     <div class="no-comment" *ngIf="isCommentsEmpty">
         <ion-icon name="chatbubbles"></ion-icon>
@@ -40,24 +38,11 @@
 </ion-content>
 
 <ion-footer *ngIf="complaint.statusId != 4 && complaint.statusId != 6 " keyboard-attach style="position:fixed" class="bar-stable">
-
-    <ion-grid>
-        <ion-row>
-
-            <ion-col col-10>
-                <ion-input [(ngModel)]="inputChat" class="csCommentInput" type="text" placeholder=" Write comment..."></ion-input>
-            </ion-col>
-
-            <ion-col>
-
-                <button [disabled]="inputChat?.trim().length==0" (click)="postChat()" style="width: 50px !important; " class="csCommentSend"
-                    color="primary" ion-button icon-only item-end>
-                    <ion-icon name="md-send" role="img"></ion-icon>
-                </button>
-
-            </ion-col>
-
-        </ion-row>
-    </ion-grid>
+    <div class="d-flex justify-content-between" padding>
+            <ion-input [(ngModel)]="inputChat" class="csCommentInput" type="text" placeholder=" Write comment..."></ion-input>
+            <button [disabled]="inputChat?.trim().length==0" (click)="postChat()" class="csCommentSend" color="primary" ion-button icon-only>
+            <ion-icon name="md-send" role="img"></ion-icon>
+        </button>
+    </div>
 
 </ion-footer>

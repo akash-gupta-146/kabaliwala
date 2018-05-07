@@ -74,7 +74,7 @@
       <div item-right>{{complaint.createdAt  | amTimeAgo}}</div>
     </ion-item>
     <ion-item *ngIf="complaint.closedOn">
-      <ion-icon item-left name="caalendar" [style.color]="complaint.statusColor"></ion-icon>
+      <ion-icon item-left name="calendar" [style.color]="complaint.statusColor"></ion-icon>
       <b [style.color]="complaint.statusColor">Closed On</b>
       <div item-right>{{complaint.closedOn  | amTimeAgo}}</div>
     </ion-item>

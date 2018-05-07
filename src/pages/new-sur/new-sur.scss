@@ -51,7 +51,13 @@ page-new-sur{
             background-image:url(../assets/imgs/nuts2.png);
         } 
         ion-textarea{
-            border:1px solid lightgray;
+            border-bottom: 1px solid lightgray;
+            transition:0.3s;
+            transform-origin: center;
+            border-bottom-width: 10px;
+            &:focus-within{
+                border-bottom:1px solid color($colors,primary);
+            }
         }
     }
     rating ul{
