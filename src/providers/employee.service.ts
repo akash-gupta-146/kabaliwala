@@ -25,7 +25,7 @@ export class EmployeeService {
     }
 
     getEmployees(pageNo: number) {
-        return this.http.get(`/employee/pagepage/${pageNo}`);
+        return this.http.get(`/employee/page/${pageNo}`);
     }
 
     createEmployee(data: any) {

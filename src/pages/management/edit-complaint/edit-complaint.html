@@ -1,44 +1,38 @@
 <ion-header>
-    <ion-navbar>
-        <ion-navbar color="primary">
-            <ion-toolbar>
-                <ion-buttons start>
-                    <button ion-button color="light" class="navBtnRight" (click)="dismiss()">
-                        <span color="light">Cancel</span>
-                    </button>
-                </ion-buttons>
-                <ion-title> {{title | titlecase}} </ion-title>
-            </ion-toolbar>
-        </ion-navbar>
-    </ion-navbar></ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span color="light">Cancel</span>
+      </button>
+    </ion-buttons>
+    <ion-title>{{title | titlecase}}</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-<ion-content >
-
-    <ion-card>
-        <button ion-item (click)="onAssignedToBtn()">
-            <ion-label stacked>Assign To</ion-label>
-            <ion-input [(ngModel)]="assignToName" disabled placeholder="Select Employee"></ion-input>
-        </button>
-    </ion-card>
-
-    <ion-card>
-        <ion-item>
-            <ion-label>Set Priority</ion-label>
-            <ion-select [(ngModel)]="priority">
-                <ion-option *ngFor="let p of priorityList" [value]="p.id">{{p.name}}</ion-option>
-            </ion-select>
-        </ion-item>
-    </ion-card>
-
-    <ion-card *ngIf="complaint.statusId!=3">
-        <ion-item>
-            <ion-label>In Progress</ion-label>
-            <ion-checkbox [(ngModel)]="inProgress"></ion-checkbox>
-        </ion-item>
-    </ion-card>
-
-    <div padding>
-        <button [disabled]="!(assignTo || priority || inProgress)" (click)="onEditBtn()" ion-button full>Edit</button>
-    </div>
-
+<ion-content class="gray-back">
+  <div class="input-box">
+    <ion-item (click)="onAssignedToBtn()" no-lines>
+      <ion-icon name="md-done-all" color='primary' item-left></ion-icon>
+      <ion-label>Assign To</ion-label>
+      <ion-input right item-right [(ngModel)]="assignToName" disabled placeholder="Select Employee"></ion-input>
+    </ion-item>
+  </div>
+  <div class="input-box">
+    <ion-item no-lines>
+      <ion-icon name="md-arrow-round-up" color='primary' item-left></ion-icon>
+      <ion-label>Set Priority</ion-label>
+      <ion-select [(ngModel)]="priority">
+        <ion-option *ngFor="let p of priorityList" [value]="p.id">{{p.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </div>
+  <div class="input-box">
+    <ion-item no-lines>
+      <ion-label>In Progress</ion-label>
+      <ion-checkbox [(ngModel)]="inProgress"></ion-checkbox>
+    </ion-item>
+  </div>
+  <div padding>
+    <button [disabled]="!(assignTo || priority || inProgress)" round (click)="onEditBtn()" ion-button full>Save</button>
+  </div>
 </ion-content>

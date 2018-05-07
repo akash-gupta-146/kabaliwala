@@ -1,83 +1,103 @@
 <ion-header>
-
-  <ion-navbar>
+  <ion-navbar color='primary'>
     <ion-title>{{title | titlecase}}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content class="view-complaint">
-  <ion-item style="margin-bottom:10px;" no-lines no-padding no-padding-right [style.background]="complaint.statusColor || 'green'"
-    *ngIf="complaint" text-center>
-    <div flex>
-      <div>
-        <h1>
-          <ion-icon name="cloud-upload"></ion-icon>
-        </h1>Status:
-        <b>{{complaint.statusName}}</b>
+<ion-content class="gray-back complaint-view">
+  <ion-item no-lines *ngIf="complaint" class="header">
+    <div class="d-flex">
+      <div padding>
+        <div class="image">
+          <img src="assets/imgs/user.png" *ngIf="complaint.assignedEmployeePicUrl">
+          <img src="assets/imgs/user.png" *ngIf="!complaint.assignedEmployeePicUrl">
+        </div>
       </div>
-      <div>
+      <div padding class="details">
         <h1>
-          <ion-icon name="pulse"></ion-icon>
-        </h1>Priority:
-        <b>{{ complaint.priorityName }}</b>
+          <b>{{complaint.againstCategoryName}}</b>
+        </h1>
+        <h2>
+          <b>Store: {{complaint.storeName}}</b>
+        </h2>
+        <h2 *ngIf="complaint.assignedEmployeeName">Assigned to: {{complaint.assignedEmployeeName}}
+          <small>({{complaint.assignedEmployeeId}})</small>
+        </h2>
+        <h2 *ngIf="complaint.visitorName">Visitor Name: {{complaint.visitorName}}</h2>
+        <h2 *ngIf="complaint.ContactNo">Visitor Phone: {{complaint.ContactNo}}</h2>
+        <div margin-top>
+          <b>{{complaint.title}}</b>
+        </div>
+        <div>{{complaint.description}}</div>
+
+        <ion-grid margin-top>
+          <ion-row>
+            <ion-col col col-4>
+              <button (click)="comment()" full small ion-button round icon-left padding-left padding-right>
+                <ion-icon name="chatbubbles"></ion-icon>
+                <b>Comment</b>
+              </button>
+            </ion-col>
+            <ion-col col col-4>
+              <button (click)="edit()" full small ion-button round icon-left padding-left padding-right>
+                <ion-icon name="md-create"></ion-icon>
+                Edit
+              </button>
+            </ion-col>
+            <ion-col col col-4>
+              <button (click)="close()" full small ion-button round icon-left padding-left padding-right>
+                <ion-icon name="md-remove-circle"></ion-icon>
+                Close
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </div>
-    </div>
-    <div date>{{complaint.createdAt | amDateFormat:'LL'}}
-      <span *ngIf="complaint.closedOn"> - {{complaint.closedOn | amDateFormat:'LL'}} </span>
-    </div>
-    <div>
-      <ion-title>
-        {{complaint.againstCategoryName}}
-      </ion-title>
-    </div>
-    <div flex buttons>
-      <button (click)="comment()" ion-button round icon-left outline color="secondary" [style.border-color]="complaint.statusColor || 'green' "
-        [style.color]="complaint.statusColor || 'green' ">
-        <ion-icon name="chatbubbles"></ion-icon>
-        Comment
-      </button>
-      <button (click)="edit()" *ngIf="complaint.statusId != 6 && complaint.statusId != 4" ion-button round icon-left outline
-        color="secondary" [style.border-color]="complaint.statusColor || 'green' " [style.color]="complaint.statusColor || 'green' ">
-        <ion-icon name="md-create"></ion-icon>
-        Edit
-      </button>
-      <button (click)="close()" *ngIf="complaint.statusId != 6 && complaint.statusId != 4" ion-button round icon-left outline
-        color="secondary" [style.border-color]="complaint.statusColor || 'green' " [style.color]="complaint.statusColor || 'green' ">
-        <ion-icon name="md-remove-circle"></ion-icon>
-        Close
-      </button>
     </div>
   </ion-item>
 
   <ion-list *ngIf="complaint">
-    <ion-item>
-      <b>{{complaint.title}}</b>
-      <p class="csParagraph">{{complaint.description}}</p>
+    <ion-item *ngIf="complaint.statusName">
+      <ion-icon item-left name="pulse" [style.color]="complaint.statusColor"></ion-icon>
+      <b [style.color]="complaint.statusColor">Status</b>
+      <div item-right [style.color]="complaint.statusColor">{{complaint.statusName}}</div>
     </ion-item>
-
     <ion-item *ngIf="complaint.rca">
-      <ion-icon name="thumbs-up" [style.color]="complaint.statusColor" item-start></ion-icon>
-      <span class="csFont12" [style.color]="complaint.statusColor">RCA</span>
-      <br>
-      <span class="csParagraph">{{complaint.rca}}</span>
+      <ion-icon item-left name="search" [style.color]="complaint.statusColor"></ion-icon>
+      <b [style.color]="complaint.statusColor">RCA</b>
+      <div item-right>{{complaint.rca}}</div>
+    </ion-item>
+    <ion-item *ngIf="complaint.createdAt">
+      <ion-icon item-left name="calendar" [style.color]="complaint.statusColor"></ion-icon>
+      <b [style.color]="complaint.statusColor">Created at</b>
+      <div item-right>{{complaint.createdAt  | amTimeAgo}}</div>
+    </ion-item>
+    <ion-item *ngIf="complaint.closedOn">
+      <ion-icon item-left name="caalendar" [style.color]="complaint.statusColor"></ion-icon>
+      <b [style.color]="complaint.statusColor">Closed On</b>
+      <div item-right>{{complaint.closedOn  | amTimeAgo}}</div>
+    </ion-item>
+    <ion-item *ngIf="complaint.priorityName">
+      <ion-icon item-left name="md-arrow-round-up" [style.color]="complaint.statusColor"></ion-icon>
+      <b [style.color]="complaint.statusColor">Priority</b>
+      <div item-right>{{complaint.priorityName}}</div>
+    </ion-item>
+    <ion-item *ngIf="complaint.storeLocation">
+      <ion-icon item-left name="navigate" [style.color]="complaint.statusColor"></ion-icon>
+      <b [style.color]="complaint.statusColor">Store Location</b>
+      <div item-right>{{complaint.storeLocation}}</div>
+    </ion-item>
+    <ion-item *ngIf="complaint.storeId">
+      <ion-icon item-left name="basket" [style.color]="complaint.statusColor"></ion-icon>
+      <b [style.color]="complaint.statusColor">Store ID</b>
+      <div item-right>{{complaint.storeId}}</div>
     </ion-item>
 
-
-    <ion-item *ngIf="complaint.assignedEmployeeName">
-      <ion-icon name="construct" [style.color]="complaint.statusColor" item-start></ion-icon>
-      <span class="csFont12" [style.color]="complaint.statusColor">Assigned to</span>
-      <nl-img [src]="complaint.assignedEmployeePicUrl"></nl-img>
-      {{complaint.assignedEmployeeName}}
+    <ion-item *ngIf="complaint.id">
+      <ion-icon item-left name="finger-print" [style.color]="complaint.statusColor"></ion-icon>
+      <b [style.color]="complaint.statusColor">Complaint ID</b>
+      <div item-right>{{complaint.id}}</div>
     </ion-item>
-
-    <ion-item *ngIf="complaint.visitorName">
-      <h5>Complaint By </h5>
-      <p>{{complaint.visitorName}}</p>
-      <small *ngIf="complaint.visitorContactNo"> {{complaint.visitorContactNo}}</small><br>
-      <small *ngIf="complaint.visitorEmail"> {{complaint.visitorEmail}}</small>
-    </ion-item>
-
   </ion-list>
 </ion-content>

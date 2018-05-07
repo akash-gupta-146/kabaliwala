@@ -1,19 +1,15 @@
 <ion-header>
-    <ion-navbar>
-        <ion-navbar color="primary">
-            <ion-toolbar>
-                <ion-buttons start>
-                    <button ion-button color="light" class="navBtnRight" (click)="dismiss()">
-                        <span color="light">Cancel</span>
-                    </button>
-                </ion-buttons>
-                <ion-title> {{title | titlecase}} </ion-title>
-            </ion-toolbar>
-        </ion-navbar>
-    </ion-navbar>
-</ion-header>
+        <ion-toolbar color="primary">
+          <ion-buttons start>
+            <button ion-button (click)="dismiss()">
+              <span color="light">Cancel</span>
+            </button>
+          </ion-buttons>
+          <ion-title>{{title | titlecase}}</ion-title>
+        </ion-toolbar>
+    </ion-header>
 
-<ion-content>
+<ion-content class="gray-back">
 
     <ion-card>
         <ion-item>

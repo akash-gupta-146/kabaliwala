@@ -1,5 +1,26 @@
 <ion-spinner name="dots" *ngIf="searchInProcess">
 </ion-spinner>
+<ion-grid>
+    <ion-row>
+      <ion-col col-sm-12 col-md-6 col-lg-4 col-xl-3 *ngFor="let complaint of complaintList; let i =index" >
+<ion-card class="complaint-card"  text-center tappable (click)="openViewModal(complaint, i)" [style.border-color]="complaint.statusColor">
+   <div class='d-flex justify-content-between'>
+        <p margin>{{complaint.createdAt | amTimeAgo}}</p>
+    <ion-badge margin [style.background-color]="complaint.statusColor">{{complaint.statusName}}</ion-badge>
+    </div>
+    <div class="against">
+        <img src="assets/imgs/{{complaint.againstCategoryName}}.png">
+        <div text-center><b>{{complaint.againstCategoryName}}</b></div>
+    </div>
+    <h3 no-margin class="title">
+        {{complaint.title}}
+    </h3>
+<button ion-button full [style.background-color]="complaint.statusColor" icon-left><ion-icon name="chat-bubbles"></ion-icon><b>Comment</b></button>
+</ion-card>
+</ion-col>
+    </ion-row>
+</ion-grid>
+<!-- 
 <ion-list class="complaint-list">
     <ion-item-sliding *ngFor="let complaint of complaintList; let i =index">
         <a ion-item (click)="openViewModal(complaint, i)" [style.border-left-color]="complaint.statusColor">
@@ -22,9 +43,8 @@
             <c-s-options [complaint]="complaint" [complaintIndex]="i"></c-s-options>
         </ion-item-options>
     </ion-item-sliding>
-<!-- IMAG IN no-results COMPONENT CONTAINS SOCME ICON IMAGE, SO IMAGE NEEDS TO BE CHNAGED -->
     <no-results *ngIf="isEmptyList"></no-results>
-</ion-list>
+</ion-list> -->
 <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
 </ion-infinite-scroll>
