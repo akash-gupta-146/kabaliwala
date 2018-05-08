@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { IonicPage, ModalController } from 'ionic-angular';
+import { IonicPage, ModalController, NavController } from 'ionic-angular';
 import { SurveyService } from '../../providers/survey.service';
 import { CustomService } from '../../providers/custom.service';
 
@@ -19,7 +19,8 @@ export class SurveyPage implements OnInit {
     constructor(
         public modalCtrl: ModalController,
         public surveyService: SurveyService,
-        public customService: CustomService
+        public customService: CustomService,
+        private navCtrl: NavController
     ) {
     };
 
@@ -66,4 +67,21 @@ export class SurveyPage implements OnInit {
             });
     }
 
-}
+    onSurveyClick(survey: any) {
+
+        this.customService.showLoader();
+        this.surveyService.getSurvey(survey.id)
+            .subscribe((res: any) => {
+                this.customService.hideLoader();
+                this.goToDetailPage(res);
+            }, (err: any) => {
+                this.customService.hideLoader();
+                this.customService.showToast(err.msg);
+            });
+    }
+
+    goToDetailPage(detail: any) {
+        this.navCtrl.push("SurveyDetailPage", { 'surveyInfo':detail });
+    }
+    
+}      
