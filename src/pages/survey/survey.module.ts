@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { SurveyPage } from './survey';
+import { ChangeRoleModule } from '../management/change-role/change-role.module';
 
 
 @NgModule({
@@ -8,6 +9,7 @@ import { SurveyPage } from './survey';
     declarations: [SurveyPage],
    
     imports: [
+        ChangeRoleModule,
         IonicPageModule.forChild(SurveyPage)
     ],
     

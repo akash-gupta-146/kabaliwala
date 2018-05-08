@@ -21,6 +21,11 @@ export class AppreciationsPage {
         this.getAppreciations();
     }
 
+    onRoleChanged(ev: any) {
+        this.pageNo = 1;
+        this.getAppreciations();
+    }
+
     getAppreciations(refresher?: any) {
 
         if (!refresher) { this.customService.showLoader(); }

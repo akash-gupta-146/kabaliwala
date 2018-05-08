@@ -1,8 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { ComplaintService } from '../../../providers/complaint.service';
 import { ComplaintMainPage } from '../complaint-main/complaint-main';
-
+declare var URLPREFIX;
+declare var ROLE;
 
 @IonicPage()
 @Component({
@@ -12,6 +13,9 @@ import { ComplaintMainPage } from '../complaint-main/complaint-main';
 export class ComplaintsPage {
 
   title: string;
+
+  isAdmin = URLPREFIX === 'a'; // to show/hide the change role btn
+  role = ROLE; // to show the currently selected role
 
   @ViewChild(ComplaintMainPage) complaintMainPage: ComplaintMainPage;
 
@@ -31,13 +35,19 @@ export class ComplaintsPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private complaintService: ComplaintService
+    private complaintService: ComplaintService,
+    private alertCtrl: AlertController
   ) {
     this.complaintService.compOrSugg = "complaint";
-    this.title = this.complaintService.compOrSugg+'s';
+    this.title = this.complaintService.compOrSugg + 's';
 
     this.showHelpers = false;
     this.hideHelpers = true;
+  }
+      
+  onRoleChanged(ev: any) {
+    this.complaintMainPage.currentPage = 1;
+    this.complaintMainPage.getComplaints(1);
   }
 
   ionViewDidLoad() {

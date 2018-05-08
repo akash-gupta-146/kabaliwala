@@ -25,6 +25,11 @@ export class SuggestionsPage {
         this.title = this.complaintService.compOrSugg + 's';
     }
 
+    onRoleChanged(ev: any) {
+        this.complaintMainPage.currentPage = 1;
+        this.complaintMainPage.getComplaints(1);
+    }
+
 
 
     onSortFilterSelect(event: any) {

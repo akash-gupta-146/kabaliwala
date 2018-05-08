@@ -1,14 +1,19 @@
-
 <ion-header>
   <ion-navbar color="primary">
-      <button ion-button icon-only menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title no-lines>
-        {{title | titlecase}}
-      </ion-title>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title no-lines>
+      {{title | titlecase}}
+    </ion-title>
+    
+    <ion-buttons end >
+        <change-role (roleChanged)="onRoleChanged($event)"></change-role>
+    </ion-buttons>
+    
   </ion-navbar>
 </ion-header>
+
 <ion-content class="gray-back">
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>

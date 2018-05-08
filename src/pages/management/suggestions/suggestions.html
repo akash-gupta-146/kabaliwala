@@ -5,6 +5,11 @@
           <ion-icon name="menu"></ion-icon>
         </button>
         <ion-title> {{title | titlecase}} </ion-title>
+
+        <ion-buttons end >
+            <change-role (roleChanged)="onRoleChanged($event)"></change-role>
+        </ion-buttons>
+        
       </ion-toolbar>
     </ion-navbar>
     <!-- <ion-searchbar [ngClass]="{'hide-header':showHelpers,'show-header':hideHelpers}" [(ngModel)]="searchInput" (ionInput)="onSearchInput($event)"

@@ -6,6 +6,11 @@
     <ion-title no-lines>
       Appreciations
     </ion-title>
+
+    <ion-buttons end >
+        <change-role (roleChanged)="onRoleChanged($event)"></change-role>
+    </ion-buttons>
+    
   </ion-navbar>
 </ion-header>
 

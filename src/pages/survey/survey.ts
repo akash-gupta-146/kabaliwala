@@ -21,8 +21,12 @@ export class SurveyPage implements OnInit {
         public surveyService: SurveyService,
         public customService: CustomService,
         private navCtrl: NavController
-    ) {
-    };
+    ) {    };
+
+    onRoleChanged(ev: any) {
+        this.pageNo = 1;
+        this.getSurveyList();
+    }
 
     ngOnInit() {
 
