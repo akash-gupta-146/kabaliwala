@@ -8,7 +8,7 @@
     <ion-content>
         <ion-list>
             <button ion-item *ngFor="let option of sideMenuOptions" (click)="openPage(option)" [ngClass]="{'activePage': activePage == option.component}">
-                <ion-icon [name]="option.icon" [style.color]="option.color" item-left></ion-icon>{{option.title}}
+                <ion-icon [name]="option.icon" color="primary" item-left></ion-icon>{{option.title}}
             </button>
         </ion-list>
     </ion-content>
