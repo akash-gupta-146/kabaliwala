@@ -22,6 +22,7 @@ import { SharedService } from '../providers/shared.service';
 import { StoreService } from '../providers/store.service';
 import { EmployeeService } from '../providers/employee.service';
 import { DashboardPage } from '../pages/dashboard/dashboard';
+import { DashboardService } from '../providers/dashboard.service';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { DashboardPage } from '../pages/dashboard/dashboard';
     SurveyService,
     StoreService,
     EmployeeService,
-    SharedService
+    SharedService,
+    DashboardService
   ]
 })
 export class AppModule { }

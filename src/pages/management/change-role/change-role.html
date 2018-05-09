@@ -1,4 +1,4 @@
-    <div style="border:1px solid black" (tap)="onChangeRole()">
+    <div *ngIf="isAdmin" style="border:1px solid black" (tap)="onChangeRole()">
        <span>{{role}}</span>
     <button ion-button icon-only>
             <ion-icon name="person"></ion-icon>
