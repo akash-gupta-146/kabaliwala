@@ -9,8 +9,8 @@
     <ion-badge margin [style.background-color]="complaint.statusColor">{{complaint.statusName}}</ion-badge>
     </div>
     <div class="against">
-        <img src="assets/imgs/{{complaint.againstCategoryName}}.png" *ngIf="complaint.againstCategoryName == 'Qualitty Issue' || complaint.againstCategoryName == 'Out of Stock' || complaint.againstCategoryName == 'Inefficient'">
-        <img src="assets/imgs/Other.png" *ngIf="complaint.againstCategoryName != 'Qualitty Issue' && complaint.againstCategoryName != 'Out of Stock' && complaint.againstCategoryName != 'Inefficient'">
+        <img src="assets/imgs/{{complaint.againstCategoryName}}.png" *ngIf="complaint.againstCategoryName == 'Quality Issue' || complaint.againstCategoryName == 'Out of Stock' || complaint.againstCategoryName == 'Inefficient'">
+        <img src="assets/imgs/Other.png" *ngIf="complaint.againstCategoryName != 'Quality Issue' && complaint.againstCategoryName != 'Out of Stock' && complaint.againstCategoryName != 'Inefficient'">
         <div text-center><b>{{complaint.againstCategoryName}}</b></div>
     </div>
     <h3 no-margin class="title">
