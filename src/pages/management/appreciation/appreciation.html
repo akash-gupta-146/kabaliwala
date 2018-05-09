@@ -1,13 +1,69 @@
-
 <ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title no-lines>
+      Appreciations
+    </ion-title>
 
-  <ion-navbar>
-    <ion-title>appreciation</ion-title>
+    <ion-buttons end >
+        <change-role (roleChanged)="onRoleChanged($event)"></change-role>
+    </ion-buttons>
+    
   </ion-navbar>
-
 </ion-header>
 
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-<ion-content padding>
+  <ion-list>
+    <ion-card padding *ngFor="let appr of appreciationList">
 
+      <h3 style="font-weight: bold">{{appr.title}}</h3>
+      <p>{{appr.description}}</p>
+      <br>
+      <p>
+        <span style="font-weight: bold">Created:</span>
+        <span>{{appr.createdAt | amDateFormat:'LL' }}</span>
+      </p>
+      <p>
+        <span style="font-weight: bold"> Store: </span>
+        <span>{{appr.storeName}}</span>
+      </p>
+      <p>
+        <span style="font-weight: bold"> Location: </span>
+        <span>{{appr.storeLocation}}</span>
+      </p>
+
+      <br>
+      <div *ngIf="appr.visitorContactNo || appr.visitorEmail">
+        <h5>Visitor Info</h5>
+        <ion-item item-left>
+          <ion-icon name="person"> </ion-icon>
+          <span>{{appr.visitorName}}</span>
+        </ion-item>
+        <ion-item item-left *ngIf="appr.visitorContactNo">
+          <ion-icon name="call"> </ion-icon>
+          <span>{{appr.visitorContactNo}}</span>
+        </ion-item>
+        <ion-item item-left *ngIf="appr.visitorEmail">
+          <ion-icon name="mail"> </ion-icon>
+          <span>{{appr.visitorEmail}}</span>
+        </ion-item>
+      </div>
+
+    </ion-card>
+  </ion-list>
+
+  <ion-list class="no-comment" *ngIf="appreciationList?.length==0">
+    <ion-icon name="list-box"></ion-icon>
+    <br>NO RECORD FOUND
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

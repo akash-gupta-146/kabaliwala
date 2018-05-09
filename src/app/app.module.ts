@@ -21,13 +21,16 @@ import { SurveyService } from '../providers/survey.service';
 import { SharedService } from '../providers/shared.service';
 import { StoreService } from '../providers/store.service';
 import { EmployeeService } from '../providers/employee.service';
+import { DashboardPage } from '../pages/dashboard/dashboard';
+import { DashboardService } from '../providers/dashboard.service';
 
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    DashboardPage
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,8 @@ import { EmployeeService } from '../providers/employee.service';
   entryComponents: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    DashboardPage
   ],
   providers: [
     StatusBar,
@@ -57,7 +61,8 @@ import { EmployeeService } from '../providers/employee.service';
     SurveyService,
     StoreService,
     EmployeeService,
-    SharedService
+    SharedService,
+    DashboardService
   ]
 })
 export class AppModule { }

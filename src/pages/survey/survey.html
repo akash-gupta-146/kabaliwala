@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <button ion-button icon-only menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>
+            Surveys
+        </ion-title>
+
+        <ion-buttons end >
+                <change-role (roleChanged)="onRoleChanged($event)"></change-role>
+            </ion-buttons>
+            
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-list padding>
+
+        <a ion-item *ngFor="let survey of surveyList; let i =index" (click)="onSurveyClick(survey)">
+
+            <p>
+                <ion-icon name="home"></ion-icon> {{survey.storeName}}</p>
+            <p>
+                <ion-icon name="pin"></ion-icon> {{survey.storeName}}</p>
+            
+            <div *ngIf="survey.visitorName">
+                <br>
+                <p>
+                    <ion-icon name="person"></ion-icon> {{survey.visitorName}}</p>
+            </div>
+
+        </a>
+
+    </ion-list>
+
+    <div class="no-comment" *ngIf="surveyList?.length==0">
+        <ion-icon name="list-box"></ion-icon>
+        <br>NO RECORD FOUND
+    </div>
+
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

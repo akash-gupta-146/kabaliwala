@@ -1,0 +1,22 @@
+<ion-header >
+    <ion-navbar color="primary">
+        <ion-title>Survey Details</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-card *ngFor="let q of survey;let i=index">
+        <h3>
+            <b>Question {{i+1}}</b>
+        </h3>
+        <h4>{{q.question}}</h4>
+        <br>
+        <div *ngIf="q.textValue" text-center style="color:blue !important">
+            <p>{{q.textValue}}</p>
+        </div>
+        <div *ngIf="q.starValue" style="color:blue">
+            <rating [(ngModel)]="q.starValue" text-center readOnly="true"></rating>
+        </div>
+    </ion-card>
+</ion-content>

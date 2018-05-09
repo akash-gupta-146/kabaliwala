@@ -14,7 +14,7 @@ import { CustomService } from '../../../providers/custom.service';
 })
 
 export class ComplaintMainPage {
-
+   
     @Input() complaintList: Array<any>;
     @Input() searchInput: string;
 

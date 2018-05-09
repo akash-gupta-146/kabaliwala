@@ -9,4 +9,9 @@ export class AppreciationService {
     submitAppreciation(data: any) {
         return this.http.post('/appreciation', data);
     }
+
+    getAppreciations(pageNo:number){
+        return this.http.get(`/appreciation/page/${pageNo}`);
+
+    }
 }

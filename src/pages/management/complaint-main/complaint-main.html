@@ -21,6 +21,8 @@
 </ion-col>
     </ion-row>
 </ion-grid>
+<no-results *ngIf="isEmptyList"></no-results>
+
 <!-- 
 <ion-list class="complaint-list">
     <ion-item-sliding *ngFor="let complaint of complaintList; let i =index">

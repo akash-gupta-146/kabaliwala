@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { IonicPage, Events, NavParams, ViewController, ModalController, ActionSheetController } from 'ionic-angular';
 import { ComplaintService } from '../../../providers/complaint.service';
 import { CustomService } from '../../../providers/custom.service';
+declare var URLPREFIX;
 
 @IonicPage()
 @Component({
@@ -56,14 +57,20 @@ export class ComplaintEditPage {
 
     onAssignedToBtn() {
 
-        let searchPage = this.mdlCtrl.create("FacultySearchPage", { 'searchList': this.facultyList, 'title': 'Employee' });
+        let searchableList: Array<any>;
+        if (URLPREFIX === 'sa') {
+            searchableList = this.facultyList.filter(s => s.storeId === this.complaint.storeId);
+        } else {
+            searchableList = this.facultyList;
+        }
+
+        let searchPage = this.mdlCtrl.create("FacultySearchPage", { 'searchList': searchableList, 'title': 'Employee' });
         searchPage.present();
         searchPage.onDidDismiss((selected) => {
             if (selected) {
 
                 this.assignTo = selected.selectedSearch;
                 this.assignToName = selected.selectedSearch.name;
-
             }
         });
     }
@@ -98,14 +105,14 @@ export class ComplaintEditPage {
             priority: this.priority
         };
         (this.inProgress);
-        
+
         if (this.inProgress) { status.statusId = 3; }
 
         this.customService.showLoader();
         this.complaintService.editComplaint(this.complaint.id, status)
             .subscribe((res: any) => {
 
-                this.complaintService.updateComplaint(this.complaint,res);
+                this.complaintService.updateComplaint(this.complaint, res);
                 this.customService.hideLoader();
                 this.customService.showToast('Complaint Edited successfully');
                 this.dismiss(res);
@@ -117,7 +124,7 @@ export class ComplaintEditPage {
 
     }
 
-    dismiss(updatedComplaint?:any) {
+    dismiss(updatedComplaint?: any) {
 
         this.viewCtrl.dismiss(updatedComplaint);
     }
