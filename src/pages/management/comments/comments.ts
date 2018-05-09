@@ -168,7 +168,7 @@ export class CommentsPage {
             createdAt: new Date(Date.now())
         });
 
-    }
+    }    
 
 
     dismiss(updatedComplaint?: any) {

@@ -31,10 +31,10 @@
         </div>
 
     </div>
-    <ion-spinner  name="dots" *ngIf="postInProcess"></ion-spinner>
+    <ion-spinner float-right name="dots" *ngIf="postInProcess"></ion-spinner>
 
 </ion-content>
-
+    
 <ion-footer *ngIf="complaint.statusId != 4 && complaint.statusId != 6 " keyboard-attach style="position:fixed" class="bar-stable">
     <div class="d-flex justify-content-between" padding>
             <ion-input [(ngModel)]="inputChat" class="csCommentInput" type="text" placeholder=" Write comment..."></ion-input>
