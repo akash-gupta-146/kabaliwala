@@ -14,7 +14,7 @@ import { CustomService } from '../../../providers/custom.service';
 })
 
 export class ComplaintMainPage {
-   
+
     @Input() complaintList: Array<any>;
     @Input() searchInput: string;
 
@@ -32,7 +32,6 @@ export class ComplaintMainPage {
     isEmptyList: boolean = false;
     currentPage: number = 1;
     currentPageWithSearch: number = 1;
-    currentPageWithSortFilter: number = 1;
 
     searchInProcess: boolean = false;
     isSortApplied: boolean = false;
@@ -45,99 +44,77 @@ export class ComplaintMainPage {
 
     constructor(
         public mdlCtrl: ModalController,
-        private navCtrl:NavController,
+        private navCtrl: NavController,
         private toastCtrl: ToastController,
         public complaintService: ComplaintService,
         public customService: CustomService,
         public events: Events
     ) {
-        // this.registerStatusChange();
         this.getComplaints(1);
-
     }
 
-    registerStatusChange() {
-
-        // this.events.subscribe('complaintClosed', (newData: any, index: number) => {
-
-        //     this.complaintList[index] = newData;
-        // });
-
-        // this.events.subscribe('complaintReOpened', (newData: any, index: number) => {
-
-        //     this.complaintList[index] = newData;
-        // });
-
-        // this.events.subscribe('complaintSatisfied', (newData: any, index: number) => {
-
-        //     this.complaintList[index] = newData;
-        // });
-
-        // this.events.subscribe('complaintStatusChangedInCommentsPage', (newData: any, index: number) => {
-
-        //     this.complaintList[index] = newData;
-        // });
-
-
-        // /**for management only as edit page exist in this case only*/
-        // this.events.subscribe('complaintEdited', (newData: any, index: number) => {
-
-        //     this.complaintList[index] = newData;
-        // });
-
-    }
 
     onSortFilterSelect(event: any) {
 
-        // if (event.sortName) {
+        if (event.sortName) {
 
-        //     if (this.isSortApplied || this.isFilterApplied) { this.currentPageWithSortFilter = 1; }
+            if (event.sortName === 'clear') {
+                this.doRefresh();
+            } else {
 
-        //     this.customService.showLoader();
-        //     this.complaintService.sortBy(event.sortName, 1)
-        //         .subscribe((res: any) => {
+                // if (this.isSortApplied || this.isFilterApplied) { this.currentPageWithSortFilter = 1; }
 
-        //             this.complaintList = res;
-        //             this.isEmptyList = this.complaintList.length == 0;
-        //             this.appliedSortName = event.sortName;
-        //             this.isSortApplied = true;
-        //             this.isFilterApplied = false;
-        //             this.searchInput = '';
-        //             this.customService.hideLoader();
-        //             this.showSortFilterRemoveMsg();
+                this.customService.showLoader();
+                this.complaintService.sortBy(event.sortName, 1)
+                    .subscribe((res: any) => {
 
+                        this.complaintList = res;
+                        this.isEmptyList = this.complaintList.length == 0;
+                        this.appliedSortName = event.sortName;
+                        this.isSortApplied = true;
+                        this.isFilterApplied = false;
+                        this.searchInput = '';
+                        this.customService.hideLoader();
 
-        //         },
-        //         (err: any) => {
+                        this.currentPage = 1;
+                        // this.showSortFilterRemoveMsg();
 
-        //             this.customService.hideLoader();
-        //             this.customService.showToast(err.msg);
+                    },
+                        (err: any) => {
 
-        //         });
-        // } else if (event.filter) {
+                            this.customService.hideLoader();
+                            this.customService.showToast(err.msg);
 
-        //     if (this.isSortApplied || this.isFilterApplied) { this.currentPageWithSortFilter = 1; }
+                        });
+            }
+        }
+        else if (event.filter) {
 
-        //     this.customService.showLoader();
-        //     this.complaintService.filterBy(event.filter, 1)
-        //         .subscribe((res: any) => {
+            if (event.filter.filterName === 'clear') {
+                this.doRefresh();
+            } else {
 
-        //             this.complaintList = res;
-        //             this.isEmptyList = this.complaintList.length == 0;
-        //             this.appliedFilter = event.filter;
-        //             this.isFilterApplied = true;
-        //             this.isSortApplied = false;
-        //             this.searchInput = '';
-        //             this.customService.hideLoader();
-        //             this.showSortFilterRemoveMsg();
-        //         },
-        //         (err: any) => {
-        //             this.customService.hideLoader();
-        //             this.customService.showToast(err.msg);
+                this.customService.showLoader();
+                this.complaintService.filterBy(event.filter.filterName, event.filter.id, 1)
+                    .subscribe((res: any) => {
 
-        //         });
-        // }
+                        this.complaintList = res;
+                        this.isEmptyList = this.complaintList.length == 0;
+                        this.appliedFilter = event.filter;
+                        this.isFilterApplied = true;
+                        this.isSortApplied = false;
+                        this.searchInput = '';
+                        this.customService.hideLoader();
+                        // this.showSortFilterRemoveMsg();
+                        this.currentPage = 1;
+                    },
+                        (err: any) => {
+                            this.customService.hideLoader();
+                            this.customService.showToast(err.msg);
 
+                        });
+            }
+        }
     }
 
     getComplaints(pageNo: number, refresher?: any) {
@@ -160,28 +137,28 @@ export class ComplaintMainPage {
                 });
     }
 
-    openNewComplaintModal() {
+    // openNewComplaintModal() {
 
-        let mod = this.mdlCtrl.create("NewComplaintPage");
-        mod.present();
+    //     let mod = this.mdlCtrl.create("NewComplaintPage");
+    //     mod.present();
 
-        mod.onDidDismiss((recentlyAddedComplaint?: any) => {
+    //     mod.onDidDismiss((recentlyAddedComplaint?: any) => {
 
-            if (recentlyAddedComplaint && recentlyAddedComplaint.data) {
+    //         if (recentlyAddedComplaint && recentlyAddedComplaint.data) {
 
-                this.complaintList.unshift(recentlyAddedComplaint.data);
-            }
-        });
-    }
+    //             this.complaintList.unshift(recentlyAddedComplaint.data);
+    //         }
+    //     });
+    // }
 
     openViewModal(complaint: any, index: number) {
         // complaint list and index are to be sent so that 
         // if complaint is edited from within the view
         // the same can be reflected in the list also
-        this.navCtrl.push("ViewComplaintPage", { viewCompl: complaint, index: index,list:this.complaintList });
+        this.navCtrl.push("ViewComplaintPage", { viewCompl: complaint, index: index, list: this.complaintList });
     }
 
-    doRefresh(refresher: any) {
+    doRefresh(refresher?: any) {
 
         this.getComplaints(1, refresher);
         this.currentPage = 1;
@@ -196,87 +173,84 @@ export class ComplaintMainPage {
 
         if (this.searchInput.trim().length >= 1) {
 
-            //     if (!this.appliedFilter) {
-            //         this.complaintService.search(this.searchInput, this.currentPageWithSearch + 1)
-            //             .subscribe((res: any) => {
+            // if (!this.appliedFilter) {
+            //     this.complaintService.search(this.searchInput, this.currentPageWithSearch + 1)
+            //         .subscribe((res: any) => {
 
-            //                 if (!res) {
-            //                     refresher.complete();
-            //                     return;
-            //                 }
-            //                 this.complaintList = this.complaintList.concat(res);
-            //                 if (res.length != 0) { this.currentPageWithSearch++; }
+            //             if (!res) {
             //                 refresher.complete();
+            //                 return;
+            //             }
+            //             this.complaintList = this.complaintList.concat(res);
+            //             if (res.length != 0) { this.currentPageWithSearch++; }
+            //             refresher.complete();
 
-            //             }, (err: any) => {
+            //         }, (err: any) => {
 
+            //             refresher.complete();
+            //             this.customService.showToast(err.msg);
+
+            //         });
+            // } else {
+
+            //     this.complaintService.searchAfterFilter(this.appliedFilter, this.searchInput, this.currentPageWithSearch + 1)
+            //         .subscribe((res: any) => {
+
+            //             if (!res) {
             //                 refresher.complete();
-            //                 this.customService.showToast(err.msg);
+            //                 return;
+            //             }
+            //             this.complaintList = this.complaintList.concat(res);
+            //             if (res.length != 0) { this.currentPageWithSearch++; }
+            //             refresher.complete();
 
-            //             });
-            //     } else {
+            //         }, (err: any) => {
 
-            //         this.complaintService.searchAfterFilter(this.appliedFilter, this.searchInput, this.currentPageWithSearch + 1)
-            //             .subscribe((res: any) => {
+            //             refresher.complete();
+            //             this.customService.showToast(err.msg);
 
-            //                 if (!res) {
-            //                     refresher.complete();
-            //                     return;
-            //                 }
-            //                 this.complaintList = this.complaintList.concat(res);
-            //                 if (res.length != 0) { this.currentPageWithSearch++; }
-            //                 refresher.complete();
+            //         });
+            // }
 
-            //             }, (err: any) => {
+        }
+        else if (this.isSortApplied || this.isFilterApplied) {
 
-            //                 refresher.complete();
-            //                 this.customService.showToast(err.msg);
+            if (this.isSortApplied) {
+                this.complaintService.sortBy(this.appliedSortName, this.currentPage + 1)
+                    .subscribe((res: any) => {
 
-            //             });
-            //     }
+                        refresher.complete();
+                        if (res && res.length) {
+                            this.currentPage++;
+                            this.complaintList = this.complaintList.concat(res);
+                        }
 
-            // } else if (this.isSortApplied || this.isFilterApplied) {
+                    }, (err: any) => {
 
-            //     if (this.isSortApplied) {
-            //         this.complaintService.sortBy(this.appliedSortName, this.currentPageWithSortFilter + 1)
-            //             .subscribe((res: any) => {
+                        refresher.complete();
+                        this.customService.showToast(err.msg);
 
-            //                 if (!res) {
-            //                     refresher.complete();
-            //                     return;
-            //                 }
-            //                 this.complaintList = this.complaintList.concat(res);
-            //                 if (res.length != 0) { this.currentPageWithSortFilter++; }
-            //                 refresher.complete();
+                    });
 
-            //             }, (err: any) => {
+            }
 
-            //                 refresher.complete();
-            //                 this.customService.showToast(err.msg);
+            else {
+                this.complaintService.filterBy(this.appliedFilter.filterName, this.appliedFilter.id, this.currentPage + 1)
+                    .subscribe((res: any) => {
 
-            //             });
+                        if (res && res.length) {
+                            this.currentPage++;
+                            this.complaintList = this.complaintList.concat(res);
+                        }
+                        refresher.complete();
 
-            //     }
+                    }, (err: any) => {
 
-            //     else {
-            //         this.complaintService.filterBy(this.appliedFilter, this.currentPageWithSortFilter + 1)
-            //             .subscribe((res: any) => {
+                        refresher.complete();
+                        this.customService.showToast(err.msg);
 
-            //                 if (!res) {
-            //                     refresher.complete();
-            //                     return;
-            //                 }
-            //                 this.complaintList = this.complaintList.concat(res);
-            //                 if (res.length != 0) { this.currentPageWithSortFilter++; }
-            //                 refresher.complete();
-
-            //             }, (err: any) => {
-
-            //                 refresher.complete();
-            //                 this.customService.showToast(err.msg);
-
-            //             });
-            //     }
+                    });
+            }
         }
         else {
 

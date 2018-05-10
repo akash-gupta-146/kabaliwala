@@ -11,12 +11,14 @@ export class ComplaintService {
     //  THIS SCRIPT IS USED FOR BOTH COMPLAINTS AND SUGGESTIONS
     // HENCE COMPLAINT REFERS TO BOTH, COMPLAINTS AS WELL AS SUGGESTIONS
 
-    compOrSugg: string; // to track which one complaint or suggestion is currently being used
+    compOrSugg: string; // to track which one of the complaint or suggestion is currently being used
     complaintCategories: Array<any>;
 
     // below info is used for editing complaints/suggstions
     complaintPriorities: Array<any>;
     employees: Array<any>;
+
+    dataRequiredForFiltering: any;
 
     constructor(private http: CustomHttpService) { }
 
@@ -84,7 +86,7 @@ export class ComplaintService {
     }
 
     updateComplaint(oldC: any, newC: any) {
-        // these are all the updatable properties depending on which operationj is performed
+        // these are all the updatable properties depending on which operation is performed
         // if a property has been changed, it will be updated, otherwise old value will be assigned
         oldC.statusId = newC.statusId || oldC.statusId;
         oldC.statusName = newC.statusName || oldC.statusName;
@@ -98,5 +100,33 @@ export class ComplaintService {
         oldC.priorityName = newC.priorityName || oldC.priorityName;
         oldC.rca = newC.rca || oldC.rca;
     }
+
+    // below methods are related to fetch the data required for sort and fiter
+    fetchDataRequiredForFiltering() {
+        if (this.dataRequiredForFiltering) {
+            return of(this.dataRequiredForFiltering);
+        } else {
+
+            return this.http.get('/complaint/filter/info').map(res => {
+                this.dataRequiredForFiltering = res;
+                return res;
+            });
+        }
+    }
+
+    sortBy(sortType: string, pageNo: number) {
+        return this.http.get(`/${this.compOrSugg}/sort/${sortType}/true/page/${pageNo}`);
+    }
+
+    filterBy(filterName: string, id: number, pageNo: number) {
+        console.log(filterName);
+        const data={[filterName+'Id']:id};
+        console.log(data);
+        
+        
+        return this.http.post(`/${this.compOrSugg}/filter/page/${pageNo}`, data);
+
+    }
+
 
 }

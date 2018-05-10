@@ -23,4 +23,4 @@
     </ion-refresher>
     <complaint-main [complaintList]="complaintList" [searchInput]="searchInput"></complaint-main>
   </ion-content>
-  <!-- <sort-filter [ngClass]="{'hide-footer':showHelpers,'show-footer':hideHelpers}" [sortSelected]="complaintMainPage.isSortApplied" [filterSelected]="complaintMainPage.isFilterApplied" (onSelect)="onSortFilterSelect($event)"></sort-filter> -->
+  <sort-filter  [sortSelected]="complaintMainPage.isSortApplied" [filterSelected]="complaintMainPage.isFilterApplied" (onSelect)="onSortFilterSelect($event)"></sort-filter>

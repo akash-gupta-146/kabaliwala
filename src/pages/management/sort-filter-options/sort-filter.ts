@@ -1,6 +1,7 @@
 
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { IonicPage, ActionSheetController } from 'ionic-angular';
+import { ComplaintService } from '../../../providers/complaint.service';
 
 @IonicPage()
 @Component({
@@ -49,13 +50,26 @@ export class SortFilterOptionsPage implements OnInit {
 
     constructor(
         private actionSheetCtrl: ActionSheetController,
+        private complaintService: ComplaintService
     ) { }
 
     ngOnInit() {
-        
-        this.statusOptions = JSON.parse(localStorage.getItem('complaintStatusList'));
-        this.priorityOptions = JSON.parse(localStorage.getItem('complaintPriorityList'));
-        this.complaintCategoryOptions = JSON.parse(localStorage.getItem('complaintCategoryOptions'));
+
+        this.getDataRequiredForFiltering();
+        // this.statusOptions = JSON.parse(localStorage.getItem('complaintStatusList'));
+        // this.priorityOptions = JSON.parse(localStorage.getItem('complaintPriorityList'));
+        // this.complaintCategoryOptions = JSON.parse(localStorage.getItem('complaintCategoryOptions'));
+    }
+
+    getDataRequiredForFiltering() {
+        this.complaintService.fetchDataRequiredForFiltering()
+            .subscribe((res: any) => {
+                this.statusOptions = res.status;
+                this.priorityOptions = res.priority;
+                this.complaintCategoryOptions = res.category;
+            }, (err: any) => {
+
+            });
     }
 
     onSort() {
@@ -63,24 +77,24 @@ export class SortFilterOptionsPage implements OnInit {
             title: 'Sort By',
             buttons: [
                 {
-                    text: 'Title',
-                    handler: () => {
-                        /** this event is being listened in complaint.ts, 1st parameter is for sort, 2nd is for filter*/
-                        this.onSelect.emit({ sortName: 'title', filter: null });
-                    }
-                },
-                {
-                    text: 'Category',
-                    handler: () => {
-                        //show further options of complaintCatgories
-                        this.onSelect.emit({ sortName: 'category', filter: null });
+                    text: 'Priority',
 
+                    handler: () => {
+                        this.onSelect.emit({ sortName: 'priority', filter: null });
                     }
                 },
                 {
                     text: 'Status',
                     handler: () => {
                         this.onSelect.emit({ sortName: 'status', filter: null });
+
+                    }
+                },
+                {
+                    text: 'Clear',
+                    handler: () => {
+                        if (!this.sortSelected) { return; }
+                        this.onSelect.emit({ sortName: 'clear', filter: null });
 
                     }
                 },
@@ -104,22 +118,35 @@ export class SortFilterOptionsPage implements OnInit {
                 {
                     text: 'Priority',
                     handler: () => {
-                        this.filterBySubCategories(1);
-
+                        actionSheet.dismiss().then(() => {
+                            this.filterBySubCategories(1);
+                        });
+return false;
                     }
                 },
                 {
                     text: 'Status',
                     handler: () => {
-                        this.filterBySubCategories(2);
-
+                        actionSheet.dismiss().then(() => {
+                            this.filterBySubCategories(2);
+                        });
+                        return false;
                     }
                 },
                 {
                     text: 'Category',
                     handler: () => {
-                        this.filterBySubCategories(3);
-
+                        actionSheet.dismiss().then(() => {
+                            this.filterBySubCategories(3);
+                        });
+                        return false;
+                    }
+                },
+                {
+                    text: 'Clear',
+                    handler: () => {
+                        if (!this.filterSelected) { return; }
+                        this.onSelect.emit({ sortName: null, filter: { filterName: 'clear', id: null } });
                     }
                 },
                 {
@@ -144,7 +171,7 @@ export class SortFilterOptionsPage implements OnInit {
 
             for (let i = 0; i < this.priorityOptions.length; i++) {
                 actionSheet.addButton({
-                    text: this.priorityOptions[i].id,
+                    text: this.priorityOptions[i].name,
                     handler: () => {
                         this.onSelect.emit({ sortName: null, filter: { filterName: 'priority', id: this.priorityOptions[i].id } });
 
@@ -171,8 +198,10 @@ export class SortFilterOptionsPage implements OnInit {
                 actionSheet.addButton({
                     text: this.complaintCategoryOptions[i].name,
                     handler: () => {
-
-                        this.afterCategorySelect(this.complaintCategoryOptions[i]);
+                        actionSheet.dismiss().then(() => {
+                            this.afterCategorySelect(this.complaintCategoryOptions[i]);
+                        });
+                        return false;
                     }
                 });
             }
@@ -190,48 +219,52 @@ export class SortFilterOptionsPage implements OnInit {
     afterCategorySelect(selectedCategory: any) {
         console.log(selectedCategory);
 
-        const actionSheet = this.actionSheetCtrl.create();
+        if (selectedCategory.childCategory) {
 
-        actionSheet.setTitle('Select Subcategory');
+            const actionSheet = this.actionSheetCtrl.create();
 
-        for (let i = 0; i < selectedCategory.subCategory.length; i++) {
-            actionSheet.addButton({
-                text: selectedCategory.subCategory[i].name,
-                handler: () => {
+            actionSheet.setTitle('Select Subcategory');
 
-                    if (selectedCategory.subCategory[i].id !=3 && selectedCategory.subCategory[i].subCategory && selectedCategory.subCategory[i].subCategory.length != 0) {
-
-                        this.afterSubcategorySelect(selectedCategory.subCategory[i]);
-                    } else {
-
-                        this.onSelect.emit({ sortName: null, filter: { filterName: 'category', id: selectedCategory.subCategory[i].id } });
+            for (let i = 0; i < selectedCategory.childCategory.length; i++) {
+                actionSheet.addButton({
+                    text: selectedCategory.childCategory[i].name,
+                    handler: () => {
+                        this.onSelect.emit({ sortName: null, filter: { filterName: 'category', id: selectedCategory.childCategory[i].id } });
                     }
-                }
-            });
-        }
-
-        actionSheet.present();
-
-    }
-
-    afterSubcategorySelect(selectedSubcategory: any) {
-
-        const actionSheet = this.actionSheetCtrl.create();
-        switch (selectedSubcategory.id) {
-            // further options if needed in future can be added here
-            case 6: actionSheet.setTitle('Select Student Activities');
-                break;
-        }
-
-        for (let i = 0; i < selectedSubcategory.subCategory.length; i++) {
+                });
+            }
             actionSheet.addButton({
-                text: selectedSubcategory.subCategory[i].name || selectedSubcategory.subCategory[i].facultyName,
+                text: 'Cancel',
+                role: 'cancel',
                 handler: () => {
-                    this.onSelect.emit({ sortName: null, filter: { filterName: 'category', id: selectedSubcategory.subCategory[i].id || selectedSubcategory.subCategory[i].facultyId } });
                 }
             });
-        }
 
-        actionSheet.present();
+            actionSheet.present();
+        } else {
+            this.onSelect.emit({ sortName: null, filter: { filterName: 'category', id: selectedCategory.id } });
+
+        }
     }
+
+    // afterSubcategorySelect(selectedSubcategory: any) {
+
+    //     const actionSheet = this.actionSheetCtrl.create();
+    //     switch (selectedSubcategory.id) {
+    //         // further options if needed in future can be added here
+    //         case 6: actionSheet.setTitle('Select Student Activities');
+    //             break;
+    //     }
+
+    //     for (let i = 0; i < selectedSubcategory.childCategory.length; i++) {
+    //         actionSheet.addButton({
+    //             text: selectedSubcategory.childCategory[i].name || selectedSubcategory.childCategory[i].facultyName,
+    //             handler: () => {
+    //                 this.onSelect.emit({ sortName: null, filter: { filterName: 'category', id: selectedSubcategory.childCategory[i].id || selectedSubcategory.childCategory[i].facultyId } });
+    //             }
+    //         });
+    //     }
+
+    //     actionSheet.present();
+    // }
 }
