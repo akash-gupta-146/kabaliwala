@@ -1,4 +1,9 @@
 page-home {
+    .home-logo{
+        display: block;
+        margin: auto;
+        margin: 20px auto 0 auto;
+    }
     .custom-button{
         background-image:url(../assets/imgs/icon-back.png);
         background-size: contain;

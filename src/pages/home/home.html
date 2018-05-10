@@ -1,17 +1,8 @@
-<ion-header>
-    <ion-navbar color="primary">
-        <ion-title no-lines>
-          Guest
-        </ion-title>
-        <ion-buttons end>
-            <button ion-button icon-only (click)="onLogout()">
-              <ion-icon name="log-out"></ion-icon>
-            </button>
-          </ion-buttons>
-    </ion-navbar>
-  </ion-header>
 <ion-content class="gray-back">
-  
+    <ion-fab bottom right>
+        <button color="danger" ion-fab (click)="onLogout()"> <ion-icon name="log-out"></ion-icon></button>
+      </ion-fab>
+  <img src="assets/imgs/logo.png" class="home-logo" /> 
   <ion-grid>
       <ion-row>
         <ion-col col-6>
