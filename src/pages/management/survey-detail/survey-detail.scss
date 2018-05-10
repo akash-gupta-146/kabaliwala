@@ -1,0 +1,66 @@
+.survey-user{
+    position: sticky;
+    top: 25px;
+    margin:26px 35px;
+    $mainColor: #2f44b5;
+    font-family:arial;
+    color:white;
+    font-size:16px;
+      border-radius:15px;
+    background: linear-gradient(to right, lighten($mainColor,25%), $mainColor);
+    box-shadow: 0 10px 40px lighten($mainColor,25%);
+    ion-icon{
+        color:white;
+    }
+    .date{
+      padding:10px 20px;
+      text-align:right;
+    }
+    .content{
+      padding:20px;
+      display:flex;
+      .rate{
+        font-size:30px;
+        text-align:center;
+        min-width: 60px;
+      }
+       .details{
+         .store{
+           padding:0 20px;
+           p{
+             margin:0px;
+           }
+         }
+       }
+    }
+    .user{
+      display:flex;
+      padding:20px;
+      justify-content:space-between;
+      font-size:14px;
+      .name{
+        font-weight:bold;
+      }
+      .contact{
+        text-align:right;
+      }
+    }
+  }
+  .survey-box{
+      margin:16px 25px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+      padding: 5px 10px;
+      background:white;
+      border-radius: 20px;
+      .question{
+          text-align:center;
+      }
+      .text-answer{
+        text-align:center;
+        color:color($colors,primary);
+      }
+      .rate-answer{
+        text-align:center;
+        color:color($colors,primary);
+      }
+  }

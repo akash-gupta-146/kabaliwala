@@ -6,11 +6,9 @@
     <ion-title no-lines>
       Appreciations
     </ion-title>
-
     <ion-buttons end >
         <change-role (roleChanged)="onRoleChanged($event)"></change-role>
     </ion-buttons>
-    
   </ion-navbar>
 </ion-header>
 
@@ -18,8 +16,7 @@
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-<img src="assets/imgs/star.png" class="star-back" />
-
+<img src="assets/imgs/star.png" class="pic-back" />
   <div class="appreciation-card" *ngFor="let appr of appreciationList">
       <div class="date">{{appr.createdAt | amDateFormat:'LL' }}</div>
       <div class="appreciation">
@@ -42,62 +39,7 @@
           <div class="email" *ngIf="appr.visitorEmail"><ion-icon name="mail"> </ion-icon> : {{appr.visitorEmail}}</div>
         </div>
       </div>
-      
     </div>
-
-
-    <!-- to be deleted -->
-    <div class="appreciation-card">
-        <div class="date">12,May 2018</div>
-        <div class="appreciation">
-          <div class="image">
-            ★
-          </div>
-          <div class="details">
-            <h4>Good Quailty</h4>
-            <p>lorem ipsum ks ijdh good knowledge requirement not for available</p>
-          </div>
-        </div>
-          <div class="contact-details">
-           <div class="store">
-             <h5>Kabliwala Noida</h5>
-             <p>Sector 18, Near GIP mall, Noida, UP
-          </div>
-          <div class="guest">
-            <h5>Akash Gupta</h5>
-            <div class="phone">Ph.: +91 9283 987 980</div>
-            <div class="email">Email: ag.akash007@gmail.com</div>
-          </div>
-        </div>
-        
-      </div>
-
-
-    <div class="appreciation-card">
-        <div class="date">12,May 2018</div>
-        <div class="appreciation">
-          <div class="image">
-            ★
-          </div>
-          <div class="details">
-            <h4>Good Quailty</h4>
-            <p>lorem ipsum ks ijdh good knowledge requirement not for available</p>
-          </div>
-        </div>
-          <div class="contact-details">
-           <div class="store">
-             <h5>Kabliwala Noida</h5>
-             <p>Sector 18, Near GIP mall, Noida, UP
-          </div>
-          <div class="guest">
-            <h5>Akash Gupta</h5>
-            <div class="phone">Ph.: +91 9283 987 980</div>
-            <div class="email">Email: ag.akash007@gmail.com</div>
-          </div>
-        </div>
-        
-      </div>
-      <!-- end of to be deleted -->
 
 
   <ion-list class="no-comment" *ngIf="appreciationList?.length==0">
