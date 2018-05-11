@@ -6,6 +6,7 @@ import { LoginPage } from '../pages/login/login';
 import { CustomService } from '../providers/custom.service';
 import { HomePage } from '../pages/home/home';
 import { DashboardPage } from '../pages/dashboard/dashboard';
+import { PushMessageService } from '../providers/push-message.service';
 
 declare var URLPREFIX;
 declare var ROLE;
@@ -24,7 +25,8 @@ export class UserSessionManage {
         public alertCtrl: AlertController,
         public networkService: NetworkService,
         public menu: MenuController,
-        public customService: CustomService) {
+        public customService: CustomService,
+        public pushMsgService: PushMessageService) {
 
         this.handleEvents();
         this.networkService.checkNetworkStatus();
@@ -60,7 +62,7 @@ export class UserSessionManage {
                 .subscribe((res) => {
                     // no need to do any thing as userdetails would have been saved in service
                     this.setRootPage();
-
+                    this.enablePushNotifications();
                 }, (err: any) => {
                     this.customService.showToast('Some error occured, Please Reopen the App or Logout');
                 });
@@ -72,14 +74,19 @@ export class UserSessionManage {
 
     public login() {
         this.setRootPage();
+        this.enablePushNotifications();
         // this.imageUpdate();
     }
 
+    enablePushNotifications() {
+        this.pushMsgService.initializeFCM();
+    }
+
     setRootPage() {
-        
+
         //check role and set root page
         const role = JSON.parse(localStorage.getItem('userInfo')).urlPrefix;
-    
+
         switch (role) {
             case 'g':
                 this.menu.enable(false);

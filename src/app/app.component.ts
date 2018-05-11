@@ -8,6 +8,7 @@ import { UserSessionManage } from '../Classes/user-session-manage';
 import { AuthService } from '../providers/auth.service';
 import { NetworkService } from '../providers/network.service';
 import { CustomService } from '../providers/custom.service';
+import { PushMessageService } from '../providers/push-message.service';
 
 @Component({
   templateUrl: 'app.html'
@@ -30,9 +31,10 @@ export class MyApp extends UserSessionManage {
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
     public menu: MenuController,
-    private customSercvice: CustomService
+    private customSercvice: CustomService,
+    public pushMsgService:PushMessageService
   ) {
-    super(events, appCtrl, authService, alertCtrl, networkService, menu, customSercvice);
+    super(events, appCtrl, authService, alertCtrl, networkService, menu, customSercvice,pushMsgService);
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.

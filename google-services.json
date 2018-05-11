@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1088800119506",
+    "firebase_url": "https://kabliwala-feedback-system.firebaseio.com",
+    "project_id": "kabliwala-feedback-system",
+    "storage_bucket": "kabliwala-feedback-system.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1088800119506:android:e76e2826312fa521",
+        "android_client_info": {
+          "package_name": "com.nxtlife.kabliwala"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1088800119506-2c2e4f9kmhdsdcnsd6h0s4e1o0f383eg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBs4yC63LfkOhdN0ck0E21ExaJ8SzC9q3w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

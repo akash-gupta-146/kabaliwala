@@ -23,6 +23,10 @@ import { StoreService } from '../providers/store.service';
 import { EmployeeService } from '../providers/employee.service';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { DashboardService } from '../providers/dashboard.service';
+import { PushMessageService } from '../providers/push-message.service';
+
+//PLUGINS
+import { FCM } from '@ionic-native/fcm';
 
 
 @NgModule({
@@ -62,7 +66,9 @@ import { DashboardService } from '../providers/dashboard.service';
     StoreService,
     EmployeeService,
     SharedService,
-    DashboardService
+    DashboardService,
+    FCM,
+    PushMessageService
   ]
 })
 export class AppModule { }

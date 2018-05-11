@@ -9,6 +9,14 @@ export class AuthService {
 
     constructor(private http: CustomHttpService) { }
 
+    // Notification token update after user login
+    tokenUpdate(token) {
+        const notificationToken: Object = {
+            notificationToken: token
+        }
+        return this.http.put('/update', notificationToken)
+    }
+
     login(loginCredentials: any) {
         return this.http.postForLogin(loginCredentials);
     }
@@ -38,8 +46,8 @@ export class AuthService {
         // urlPrefix will be 'g' for guest, 'a' for admin/management, 'sa' for superadmin
         URLPREFIX = info.urlPrefix;
         // set ROLE in case of admin/mngmnt only, set default ROLE as first role in array
-        if(URLPREFIX==='a'){
-            ROLE=info.roles[0];
+        if (URLPREFIX === 'a') {
+            ROLE = info.roles[0];
         }
     }
 

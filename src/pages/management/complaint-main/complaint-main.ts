@@ -163,7 +163,6 @@ export class ComplaintMainPage {
         this.getComplaints(1, refresher);
         this.currentPage = 1;
         this.currentPageWithSearch = 1;
-        this.currentPageWithSortFilter = 1;
         this.isSortApplied = false;
         this.isFilterApplied = false;
         this.searchInput = '';
@@ -370,19 +369,19 @@ export class ComplaintMainPage {
         // }
     }
 
-    showSortFilterRemoveMsg() {
+    // showSortFilterRemoveMsg() {
 
-        if (!this.refreshMsgDisplayed) {
-            let toast = this.toastCtrl.create({
-                message: "Pull down to refresh or remove any applied filter or sort",
-                duration: 3000,
-                position: "top"
+    //     if (!this.refreshMsgDisplayed) {
+    //         let toast = this.toastCtrl.create({
+    //             message: "Pull down to refresh or remove any applied filter or sort",
+    //             duration: 3000,
+    //             position: "top"
 
-            });
-            toast.present();
-            this.refreshMsgDisplayed = true;
-        }
-    }
+    //         });
+    //         toast.present();
+    //         this.refreshMsgDisplayed = true;
+    //     }
+    // }
 
 
 }
