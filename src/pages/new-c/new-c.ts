@@ -66,7 +66,8 @@ export class NewComplaintPage { // ALSO USED FOR NEW SUGGESTION
       this.customService.showToast('Please also enter your Contact No. or Email', 'top');
       return;
     }
-    if (!this.isGuestNameEntered() && (this.isGuestContactEntered()) || this.isGuestEmailEntered()) {
+    
+    if (!this.isGuestNameEntered() && (this.isGuestContactEntered() || this.isGuestEmailEntered())) {
       this.customService.showToast('Please also enter your name', 'top');
       return;
     }
@@ -105,6 +106,7 @@ export class NewComplaintPage { // ALSO USED FOR NEW SUGGESTION
 
 
   isGuestNameEntered() {
+    
     return this.guestInfo.name && this.guestInfo.name.trim() != '';
   }
 

@@ -68,7 +68,7 @@ export class CommentsPage {
     checkComplaintStatus() {
 
         if (this.complaint.statusId == 4 || this.complaint.statusId == 6) {
-            this.customService.showToast("This complaint is has been closed, No more comments can be added to it.");
+            this.customService.showToast("This complaint has been closed, No more comments can be added to it.");
         }
     }
 

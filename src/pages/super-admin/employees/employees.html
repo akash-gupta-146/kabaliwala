@@ -22,13 +22,12 @@
             <div class="top"></div>
             <div image>
                <!-- <img src="e.picUrl"> -->
-                <img src="http://glia.ca/scm/2013/ge1127_b/wp-content/uploads/2013/10/594partner-profile-pic-An.jpg">
+                <img [src]="e.picUrl || 'http://glia.ca/scm/2013/ge1127_b/wp-content/uploads/2013/10/594partner-profile-pic-An.jpg'">
               </div>
               <div text-center class="user-details">
-                Miley
                   <h2 class="" text-center><b>{{ e.name }}</b></h2>
-                  <p>{{e.email}}</p>
-                  <b>+91 {{e.contactNo}}</b>
+                  <p *ngIf="e.email">{{e.email}}</p>
+                  <b *ngIf="e.contactNo">{{e.contactNo}}</b>
               </div>
 
               <div class="bottom" text-center>
@@ -47,7 +46,8 @@
     </ion-row>
   </ion-grid>
 
-<ion-grid>
+  <!-- //BELOW CODE WAS JUST FOR THERE FOR AN ALTERNATE VIEW -->
+<!-- <ion-grid>
 <ion-row>
   <ion-col col-sm-12 col-md-6 col-lg-4 col-xl-3 *ngFor="let e of employees">
       <ion-card class="profile-card" >
@@ -58,7 +58,6 @@
               <ion-icon name="email"></ion-icon> {{e.email}}
             </b>
           </div>
-          <!-- <img src="e.picUrl"> -->
             <img src="http://img2.thejournal.ie/inline/2470754/original/?width=428&version=2470754">
             <div class="bottom d-flex justify-content-between">
               John
@@ -75,17 +74,8 @@
         </ion-card>
   </ion-col>
 </ion-row>
-</ion-grid>
+</ion-grid> -->
 
-
-
-<!-- nitin -->
-    <!-- <ion-item *ngFor="let e of employees">
-      <nl-img item-start [src]="e.picUrl" style="height: 50px;width: 50px"></nl-img>
-      <h5>{{e.name}} ({{e.username}})</h5>
-      <p>{{e.rolesList}}</p>
-    </ion-item> -->
-  <!-- ////nitin -->
 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
