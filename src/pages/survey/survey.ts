@@ -77,15 +77,15 @@ export class SurveyPage implements OnInit {
         this.surveyService.getSurvey(survey.id)
             .subscribe((res: any) => {
                 this.customService.hideLoader();
-                this.goToDetailPage(res);
+                this.goToDetailPage(res,survey);
             }, (err: any) => {
                 this.customService.hideLoader();
                 this.customService.showToast(err.msg);
             });
     }
 
-    goToDetailPage(detail: any) {
-        this.navCtrl.push("SurveyDetailPage", { 'surveyInfo':detail });
+    goToDetailPage(detail: any,prevDetail:any) {
+        this.navCtrl.push("SurveyDetailPage", { 'surveyInfo':detail,'prevDetail':prevDetail});
     }
     
 }      

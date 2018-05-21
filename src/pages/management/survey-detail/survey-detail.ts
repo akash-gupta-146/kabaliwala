@@ -13,7 +13,7 @@ import { SurveyService } from '../../../providers/survey.service';
 export class SurveyDetailPage implements OnInit {
 
     survey: Array<any>; // contains array of questiona nd their answers givenby visitor
-
+otherDetail:any;
     constructor(
         public surveyService: SurveyService,
         private navCtrl: NavController,
@@ -23,6 +23,7 @@ export class SurveyDetailPage implements OnInit {
     ngOnInit() {
 
         this.survey = this.navParam.get('surveyInfo');
+        this.otherDetail = this.navParam.get('prevDetail');
     }
 
 
