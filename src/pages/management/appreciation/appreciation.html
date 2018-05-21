@@ -6,57 +6,41 @@
     <ion-title no-lines>
       Appreciations
     </ion-title>
-
     <ion-buttons end >
         <change-role (roleChanged)="onRoleChanged($event)"></change-role>
     </ion-buttons>
-    
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class=" gray-back ">
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-
-  <ion-list>
-    <ion-card padding *ngFor="let appr of appreciationList">
-
-      <h3 style="font-weight: bold">{{appr.title}}</h3>
-      <p>{{appr.description}}</p>
-      <br>
-      <p>
-        <span style="font-weight: bold">Created:</span>
-        <span>{{appr.createdAt | amDateFormat:'LL' }}</span>
-      </p>
-      <p>
-        <span style="font-weight: bold"> Store: </span>
-        <span>{{appr.storeName}}</span>
-      </p>
-      <p>
-        <span style="font-weight: bold"> Location: </span>
-        <span>{{appr.storeLocation}}</span>
-      </p>
-
-      <br>
-      <div *ngIf="appr.visitorContactNo || appr.visitorEmail">
-        <h5>Visitor Info</h5>
-        <ion-item item-left>
-          <ion-icon name="person"> </ion-icon>
-          <span>{{appr.visitorName}}</span>
-        </ion-item>
-        <ion-item item-left *ngIf="appr.visitorContactNo">
-          <ion-icon name="call"> </ion-icon>
-          <span>{{appr.visitorContactNo}}</span>
-        </ion-item>
-        <ion-item item-left *ngIf="appr.visitorEmail">
-          <ion-icon name="mail"> </ion-icon>
-          <span>{{appr.visitorEmail}}</span>
-        </ion-item>
+<img src="assets/imgs/star.png" class="pic-back" />
+  <div class="appreciation-card" *ngFor="let appr of appreciationList">
+      <div class="date">{{appr.createdAt | amDateFormat:'LL' }}</div>
+      <div class="appreciation">
+        <div class="image">
+          ★
+        </div>
+        <div class="details">
+          <h4>{{appr.title}}</h4>
+          <p>{{appr.description}}</p>
+        </div>
       </div>
+        <div class="contact-details">
+         <div class="store">
+           <h5>{{appr.storeName}}</h5>
+           <p><ion-icon name="home"></ion-icon> {{appr.storeLocation}}</p>
+        </div>
+        <div class="guest">
+          <h5 *ngIf="appr.visitorName">{{appr.visitorName}}</h5>
+          <div class="phone" *ngIf="appr.visitorContactNo"><ion-icon name="call"> </ion-icon> : {{appr.visitorContactNo}}</div>
+          <div class="email" *ngIf="appr.visitorEmail"><ion-icon name="mail"> </ion-icon> : {{appr.visitorEmail}}</div>
+        </div>
+      </div>
+    </div>
 
-    </ion-card>
-  </ion-list>
 
   <ion-list class="no-comment" *ngIf="appreciationList?.length==0">
     <ion-icon name="list-box"></ion-icon>

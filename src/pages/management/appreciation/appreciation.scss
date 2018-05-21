@@ -1,0 +1,88 @@
+
+.pic-back{
+    position:fixed;
+    bottom: 0;
+    right: 0;
+    opacity: 0.6;
+    height:25%;
+    z-index: -1;
+}
+.appreciation-card{
+    $primeColor : #0b8ce4;
+    background:linear-gradient(to right,lighten($primeColor,20%),$primeColor);
+    box-shadow: inset 0 0 20px lighten($primeColor,20%), 0 3px 18px lighten($primeColor,30%);
+    border-radius:25px;
+    margin: 20px;
+    padding:15px;
+    color:white;
+    font-family:arial;
+    .date{
+      text-align:right;
+    }
+    .appreciation{
+      display:flex;
+      .image{
+        font-size:40px;
+        padding: 0 10px 0 0;
+        text-shadow: 0 8px 39px $primeColor;
+      }
+      .details{
+        h4{
+          margin:0px;
+          font-weight:bold;
+        }
+        p{
+          margin:0px;
+        }
+      }
+    }
+    .contact-details{
+      margin-left:50px;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      .store{
+        padding-right:10px;
+      }
+      .guest{
+        text-align:right;
+        padding-left:10px;
+        .phone,.email{
+          font-size:14px;
+        }
+      }
+      h5{
+        margin:10px 0 0 0;
+        font-weight:bold;
+      }
+      p{
+        margin:0px;
+        font-size:14px;
+      }
+    }
+    position:relative;
+    &:after{
+      position:absolute;
+      content:'';
+      width: 50%;
+      height:180%;
+      border-radius:50%;
+      background:white;
+      right:-15%;
+      top:-20px;
+      transform:rotate(-40deg) skew(15deg);
+      background:transparent;
+      box-shadow:inset 0 0 50px #ebe3de;
+    }
+  }
+
+  .appreciation-card:nth-child(even){
+    $primeColor : #e3556f;
+    background:linear-gradient(to right,lighten($primeColor,20%),$primeColor);
+    box-shadow: inset 0 0 20px lighten($primeColor,20%), 0 3px 18px lighten($primeColor,30%);
+    .appreciation{
+        .image{
+          text-shadow: 0 8px 39px $primeColor;
+        }
+    }
+  }

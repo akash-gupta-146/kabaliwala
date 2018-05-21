@@ -1,23 +1,22 @@
 <ion-header>
-    <ion-navbar>
-      <ion-toolbar>
+      <ion-navbar color="primary">
         <button ion-button icon-only menuToggle>
           <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title> {{title | titlecase}} </ion-title>
-
+        <ion-title no-lines>
+          {{title | titlecase}}
+        </ion-title>
+        
         <ion-buttons end >
             <change-role (roleChanged)="onRoleChanged($event)"></change-role>
         </ion-buttons>
         
-      </ion-toolbar>
-    </ion-navbar>
-    <!-- <ion-searchbar [ngClass]="{'hide-header':showHelpers,'show-header':hideHelpers}" [(ngModel)]="searchInput" (ionInput)="onSearchInput($event)"
-      [debounce]="debounceDuration" (ionClear)="onSearchClear($event)"></ion-searchbar> -->
-  </ion-header>
+      </ion-navbar>
+    </ion-header>
+    
   
   
-  <ion-content padding>
+  <ion-content class="gray-back">
     <ion-refresher (ionRefresh)="doRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>

@@ -14,8 +14,7 @@
 <ion-content class="gray-back">
 
     <div class="no-comment" *ngIf="isCommentsEmpty">
-        <ion-icon name="chatbubbles"></ion-icon>
-        <br>NO COMMENT
+        NO COMMENT
     </div>
 
     <div class="message-box csTransparent" *ngFor="let comm of comments" [ngClass]="{'mine':comm.employeeId==selfId}"

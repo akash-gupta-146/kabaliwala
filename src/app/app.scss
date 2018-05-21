@@ -2,3 +2,7 @@
     background-color :  grey;
     font-weight:bolder;
 }
+.primary-back{
+    background:color($colors,primary);
+    color:white;
+}

@@ -13,42 +13,41 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content  class="gray-back">
 
-  <!-- <div class="nuts-back"></div>
-  <img src="assets/imgs/logo.png" class="biglogo"> -->
+  <div class="nuts-back"></div>
   <ion-spinner class="graph-loader" *ngIf="!loaded"></ion-spinner>
-  <div *ngIf="complaintByStatus">
-    <h6>Complaints Status (Overall)</h6>
+  <div class="graph" *ngIf="complaintByStatus">
+    <h6><span>Complaints</span> <span>Status (Overall)</span></h6>
     <div id="complaintStatus_div"></div>
   </div>
 
-  <div *ngIf="complaintByCategoryStatus">
+  <div class="graph" *ngIf="complaintByCategoryStatus">
     <h6>Complaints Status (Grouped by Category)</h6>
     <div id="complaintByCategoryStatus_div"></div>
   </div>
 
-  <div *ngIf="complaintStatusStoreWise">
+  <div class="graph" *ngIf="complaintStatusStoreWise">
     <h6>Complaints Status (Grouped by Store)</h6>
     <div id="complaintStatusStoreWise_div"></div>
   </div>
 
-  <div *ngIf="appreciationStoreWise">
+  <div class="graph"  *ngIf="appreciationStoreWise">
     <h6>Appreciations (Grouped By Store)</h6>
     <div id="appreciationStoreWise_div"></div>
   </div>
 
-  <div *ngIf="surveyTakenStoreWise">
+  <div class="graph" *ngIf="surveyTakenStoreWise">
     <h6>Surveys (Grouped By Store)</h6>
     <div id="surveyTakenStoreWise_div"></div>
   </div>
   
-  <div *ngIf="ratingGroupedByStore">
+  <div class="graph" *ngIf="ratingGroupedByStore">
     <h6>Survey Ratings (Grouped By Store)</h6>
     <div id="ratingGroupedByStore_div"></div>
   </div>
 
-  <div *ngIf="ratingGroupedByQuestion">
+  <div class="graph" *ngIf="ratingGroupedByQuestion">
     <h6>Survey Ratings (Grouped By Question)</h6>
     <div id="ratingGroupedByQuestion_div"></div>
   </div>

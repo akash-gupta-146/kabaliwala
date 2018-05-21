@@ -3,7 +3,7 @@
         <button ion-button icon-only menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>
+        <ion-title no-lines>
             Surveys
         </ion-title>
 
@@ -14,28 +14,30 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="gray-back">
     <ion-refresher (ionRefresh)="doRefresh($event)">
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
+    <img src="https://forum.sketchfab.com/uploads/db4890/1186/bb945a99e752fcb9.png" class="pic-back" />
+    <ion-list>
+        <ion-grid>
+            <ion-row>
+                <ion-col col-sm-12 col-md-6 col-lg-4 *ngFor="let survey of surveyList; let i =index" (click)="onSurveyClick(survey)">
+                    <ion-card padding>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h3><b><ion-icon name="ios-analytics" style="color:orangered"></ion-icon> {{survey.storeName}}</b></h3>
+                                <h3 *ngIf="survey.visitorName"><ion-icon name="md-person" style="color:#04a9f4"></ion-icon> {{survey.visitorName}}</h3>
+                            </div>
+                            <div style="color:#fec108; font-size:25px">
+                                {{survey.averageMark}}<ion-icon name="star" ></ion-icon>
+                            </div>
 
-    <ion-list padding>
-
-        <a ion-item *ngFor="let survey of surveyList; let i =index" (click)="onSurveyClick(survey)">
-
-            <p>
-                <ion-icon name="home"></ion-icon> {{survey.storeName}}</p>
-            <p>
-                <ion-icon name="pin"></ion-icon> {{survey.storeName}}</p>
-            
-            <div *ngIf="survey.visitorName">
-                <br>
-                <p>
-                    <ion-icon name="person"></ion-icon> {{survey.visitorName}}</p>
-            </div>
-
-        </a>
-
+                        </div>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
     </ion-list>
 
     <div class="no-comment" *ngIf="surveyList?.length==0">

@@ -1,5 +1,5 @@
 <ion-menu [content]="mycontent" *ngIf="!isGuest">
-    <ion-header tappable (tap)="openPage()" menuClose>
+    <ion-header tappable (tap)="openPage()" menuClose class="primary-back">
                 <div>
                     <img [src]="userImage || defaultUserImage" class="center-block" width="100px" height="100px" margin-top>
                     <h2 text-center>{{userName | titlecase}}</h2>

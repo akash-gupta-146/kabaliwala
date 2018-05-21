@@ -21,8 +21,9 @@
           <ion-card class="profile-card2">
             <div class="top"></div>
             <div image>
-               <!-- <img src="e.picUrl"> -->
-                <img [src]="e.picUrl || 'http://glia.ca/scm/2013/ge1127_b/wp-content/uploads/2013/10/594partner-profile-pic-An.jpg'">
+               <img *ngIf="e.picUrl" [src]="e.picUrl">
+               <img *ngIf="!e.picUrl" src="assets/imgs/user.png">
+                <!-- <img src="http://glia.ca/scm/2013/ge1127_b/wp-content/uploads/2013/10/594partner-profile-pic-An.jpg"> -->
               </div>
               <div text-center class="user-details">
                   <h2 class="" text-center><b>{{ e.name }}</b></h2>
